@@ -1,0 +1,49 @@
+[user]
+	email = ansterd@nate.com
+	name = ansterd
+[alias]
+	ci = commit -v
+	ca = commit --amend
+	cm = commit -m
+
+	co = checkout
+	com = checkout master
+
+	ph = push
+	pl = pull
+
+	a = !git add . && git status
+	aa = !git add --all . && git status
+
+	s = status --short --branch
+	st = status
+
+	df = diff
+
+	ra = remote add
+	rm = remote remove
+	ro = remote show origin -n
+
+	rs = reset HEAD^
+	rs = reset HEAD
+	rh = reset --hard
+
+	br = branch
+	bv = branch -v
+	bd = branch -d
+
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+
+	last = log -1 HEAD
+	type = cat-file -t
+	dump = cat-file -p
+
+	me = config user.name
+
+	today = "log --since=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+	yesterday = "log --since yesterday --until=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+
+	outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
+	incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
+
