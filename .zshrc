@@ -77,3 +77,5 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 
 # solarized theme
 # eval 'dircolors ~/.dircolors'
+
+export TERM=xterm-256color
