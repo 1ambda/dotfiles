@@ -115,5 +115,3 @@ fi
 
 export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
 export JAVA_HOME=/usr/lib/jvm/java-8-oracle
-
-zsh
