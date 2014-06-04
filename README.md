@@ -7,11 +7,28 @@ See : [Details](http://anster.tistory.com)
 ```
 $ sudo apt-get update
 $ sudo apt-get upgrade
-$ sudo apt-get install vim git wget curl ssh
+$ sudo apt-get install git wget curl ssh xclip
 
 $ # register ssh key on Github
 $ # install chrome dropbox
 ```
+
+### 1.1 vim
+```
+$ # get vim source
+$ sudo apt-get install libncurses5-dev
+$ sudo apt-get install libx11-dev
+$ sudo apt-get install libxt-dev
+
+$ cd vim
+$ ./configure --with-features=huge --enable-cscope --enable-multibyte
+$ sudo make install
+
+$ sudo rm /usr/bin/vi
+$ sudo ln -s /usr/local/bin/vim /usr/bin/vi
+$ vi --version
+```
+
 
 <br>
 ## 2. Appearance Setting
