@@ -50,11 +50,18 @@ $ git clone https://github.com/sigurdga/gnome-terminal-colors-solarized.git
 $ cd gnome-terminal-colors-solarized
 $ ./set_dark.sh
 
-$ # add this line into your .zshrc
-$ # eval `dircolors ~/.dircolors`
+$ cp dotfiles/.zshrc ~/
 ```
 <br>
 Ref : [Here](http://www.webupd8.org/2011/04/solarized-must-have-color-paletter-for.html)
+
+### 2.6 tmux, tmux-powerline
+```
+$ sudo apt-get install tmux
+$ install tmux powerline see https://powerline.readthedocs.org/en/latest/installation/linux.html#installation-linux
+$ cp dotfiles/.tmux.conf ~/
+```
+
 
 <br>
 ## 3. Key
@@ -160,51 +167,7 @@ See : https://github.com/ansterd/emacs-linux/
 ### 5.8 Git
 
 ```
-[alias]
-        ci = commit -v
-        ca = commit --amend
-        cm = commit -m
-
-        co = checkout
-        com = checkout master
-
-        ph = push
-        pl = pull
-
-        a = !git add . && git status
-        aa = !git add --all . && git status
-
-        s = status --short --branch
-        st = status
-
-        df = diff
-
-        ra = remote add
-        rm = remote remove
-        ro = remote show origin -n
-
-	rc = reset HEAD^
-        rs = reset HEAD
-        rh = reset --hard
-
-        br = branch
-        bv = branch -v
-        bd = branch -d
-
-        ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
-
-        last = log -1 HEAD
-        type = cat-file -t
-        dump = cat-file -p
-
-        me = config user.name
-
-        today = "log --since=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
-        yesterday = "log --since yesterday --until=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
-
-        outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
-        incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
+$ dotfiles/.gitconfig ~/
 ```
 
 Ref1 : http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/  
