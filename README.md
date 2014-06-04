@@ -147,6 +147,10 @@ $ sudo add-apt-repository ppa:webupd8team/java
 $ sudo apt-get update
 $ sudo apt-get install oracle-java8-installer
 $ sudo apt-get install oracle-java8-set-default
+
+$ # export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
+$ # export JAVA_HOME=/usr/lib/jvm/java-8-oracle
+$
 ```
 
 ### 5.5 Mysql 5.5
