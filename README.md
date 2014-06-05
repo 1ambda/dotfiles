@@ -16,6 +16,8 @@ $ # install chrome dropbox
 ### 1.1 vim
 ```
 see https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+
+$ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 ```
 
 
