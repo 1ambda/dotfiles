@@ -20,6 +20,11 @@ set incsearch
 filetype indent on
 colorscheme desert
 
+" use Powerline
+set rtp+=$HOME/.local/lib/python2.7/site-packages/powerline/bindings/vim/
+set t_Co=256
+set laststatus=2
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
