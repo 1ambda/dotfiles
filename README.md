@@ -15,18 +15,7 @@ $ # install chrome dropbox
 
 ### 1.1 vim
 ```
-$ # get vim source
-$ sudo apt-get install libncurses5-dev
-$ sudo apt-get install libx11-dev
-$ sudo apt-get install libxt-dev
-
-$ cd vim
-$ ./configure --with-features=huge --enable-cscope --enable-multibyte
-$ sudo make install
-
-$ sudo rm /usr/bin/vi
-$ sudo ln -s /usr/local/bin/vim /usr/bin/vi
-$ vi --version
+see https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 ```
 
 
