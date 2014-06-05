@@ -18,6 +18,8 @@ $ # install chrome dropbox
 see https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 
 $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
+
+see http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
 ```
 
 
