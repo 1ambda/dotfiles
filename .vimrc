@@ -1,5 +1,24 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
+set autoindent
+set cindent
+set smartindent
+set wrap
+set nobackup
+set ruler
+set shiftwidth=2
+set number
+syntax on
+set fileencoding=utf-8
+set tenc=utf-8
+set expandtab
+set hlsearch
+set ignorecase
+set tabstop=2
+set lbr
+set incsearch
+filetype indent on
+colorscheme desert
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
