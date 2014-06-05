@@ -14,13 +14,23 @@ $ # install chrome dropbox
 ```
 
 ### 1.1 vim
-```
-see https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
 
+#### 1.1 Vim source build
+
+see https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
+<br/>
+```
+cp dotfiles/.vimrc ~/.vimrc
+```
+
+#### 1.2 vundle
+```
 $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
+```
+
+#### 1.3 vim-powerline
 
 see http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
-```
 
 
 <br>
