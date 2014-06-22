@@ -79,3 +79,10 @@ export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/g
 # eval 'dircolors ~/.dircolors'
 
 export TERM=xterm-256color
+
+# git clone https://github.com/seoh/buster.git && cd buster  
+# sudo python setup.py install  
+
+alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/github/ansterd.github.io' --base='http://ansterd.github.io'  
+alias busd='buster deploy --dir=~/github/ansterd.github.io'  
+
