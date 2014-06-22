@@ -206,6 +206,16 @@ VIM Configuration using **vundle** as package management tool
 - surround.vim
 - matchit
 
+## 6. Ghost
 
+```
+
+# ref : http://seoh.github.io/ghost-to-gh-pages/index.html
+
+git clone https://github.com/seoh/buster.git && cd buster  
+sudo python setup.py install  
+```
+
+see [Ghost](https://github.com/ansterd/Ghost)
 
 
