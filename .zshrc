@@ -83,6 +83,6 @@ export TERM=xterm-256color
 # git clone https://github.com/seoh/buster.git && cd buster  
 # sudo python setup.py install  
 
-alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/ansterd.github.io' --base='http://ansterd.github.io'  
-alias busd='buster deploy --dir=~/Dropbox/Blog/ansterd.github.io'  
+alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
+alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
 
