@@ -1,7 +1,5 @@
 # Ubuntu 14.04 Configuration
 
-See : [Details](http://anster.tistory.com)
-
 ## 1. Default Application Install
 
 ```
@@ -208,14 +206,23 @@ VIM Configuration using **vundle** as package management tool
 
 ## 6. Ghost
 
-```
+Install `buster`
 
+```
 # ref : http://seoh.github.io/ghost-to-gh-pages/index.html
 
 git clone https://github.com/seoh/buster.git && cd buster  
 sudo python setup.py install  
+
 ```
 
-see [Ghost](https://github.com/ansterd/Ghost)
+Set `.zshrc`
+
+```
+alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
+alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
+```
+
+Install Ghost see [Velox](https://github.com/1ambda/velox)
 
 
