@@ -1,15 +1,21 @@
 [user]
-	email = ansterd@nate.com
-	name = ansterd
+	email = 1amb4a@gmail.com
+	name = 1ambda
 [alias]
 	ci = commit -v
 	ca = commit --amend
 	cm = commit -m
 
 	co = checkout
+	cob = checkout -b
 	com = checkout master
+	cod = checkout dev
 
 	ph = push
+	pho = push origin
+	phom = push origin master
+	phod = push origin dev
+	
 	pl = pull
 
 	a = !git add . && git status
@@ -23,6 +29,7 @@
 	ra = remote add
 	rm = remote remove
 	ro = remote show origin -n
+	rv = remote -v
 
 	rs = reset HEAD^
 	rs = reset HEAD
