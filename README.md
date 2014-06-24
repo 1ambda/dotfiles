@@ -216,10 +216,13 @@ sudo python setup.py install
 
 ```
 
+Get `gen-sitemap.sh' to generate Ghost sitemap from [Here](https://gist.github.com/vbtechsupport/7094343)
+
 Set `.zshrc`
 
 ```
-alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
+alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'
+alias busm='/home/anster/Dropbox/Blog/ghost-tools/gen-sitemap.sh'
 alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
 ```
 
