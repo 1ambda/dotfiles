@@ -35,6 +35,7 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'surround.vim'
 Plugin 'matchit.zip'
+Plugin 'Powerline'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
