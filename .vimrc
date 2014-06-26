@@ -3,6 +3,8 @@ filetype off                  " required
 set autoindent
 set cindent
 set smartindent
+set nosi
+set noai
 set wrap
 set nobackup
 set ruler

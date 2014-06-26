@@ -83,7 +83,31 @@ export TERM=xterm-256color
 # git clone https://github.com/seoh/buster.git && cd buster  
 # sudo python setup.py install  
 
+
+## Custom Configuration
+
+### alias sugar
+alias vh='sudo vim /etc/hosts'
+alias vz='vi ~/.zshrc'
+alias vv='vi ~/.vimrc'
+
+alias gg='cd ~/github'
+
+alias me='whoami'
+
+alias tma='tmux a -t'
+alias tmk='tmux kill-sessions -t'
+
+### Blog
+alias ghost="node $HOME/github/ghost/index.js"
 alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
-alias busm=$Home/Dropbox/Blog/ghost-tools/gen-sitemap.sh
+alias busm=$HOME/Dropbox/Blog/ghost-tools/gen-sitemap.sh
 alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
+
+### SSH
+alias aws-mysql="ssh -i $HOME/Dropbox/Key/aws-mysql-study.pem ubuntu@ec2-54-250-215-41.ap-northeast-1.compute.amazonaws.com"
+alias aws-dev-openknowl="ssh -i $HOME/Dropbox/Key/aws-dev-openknowl.pem ubuntu@ec2-54-250-239-90.ap-northeast-1.compute.amazonaws.com"
+alias ssh-openknowl-master='ssh master@openknowl.com'
+alias ssh-openknowl-dev='ssh anster@dev.openknowl.com'
+
 
