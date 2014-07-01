@@ -22,7 +22,10 @@
 	aa = !git add --all . && git status
 
 	s = status --short --branch
-	st = status
+  st = status
+
+  sm = show master
+  rp = rev-parse
 
 	df = diff
 

@@ -90,13 +90,28 @@ export TERM=xterm-256color
 alias vh='sudo vim /etc/hosts'
 alias vz='vi ~/.zshrc'
 alias vv='vi ~/.vimrc'
+alias vg='vi ~/.gitconfig'
+alias vs='vi ~/.ssh/config'
 
-alias gg='cd ~/github'
+alias gog='cd ~/github'
+alias goe='cd ~/.emacs.d'
+alias gow='cd ~/Workspace'
+alias god='cd ~/Dropbox'
+alias gor='cd ~/Download'
+alias go='cd'
 
 alias me='whoami'
 
+alias dir='nautilus .'
+
 alias tma='tmux a -t'
-alias tmk='tmux kill-sessions -t'
+alias tmk='tmux kill-session -t'
+
+alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
+
+alias rm='echo "Use trash-cli to remove files instead of rm." false'
+alias tp='trash-put'
+alias tl='trash-list'
 
 ### Blog
 alias ghost="node $HOME/github/ghost/index.js"
@@ -104,10 +119,20 @@ alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/
 alias busm=$HOME/Dropbox/Blog/ghost-tools/gen-sitemap.sh
 alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
 
-### SSH
-alias aws-mysql="ssh -i $HOME/Dropbox/Key/aws-mysql-study.pem ubuntu@ec2-54-250-215-41.ap-northeast-1.compute.amazonaws.com"
-alias aws-dev-openknowl="ssh -i $HOME/Dropbox/Key/aws-dev-openknowl.pem ubuntu@ec2-54-250-239-90.ap-northeast-1.compute.amazonaws.com"
-alias ssh-openknowl-master='ssh master@openknowl.com'
-alias ssh-openknowl-dev='ssh anster@dev.openknowl.com'
+### function
+
+gi() {
+  curl http://www.gitignore.io/api/$@;
+}
+
+desc(){
+  USAGE="desc <application> <switch>"
+  if [[ "$#" -ne "2" ]]
+  then
+    echo "Usage: $USAGE"
+  else
+    man "$1" | sed -n "/ *"$2", -/,+3p"
+  fi
+}
 
 
