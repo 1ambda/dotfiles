@@ -86,6 +86,9 @@ export TERM=xterm-256color
 
 ## Custom Configuration
 
+### path
+export PATH=~/.composer/vendor/bin:$PATH
+
 ### alias sugar
 alias vh='sudo vim /etc/hosts'
 alias vz='vi ~/.zshrc'
