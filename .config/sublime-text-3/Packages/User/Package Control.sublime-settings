@@ -1,0 +1,25 @@
+{
+	"installed_packages":
+	[
+		"AdvancedNewFile",
+		"Alignment",
+		"AlignTab",
+		"All Autocomplete",
+		"BracketHighlighter",
+		"Clipboard Manager",
+		"DocBlockr",
+		"Emmet",
+		"Git",
+		"Markdown Preview",
+		"SideBarEnhancements",
+		"sublemacspro",
+		"SublimeBlockCursor",
+		"SublimeCodeIntel",
+		"SublimeGit",
+		"SublimeLinter",
+		"Terminal",
+		"Theme - Flatland",
+		"Theme - Soda",
+		"Vintageous"
+	]
+}

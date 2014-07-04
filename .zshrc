@@ -100,7 +100,8 @@ alias gog='cd ~/github'
 alias goe='cd ~/.emacs.d'
 alias gow='cd ~/Workspace'
 alias god='cd ~/Dropbox'
-alias gor='cd ~/Download'
+alias godl='cd ~/Download'
+alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 alias go='cd'
 
 alias me='whoami'
@@ -113,6 +114,7 @@ alias tmk='tmux kill-session -t'
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 
 alias rm='echo "Use trash-cli to remove files instead of rm." false'
+alias rmdir='echo "Use trash-cli to remove files instead of rmdir." false'
 alias tp='trash-put'
 alias tl='trash-list'
 
