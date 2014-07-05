@@ -1,3 +1,7 @@
 [
- { "keys": ["ctrl+alt+x"], "command": "command_palette" }
+ {"keys": ["ctrl+v"],
+ "command": "press_key",
+ "args": {"key": "<C-v>"},
+ "context": [{"key": "vi_command_mode_aware"},
+ {"key": "vi_use_ctrl_keys"}]}
 ]

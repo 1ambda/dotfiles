@@ -11,7 +11,8 @@
 	"highlight_modified_tabs": true,
 	"ignored_packages":
 	[
-		"Vintage"
+		"Vintage",
+		"sublemacspro"
 	],
 	"line_padding_bottom": 1,
 	"line_padding_top": 1,
@@ -25,5 +26,6 @@
 	"tab_size": 2,
 	"theme": "Soda Dark 3.sublime-theme",
 	"translate_tabs_to_spaces": true,
-	"trim_trailing_white_space_on_save": true
+	"trim_trailing_white_space_on_save": true,
+	"vintageous_use_ctrl_keys": true
 }
