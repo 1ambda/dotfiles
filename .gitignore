@@ -1,5 +1,6 @@
 .config/sublime-text-3/Packages/*
 !.config/sublime-text-3/Packages/BlockCursorEverywhere/
+!.config/sublime-text-3/Packages/Vintageous_Plugin_Surround/
 !.config/sublime-text-3/Packages/User/
 .config/sublime-text-3/Packages/User/Package\ Control.last-run
 .config/sublime-text-3/Packages/User/Package\ Control.ca-list

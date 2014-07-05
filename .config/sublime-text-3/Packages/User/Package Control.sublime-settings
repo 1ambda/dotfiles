@@ -9,7 +9,10 @@
 		"Clipboard Manager",
 		"DocBlockr",
 		"Emmet",
+		"Gist",
 		"Git",
+		"GitGutter",
+		"GitGutter-Edge",
 		"Markdown Preview",
 		"SideBarEnhancements",
 		"sublemacspro",
@@ -19,6 +22,7 @@
 		"SublimePackageSync",
 		"Terminal",
 		"Theme - Soda",
-		"Vintageous"
+		"Vintageous",
+		"WordHighlight"
 	]
 }
