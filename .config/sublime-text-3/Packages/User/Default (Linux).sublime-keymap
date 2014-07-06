@@ -1,7 +1,20 @@
 [
- {"keys": ["ctrl+v"],
+ { "keys": ["ctrl+v"],
  "command": "press_key",
  "args": {"key": "<C-v>"},
  "context": [{"key": "vi_command_mode_aware"},
- {"key": "vi_use_ctrl_keys"}]}
-]
+ {"key": "vi_use_ctrl_keys"}]},
+ {"keys": ["ctrl+r"], "command": "press_key", "args": {"key": "<C-r>"}, "context": [{"key": "vi_command_mode_aware"},   {"key": "vi_use_ctrl_keys"}]},
+ { "keys": ["f12"], "command": "goto_symbol" },
+ { "keys": ["alt+x"], "command": "show_overlay", "args": {"overlay": "command_palette"} },
+ { "keys": ["ctrl+c", "s", "s"], "command": "show_overlay", "args": {"overlay": "command_palette", "text": "Snippet: "}},
+ { "keys": ["ctrl+c", "s", "c"], "command": "new_snippet"},
+ { "keys": ["ctrl+c", "t", "s"], "command": "toggle_side_bar" },
+ { "keys": ["ctrl+c", "b", "n"], "command": "next_bookmark" },
+ { "keys": ["ctrl+c", "b", "p"], "command": "prev_bookmark" },
+ { "keys": ["ctrl+c", "b", "b"], "command": "toggle_bookmark" },
+ { "keys": ["ctrl+c", "b", "t"], "command": "toggle_bookmark" },
+ { "keys": ["ctrl+c", "b", "r"], "command": "clear_bookmarks" },
+ { "keys": ["ctrl+c", "b", "c"], "command": "clear_bookmarks" },
+ { "keys": ["ctrl+c", "b", "a"], "command": "select_all_bookmarks" }
+ ]
