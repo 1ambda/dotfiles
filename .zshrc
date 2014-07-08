@@ -105,6 +105,7 @@ alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 alias go='cd'
 
 alias me='whoami'
+alias today='date'
 
 alias dir='nautilus .'
 
@@ -117,6 +118,19 @@ alias rm='echo "Use trash-cli to remove files instead of rm." false'
 alias rmdir='echo "Use trash-cli to remove files instead of rmdir." false'
 alias tp='trash-put'
 alias tl='trash-list'
+
+alias svi='sudo vi'
+alias smv='sudo mv'
+alias service='sudo service'
+
+alias zsh-count="cut -f2 -d';' $HOME/.zsh_history | sort | uniq -c | sort -nr | head -n 30"
+
+alias hs="history | grep -i $1"
+
+alias apt-get='sudo apt-get'
+alias apt-update='apt-get update'
+alias apt-upgrade='apt-get upgrade'
+alias apt-dist-upgrade='apt-get dist-upgrade'
 
 ### Blog
 alias ghost="node $HOME/github/ghost/index.js"
