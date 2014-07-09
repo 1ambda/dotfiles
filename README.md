@@ -244,6 +244,29 @@ VIM Configuration using **vundle** as package management tool
 - surround.vim
 - matchit
 
+### 5.11 Python
+
+#### Virtualenv
+
+```
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+```
+
+#### Ipython
+
+See http://blog.safaribooksonline.com/2013/12/12/start-ipython-notebook/
+
+```
+sudo pip install jinja2 tornado pyzmq
+sudo pip install ipython[all] # in bash
+```
+
+#### Sublime 3 Todo
+
+- jedi
+- Ipython
+
 ## 6. Ghost
 
 Install `buster`
