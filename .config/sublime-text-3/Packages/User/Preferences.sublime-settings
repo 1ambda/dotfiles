@@ -15,6 +15,8 @@
 		"Markdown Preview",
 		"PHPUnit"
 	],
+	"folder_exclude_patterns":
+	[".svn", ".git", ".hg", "CVS", ".sass-cache", "node_modules"],
 	"line_padding_bottom": 1,
 	"line_padding_top": 1,
 	"overlay_scroll_bars": "enabled",
