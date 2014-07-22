@@ -30,6 +30,12 @@ $ git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/Vundle.vim
 
 see http://askubuntu.com/questions/283908/how-can-i-install-and-use-powerline-plugin
 
+### 1.3 Productivity
+
+```
+$ # Autojump
+$ sudo apt-get autojump # and edit .zshrc to add plugin
+
 
 <br>
 ## 2. Appearance Setting
