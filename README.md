@@ -124,6 +124,14 @@ $ sudo apt-get install python-software-properties python g++ make nodejs
 $ sudo npm install -g bower supervisor grunt-cli karma karma-cli 
 ```
 
+If you get permission error when run `npm install`, try this
+
+```
+$ sudo chown -R $USER:$USER ~/tmp
+$ sudo chown -R $USER:$USER ~/.npm
+```
+
+
 ### 5.2 MongoDB
 ```
 $ sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
@@ -182,11 +190,43 @@ $ # add extentions vrapper, color-theme, gradle support
 $ # set emacs key binding as default key
 ```
 
-### 5.7 Emacs
+### 5.7 PHP and Nginx
+
+```
+$ sudo apt-get install mysql-server php5-fpm php5-curl php5-mysql nginx
+sudo usermod -a -G www-data $USER
+sudo shutdown -r now
+```
+
+`/etc/php5/fpm/php.ini` setting should be
+
+```
+...
+...
+cgi.fix_pathinfo=0
+...
+...
+```
+
+and In `/etc/php5/fpm/pool.d/www.conf`, Uncomment all permission lines, like:
+
+```
+listen.owner = www-data
+listen.group = www-data
+listen.mode = 0660
+```
+
+Then restart php5-fpm
+
+```
+$ sudo service php5-fpm restart
+```
+
+### 5.8 Emacs
 
 See : https://github.com/ansterd/emacs-linux/
 
-### 5.8 Git
+### 5.9 Git
 
 ```
 $ dotfiles/.gitconfig ~/
@@ -195,7 +235,7 @@ $ dotfiles/.gitconfig ~/
 Ref1 : http://durdn.com/blog/2012/11/22/must-have-git-aliases-advanced-examples/  
 Ref2 : http://oli.jp/2012/git-powerup/
 
-### 5.9  vim
+### 5.10  vim
 
 VIM Configuration using **vundle** as package management tool
 
@@ -203,6 +243,29 @@ VIM Configuration using **vundle** as package management tool
 
 - surround.vim
 - matchit
+
+### 5.11 Python
+
+#### Virtualenv
+
+```
+sudo pip install virtualenv
+sudo pip install virtualenvwrapper
+```
+
+#### Ipython
+
+See http://blog.safaribooksonline.com/2013/12/12/start-ipython-notebook/
+
+```
+sudo pip install jinja2 tornado pyzmq
+sudo pip install ipython[all] # in bash
+```
+
+#### Sublime 3 Todo
+
+- jedi
+- Ipython
 
 ## 6. Ghost
 
