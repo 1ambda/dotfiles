@@ -55,7 +55,7 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -86,8 +86,6 @@ export TERM=xterm-256color
 
 ## Custom Configuration
 
-### path
-export PATH=~/.composer/vendor/bin:$PATH
 
 ### alias sugar
 alias vh='sudo vim /etc/hosts'
@@ -132,6 +130,8 @@ alias apt-update='apt-get update'
 alias apt-upgrade='apt-get upgrade'
 alias apt-dist-upgrade='apt-get dist-upgrade'
 
+alias disk-usage='du -h | sort -h | tail -n 1000'
+
 ### Blog
 alias ghost="node $HOME/github/ghost/index.js"
 alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
@@ -155,3 +155,8 @@ desc(){
 }
 
 
+### path
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
+export PATH=~/.composer/vendor/bin:$PATH
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source ~/.rvm/scripts/rvm

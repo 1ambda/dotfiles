@@ -19,6 +19,7 @@ set ignorecase
 set tabstop=2
 set lbr
 set incsearch
+set noswapfile
 filetype indent on
 colorscheme desert
 
