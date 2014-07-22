@@ -267,6 +267,10 @@ sudo pip install ipython[all] # in bash
 - jedi
 - Ipython
 
+### 5.12 Ruby
+
+See https://gorails.com/setup/ubuntu/14.04
+
 ## 6. Ghost
 
 Install `buster`
