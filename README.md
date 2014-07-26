@@ -49,6 +49,15 @@ $ sudo apt-get update
 $ sudo apt-get install shutter
 $ # add alias shutter as cap
 
+$ # peco : https://github.com/peco/peco
+
+$ # ghq
+$ # sudo apt-get install golang
+$ # sudo mkdir /usr/local/go
+$ # mkdir ~/.go
+$ zsh && go env # check GOROOT, GOPATH
+
+
 ```
 
 <br>
