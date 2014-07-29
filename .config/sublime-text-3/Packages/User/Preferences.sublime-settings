@@ -6,7 +6,16 @@
 	"detect_indentation": true,
 	"ensure_newline_at_eof_on_save": true,
 	"fade_fold_buttons": false,
-	"font_size": 14,
+	"folder_exclude_patterns":
+	[
+		".svn",
+		".git",
+		".hg",
+		"CVS",
+		".sass-cache",
+		"node_modules"
+	],
+	"font_size": 13,
 	"highlight_line": true,
 	"highlight_modified_tabs": true,
 	"ignored_packages":
@@ -15,8 +24,6 @@
 		"Markdown Preview",
 		"PHPUnit"
 	],
-	"folder_exclude_patterns":
-	[".svn", ".git", ".hg", "CVS", ".sass-cache", "node_modules"],
 	"line_padding_bottom": 1,
 	"line_padding_top": 1,
 	"overlay_scroll_bars": "enabled",
@@ -27,7 +34,7 @@
 	],
 	"save_on_focus_lost": true,
 	"soda_classic_tabs": true,
-	"tab_size": 2,
+	"tab_size": 4,
 	"theme": "Soda Dark 3.sublime-theme",
 	"todo":
 	{
