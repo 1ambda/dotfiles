@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git autojump zsh-syntax-highlighting)
+plugins=(git fasd zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -89,6 +89,7 @@ export TERM=xterm-256color
 
 ### alias sugar
 alias vh='sudo vim /etc/hosts'
+alias vt='vi ~/.tmux.conf'
 alias vz='vi ~/.zshrc'
 alias vv='vi ~/.vimrc'
 alias vg='vi ~/.gitconfig'
@@ -100,7 +101,6 @@ alias gow='cd ~/Workspace'
 alias god='cd ~/Dropbox'
 alias godl='cd ~/Download'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
-alias go='cd'
 
 alias me='whoami'
 alias today='date'
@@ -132,6 +132,8 @@ alias apt-dist-upgrade='apt-get dist-upgrade'
 
 alias disk-usage='du -h | sort -h | tail -n 1000'
 
+alias xc="xclip -selection clipboard"
+
 ### Blog
 alias ghost="node $HOME/github/ghost/index.js"
 alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
@@ -160,3 +162,8 @@ export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:
 export PATH=~/.composer/vendor/bin:$PATH
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 source ~/.rvm/scripts/rvm
+
+### go
+export GOPATH=$HOME/.go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
