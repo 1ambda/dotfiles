@@ -39,15 +39,29 @@ $ sudo apt-get htop ncdu
 ### 1.3 Productivity
 
 ```
-$ # Autojump
+# Autojump
 $ sudo apt-get autojump # and edit .zshrc to add plugin
 
-$ # Shutter
+# Shutter
 $ sudo apt-get install libnet-dbus-glib-perl libimage-exif-perl
 $ sudo add-apt-repository ppa:shutter/ppa
 $ sudo apt-get update
 $ sudo apt-get install shutter
 $ # add alias shutter as cap
+
+# go
+$ # download go bin
+$ tar -C /usr/local -xzf go1.3.linux-amd64.tar.gz
+$ mkdir ~/.go
+
+
+# ghq
+$ go get github.com/motemen/ghq
+
+# peco
+$ go get github.com/peco/peco/cmd/peco
+
+
 
 ```
 
