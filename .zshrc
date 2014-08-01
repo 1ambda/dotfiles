@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git fasd zsh-syntax-highlighting)
+plugins=(git fasd tmux zsh-syntax-highlighting yeoman docker bower command-not-found compleat git-extras npm pip tmuxinator)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -140,7 +140,24 @@ alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/
 alias busm=$HOME/Dropbox/Blog/ghost-tools/gen-sitemap.sh
 alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
 
-### function
+
+### path
+export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
+export PATH=~/.composer/vendor/bin:$PATH
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+source ~/.rvm/scripts/rvm
+
+### go
+export GOPATH=$HOME/.go
+export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
+
+### fasd
+eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
+
+### tmuxinator
+export EDITOR=vim
+
+### Functions
 
 gi() {
   curl http://www.gitignore.io/api/$@;
@@ -155,15 +172,4 @@ desc(){
     man "$1" | sed -n "/ *"$2", -/,+3p"
   fi
 }
-
-
-### path
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
-export PATH=~/.composer/vendor/bin:$PATH
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source ~/.rvm/scripts/rvm
-
-### go
-export GOPATH=$HOME/.go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
 

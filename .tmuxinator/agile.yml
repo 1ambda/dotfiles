@@ -1,0 +1,14 @@
+# ~/.tmuxinator/agile.yml
+
+name: agile
+root: ~/github/agile
+
+windows:
+  - todo: vi TODO.markdown
+  - grunt: grunt run
+  - test : cd tests
+  - dev: 
+      layout: even-vertical
+      panes:
+        - #empty
+        - #empty
