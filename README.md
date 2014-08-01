@@ -104,6 +104,8 @@ $ git clone git://github.com/mbrubeck/compleat.git
 $ ./Setup.lhs configure
 $ ./Setup.lhs build
 $ sudo ./Setup.lhs install
+$ udo mkdir /etc/compleat.d
+$ sudo cp examples/* /etc/compleat.d
 ```
 
 #### zsh plugin : git-extras
