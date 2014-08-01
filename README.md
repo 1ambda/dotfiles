@@ -93,6 +93,19 @@ $ curl -L http://install.ohmyz.sh | sh
 <br>
 Ref : [Here](http://www.unixmen.com/install-oh-zsh-ubuntu-arch-linux-fedora/)
 
+#### zsh plugin : compleat
+
+Background : https://github.com/mbrubeck/compleat
+
+```
+$ sudo apt-get install haskell-platform
+$ git clone git://github.com/mbrubeck/compleat.git
+
+$ ./Setup.lhs configure
+$ ./Setup.lhs build
+$ sudo ./Setup.lhs install
+```
+
 ### 2.5 Solarzied Terminal
 ```
 $ wget --no-check-certificate https://raw.github.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
