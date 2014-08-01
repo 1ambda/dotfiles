@@ -128,13 +128,25 @@ $ cp dotfiles/.zshrc ~/
 <br>
 Ref : [Here](http://www.webupd8.org/2011/04/solarized-must-have-color-paletter-for.html)
 
-### 2.6 tmux, tmux-powerline
+### 2.6 tmux
 ```
 $ sudo apt-get install tmux
+```
+
+#### tmux-powerline
+
+```
 $ install tmux powerline see https://powerline.readthedocs.org/en/latest/installation/linux.html#installation-linux
 $ cp dotfiles/.tmux.conf ~/
 ```
 
+#### tmuxinator
+
+```
+$ gem install tmuxinator
+$ tmuxinator doctor 
+$ ln -s ~/Dropbox/dotfiles/.tmuxinator ~/
+```
 
 <br>
 ## 3. Key
