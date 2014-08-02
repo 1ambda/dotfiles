@@ -13,32 +13,40 @@ call vundle#begin()
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'surround.vim'
-Plugin 'matchit.zip'
-Plugin 'jade.vim'
-Plugin 'groenewege/vim-less'
-Plugin 'jelera/vim-javascript-syntax'
-Plugin 'pangloss/vim-javascript'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'Raimondi/delimitMate'
+Bundle 'gmarik/Vundle.vim'
+Bundle 'surround.vim'
+Bundle 'matchit.zip'
+Bundle 'jade.vim'
+Bundle 'groenewege/vim-less'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'pangloss/vim-javascript'
+Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'Raimondi/delimitMate'
 imap <C-c> <RETURN><ESC>k$a<RETURN>
-Plugin 'scrooloose/syntastic'
+Bundle 'scrooloose/syntastic'
 let g:syntatic_check_on_open=1
 
-Plugin 'SirVer/ultisnips'
-Plugin 'honza/vim-snippets'
 
+"" snippet
+Bundle 'SirVer/ultisnips'
+Bundle 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<tab>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
 let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:UltiSnipsEditSplit="vertical"
 
+"" easymotion
+Bundle 'tpope/vim-repeat'
+Bundle 'Lokaltog/vim-easymotion'
+map / <Plug>(easymotion-sn)
+omap / <Plug>(easymotion-tn)
+let g:EasyMotion_smartcase = 1
+let g:EasyMotion_use_smartsign_us = 1
+
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_add_preview_to_completeopt=0
 "let g:ycm_confirm_extra_conf=0
 "set completeopt-=preview
-
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -102,6 +110,16 @@ set wrap
 "" backspace
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
+
+"" open last edited file
+autocmd BufReadPost *
+     \ if line("'\"") > 0 && line("'\"") <= line("$") |
+     \   exe "normal! g`\"" |
+     \ endif
+
+"" remember info about open buffers on close
+set viminfo^=%
+
 
 " Custom Keys
 
