@@ -60,10 +60,13 @@ $ go get github.com/motemen/ghq
 
 # peco
 $ go get github.com/peco/peco/cmd/peco
-
-
-
 ```
+
+### 1.4 Git extensions
+
+- git-flow
+- git extras
+- hub
 
 <br>
 ## 2. Appearance Setting
@@ -219,7 +222,10 @@ $ sudo service mongod restart
 $ sudo apt-get install gcc g++ make cmake autoconf libtool
 ```
 
-### 5.4 Java 8
+### 5.4 Java 8, Scala
+
+Java 8
+
 ```
 $ sudo add-apt-repository ppa:webupd8team/java
 $ sudo apt-get update
@@ -229,6 +235,16 @@ $ sudo apt-get install oracle-java8-set-default
 $ # export NODE_PATH=/usr/local/lib/jsctags/:$NODE_PATH
 $ # export JAVA_HOME=/usr/lib/jvm/java-8-oracle
 $
+```
+
+Scala
+
+```
+$ wget www.scala-lang.org/files/archive/scala-2.11.2.deb
+$ sudo dpkg -i scala-2.11.2.deb
+
+$ wget http://dl.bintray.com/sbt/debian/sbt-0.13.5.deb
+$ sudo dpkg -i sbt-0.13.5.deb
 ```
 
 ### 5.5 Mysql 5.5
@@ -349,7 +365,6 @@ Install `buster`
 
 git clone https://github.com/seoh/buster.git && cd buster  
 sudo python setup.py install  
-
 ```
 
 Get `gen-sitemap.sh' to generate Ghost sitemap from [Here](https://gist.github.com/vbtechsupport/7094343)
