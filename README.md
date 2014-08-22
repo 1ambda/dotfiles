@@ -60,10 +60,13 @@ $ go get github.com/motemen/ghq
 
 # peco
 $ go get github.com/peco/peco/cmd/peco
-
-
-
 ```
+
+### 1.4 Git extensions
+
+- git-flow
+- git extras
+- hub
 
 <br>
 ## 2. Appearance Setting
@@ -362,7 +365,6 @@ Install `buster`
 
 git clone https://github.com/seoh/buster.git && cd buster  
 sudo python setup.py install  
-
 ```
 
 Get `gen-sitemap.sh' to generate Ghost sitemap from [Here](https://gist.github.com/vbtechsupport/7094343)
