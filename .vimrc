@@ -25,6 +25,7 @@ Bundle 'Raimondi/delimitMate'
 imap <C-c> <RETURN><ESC>k$a<RETURN>
 Bundle 'scrooloose/syntastic'
 let g:syntatic_check_on_open=1
+Bundle 'derekwyatt/vim-scala'
 
 
 "" snippet

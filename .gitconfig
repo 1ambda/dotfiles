@@ -16,7 +16,9 @@
 	phom = push origin master
 	phod = push origin dev
 	
-	pl = pull
+  pl = pull
+  plom = pull origin master
+  plod = pull origin dev
 
 	a = !git add . && git status
 	aa = !git add --all . && git status

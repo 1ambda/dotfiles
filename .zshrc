@@ -83,10 +83,7 @@ export TERM=xterm-256color
 # git clone https://github.com/seoh/buster.git && cd buster  
 # sudo python setup.py install  
 
-
 ## Custom Configuration
-
-
 ### alias sugar
 alias vh='sudo vim /etc/hosts'
 alias vt='vi ~/.tmux.conf'
@@ -99,7 +96,7 @@ alias gog='cd ~/github'
 alias goe='cd ~/.emacs.d'
 alias gow='cd ~/Workspace'
 alias god='cd ~/Dropbox'
-alias godl='cd ~/Download'
+alias godl='cd ~/Downloads'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
 alias me='whoami'
@@ -107,23 +104,23 @@ alias today='date'
 
 alias dir='nautilus .'
 
+alias tm="tmux"
 alias tma='tmux a -t'
 alias tmk='tmux kill-session -t'
-
-alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 
 alias rm='echo "Use trash-cli to remove files instead of rm." false'
 alias rmdir='echo "Use trash-cli to remove files instead of rmdir." false'
 alias tp='trash-put'
 alias tl='trash-list'
 
-alias svi='sudo vi'
-alias smv='sudo mv'
-alias service='sudo service'
 
 alias zsh-count="cut -f2 -d';' $HOME/.zsh_history | sort | uniq -c | sort -nr | head -n 30"
 
 alias hs="history | grep -i $1"
+
+alias svi='sudo vi'
+alias smv='sudo mv'
+alias service='sudo service'
 
 alias apt-get='sudo apt-get'
 alias apt-update='apt-get update'
@@ -131,8 +128,13 @@ alias apt-upgrade='apt-get upgrade'
 alias apt-dist-upgrade='apt-get dist-upgrade'
 
 alias disk-usage='du -h | sort -h | tail -n 1000'
-
 alias xc="xclip -selection clipboard"
+alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
+
+### emacs
+alias emacs-server="emacs --daemon"
+alias emacs-client="emacsclient -c"
+alias emcl="emacs-client -c ."
 
 ### Blog
 alias ghost="node $HOME/github/ghost/index.js"
