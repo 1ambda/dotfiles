@@ -11,6 +11,9 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
+"
+" theme
+colorscheme desert
 
 " let Vundle manage Vundle, required
 Bundle 'gmarik/Vundle.vim'
@@ -27,7 +30,6 @@ Bundle 'scrooloose/syntastic'
 let g:syntatic_check_on_open=1
 Bundle 'derekwyatt/vim-scala'
 
-
 "" snippet
 Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
@@ -43,6 +45,9 @@ map / <Plug>(easymotion-sn)
 omap / <Plug>(easymotion-tn)
 let g:EasyMotion_smartcase = 1
 let g:EasyMotion_use_smartsign_us = 1
+
+"" git gutter
+Plugin 'airblade/vim-gitgutter'
 
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_add_preview_to_completeopt=0
@@ -66,8 +71,6 @@ filetype plugin indent on    " required
 "
 
 " Settings
-" theme
-colorscheme desert
 syntax on
 
 set ruler
@@ -108,6 +111,9 @@ set shiftwidth=2
 set lbr
 set wrap
 
+"" no auto comment
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 "" backspace
 set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
@@ -142,3 +148,5 @@ imap <C-F> <C-o>l
 imap <C-B> <C-o>h
 imap <C-N> <C-o>j
 imap <C-P> <C-o>k
+
+highlight clear SignColumn
