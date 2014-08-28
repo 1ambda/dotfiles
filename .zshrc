@@ -97,6 +97,8 @@ alias goe='cd ~/.emacs.d'
 alias gow='cd ~/Workspace'
 alias god='cd ~/Dropbox'
 alias godl='cd ~/Downloads'
+alias gob='cd ~/Dropbox/Blog'
+alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
 alias me='whoami'
@@ -106,6 +108,7 @@ alias dir='nautilus .'
 
 alias tm="tmux"
 alias tma='tmux a -t'
+alias tmn="tmux new"
 alias tmk='tmux kill-session -t'
 
 alias rm='echo "Use trash-cli to remove files instead of rm." false'
@@ -130,6 +133,8 @@ alias apt-dist-upgrade='apt-get dist-upgrade'
 alias disk-usage='du -h | sort -h | tail -n 1000'
 alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
+alias psef="ps -ef | grep"
+alias psp="ps -ef | peco"
 
 ### emacs
 alias emacs-server="emacs --daemon"
@@ -141,7 +146,6 @@ alias ghost="node $HOME/github/ghost/index.js"
 alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
 alias busm=$HOME/Dropbox/Blog/ghost-tools/gen-sitemap.sh
 alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
-
 
 ### path
 export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
