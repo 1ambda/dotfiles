@@ -119,6 +119,15 @@ See : https://github.com/visionmedia/git-extras
 $ (cd /tmp && git clone --depth 1 https://github.com/visionmedia/git-extras.git && cd git-extras && sudo make install)
 ```
 
+#### zsh plugin : grunt
+
+See : https://github.com/yonchu/grunt-zsh-completion
+
+```
+$ cd ~/.oh-my-zsh/custom/plugins
+$ git clone https://github.com/yonchu/grunt-zsh-completion.git grunt
+```
+
 ### 2.5 Solarzied Terminal
 ```
 $ wget --no-check-certificate https://raw.github.com/seebi/dircolors-solarized/master/dircolors.ansi-dark
