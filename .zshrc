@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git fasd tmux zsh-syntax-highlighting yeoman docker bower command-not-found compleat git-extras npm pip tmuxinator)
+plugins=(git fasd tmux zsh-syntax-highlighting yeoman docker bower command-not-found compleat git-extras npm pip tmuxinator grunt)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,6 +101,8 @@ alias gob='cd ~/Dropbox/Blog'
 alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
+alias gnp="git --no-pager"
+
 alias me='whoami'
 alias today='date'
 
@@ -135,6 +137,12 @@ alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
+
+### git
+alias plom="git pull origin master"
+alias plod="git pull origin dev"
+alias psom="git push oritin master"
+alias psod="git push oritin dev"
 
 ### emacs
 alias emacs-server="emacs --daemon"

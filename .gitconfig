@@ -1,61 +1,92 @@
 [user]
 	email = 1amb4a@gmail.com
-	name = 1ambda
+	name = 1ambda 
+[core]
+	warnAmbiguousRefs = false
+	editor = vim
+[color]
+	diff = auto
+	status = auto
+	branch = auto
 [alias]
 	ci = commit -v
 	ca = commit --amend
-	cm = commit -m
-
-	co = checkout
-	cob = checkout -b
-	com = checkout master
-	cod = checkout dev
-
-	ph = push
-	pho = push origin
-	phom = push origin master
-	phod = push origin dev
+  cm = commit -m
+  cc = commit -c
+  cam = commit -a -m
+  c = commit
 	
+	co = checkout
+  com = checkout master
+  cod = checkout dev
+
+  cl = clone
+
+  ps = push
+  pso = push origin
+  psom = push origin master
+  psod = push origin dev
+
   pl = pull
   plom = pull origin master
   plod = pull origin dev
 
 	a = !git add . && git status
 	aa = !git add --all . && git status
-
+	
 	s = status --short --branch
-  st = status
+	st = status
 
-  sm = show master
-  rp = rev-parse
+  df = diff
+  dfs = "!git --no-pager diff --stat"
+  dfc = diff --cached
+  dfcs = "!git --no-pager diff --cached --stat"
+  dfh = diff HEAD
+  dfhs = "!git --no-pager diff HEAD --stat"
+  dfl = diff HEAD~1 HEAD
 
-	df = diff
+  insp = "!f() { git ll "$1"^.."$1"; }; f"
+  inspd = "!f() { git diff "$1"^.."$1"; }; f"
 
 	ra = remote add
 	rm = remote remove
-	ro = remote show origin -n
-	rv = remote -v
+  ro = remote show origin -n
 
-	rs = reset HEAD^
-	rs = reset HEAD
-	rh = reset --hard
+  rp = rev-parse
+
+	rsa = reset HEAD
+	rsc = reset HEAD^
+	rsh = reset --hard
 
 	br = branch
 	bv = branch -v
-	bd = branch -d
+  bd = branch -d
 
-	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-	lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+  sl = stash list
+  sa = stash apply
+  ss = stash save
 
-	last = log -1 HEAD
+  fl = log -u
+
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+  lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+
+  last = "!git ll -1"
+
 	type = cat-file -t
 	dump = cat-file -p
 
-	me = config user.name
+  me = config user.name
+  rank = shortlog -sn --no-merges
+  root = rev-parse --git-dir
 
 	today = "log --since=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
 	yesterday = "log --since yesterday --until=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
-
+ 
 	outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
 	incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
 
