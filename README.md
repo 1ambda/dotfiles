@@ -68,6 +68,10 @@ $ go get github.com/peco/peco/cmd/peco
 - git extras
 - hub
 
+### 1.5 Geeknote
+
+[Geeknote](http://www.webupd8.org/2014/09/geeknote-command-line-evernote-client.html)
+
 <br>
 ## 2. Appearance Setting
 
