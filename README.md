@@ -288,6 +288,15 @@ $ # add extentions vrapper, color-theme, gradle support
 $ # set emacs key binding as default key
 ```
 
+gvm, springboot
+
+```
+$ curl -s get.gvmtool.net | bash
+$ $ gvm install springboot
+$ spring --version
+Spring Boot v1.2.0.BUILD-SNAPSHOT
+```
+
 ### 5.7 PHP and Nginx
 
 ```
