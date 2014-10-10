@@ -378,6 +378,14 @@ sudo pip install ipython[all] # in bash
 
 See https://gorails.com/setup/ubuntu/14.04
 
+### 5.13 SML
+
+```
+$ sudo apt-get install gcc-multilib g++-multilib
+$ ;; Installation Guide: http://www.smlnj.org/
+```
+
+
 ## 6. Ghost
 
 Install `buster`
