@@ -68,6 +68,10 @@ $ go get github.com/peco/peco/cmd/peco
 - git extras
 - hub
 
+### 1.5 Geeknote
+
+[Geeknote](http://www.webupd8.org/2014/09/geeknote-command-line-evernote-client.html)
+
 <br>
 ## 2. Appearance Setting
 
@@ -284,6 +288,15 @@ $ # add extentions vrapper, color-theme, gradle support
 $ # set emacs key binding as default key
 ```
 
+gvm, springboot
+
+```
+$ curl -s get.gvmtool.net | bash
+$ $ gvm install springboot
+$ spring --version
+Spring Boot v1.2.0.BUILD-SNAPSHOT
+```
+
 ### 5.7 PHP and Nginx
 
 ```
@@ -364,6 +377,14 @@ sudo pip install ipython[all] # in bash
 ### 5.12 Ruby
 
 See https://gorails.com/setup/ubuntu/14.04
+
+### 5.13 SML
+
+```
+$ sudo apt-get install gcc-multilib g++-multilib
+$ ;; Installation Guide: http://www.smlnj.org/
+```
+
 
 ## 6. Ghost
 
