@@ -49,7 +49,7 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git fasd tmux zsh-syntax-highlighting yeoman docker bower command-not-found compleat git-extras npm pip tmuxinator grunt)
+plugins=(git fasd tmux zsh-syntax-highlighting yeoman docker bower command-not-found compleat git-extras npm pip tmuxinator grunt spring)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -138,16 +138,51 @@ alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 
+### dev
+alias gt="grunt test"
+
 ### git
 alias plom="git pull origin master"
 alias plod="git pull origin dev"
 alias psom="git push oritin master"
 alias psod="git push oritin dev"
 
+### geeknote
+
+alias geeknote="sudo geeknote"
+alias gn="sudo geeknote"
+alias gnf="sudo geeknote find"
+gnfc() { sudo geeknote find $1 --content-search }
+alias gns="sudo geeknote show"
+
+alias gnsw="sudo geeknote show words"
+alias gnew="sudo geeknote edit words"
+
 ### emacs
 alias emacs-server="emacs --daemon"
 alias emacs-client="emacsclient -c"
 alias emcl="emacs-client -c ."
+
+### touchpad
+alias tpd="gsettings set org.gnome.settings-daemon.peripherals.touchpad touchpad-enabled false"
+alias tpe="gsettings set org.gnome.settings-daemon.peripherals.touchpad touchpad-enabled true"
+alias tpc="gsettings get org.gnome.settings-daemon.peripherals.touchpad touchpad-enabled"
+
+tt() {
+  if $(tpc);
+    then 
+      tpd;
+      sleep 0.05;
+      tpd;
+      echo "Touchpad disabled";
+    else 
+      tpe;
+      echo "Touchpad enabled";
+  fi
+}
+
+### Java
+alias jdk-change="sudo update-alternatives --config java"
 
 ### Blog
 alias ghost="node $HOME/github/ghost/index.js"
@@ -171,6 +206,16 @@ eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp z
 ### tmuxinator
 export EDITOR=vim
 
+### play
+export PATH=$PATH:~/Application/activator-1.2.10
+
+### coursera-algorithm
+export PATH=$PATH:~/Coursera/algorithm1/bin
+
+### SML
+export PATH=$PATH:~/Application/sml/bin
+
+
 ### Functions
 
 gi() {
@@ -187,3 +232,6 @@ desc(){
   fi
 }
 
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/home/anster/.gvm/bin/gvm-init.sh" ]] && source "/home/anster/.gvm/bin/gvm-init.sh"
