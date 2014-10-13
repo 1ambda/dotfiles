@@ -215,6 +215,9 @@ export PATH=$PATH:~/Coursera/algorithm1/bin
 ### SML
 export PATH=$PATH:~/Application/sml/bin
 
+### Python
+export PYTHONPATH=$PYTHONPATH:~/Dropbox/dotfiles/python
+
 
 ### Functions
 
