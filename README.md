@@ -385,6 +385,11 @@ $ sudo apt-get install gcc-multilib g++-multilib
 $ ;; Installation Guide: http://www.smlnj.org/
 ```
 
+### 5.14 Haskell
+
+1. install Haskell Platform. See [here](http://www.haskell.org/platform/linux.html)  
+
+2. install cabal See [here](http://www.haskell.org/haskellwiki/Cabal/How_to_install_a_Cabal_package) 
 
 ## 6. Ghost
 
