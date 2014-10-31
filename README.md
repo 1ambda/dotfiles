@@ -16,7 +16,7 @@ $ # install chrome dropbox
 ####  Vim source build
 
 see https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
-<br/>
+<br/>p
 ```
 cp dotfiles/.vimrc ~/.vimrc
 ```
@@ -367,12 +367,9 @@ See http://blog.safaribooksonline.com/2013/12/12/start-ipython-notebook/
 ```
 sudo pip install jinja2 tornado pyzmq
 sudo pip install ipython[all] # in bash
+sudo apt-get install liblapack-dev libatlas-dev python-dev gfortran
+sudo pip install numpy sympy matplotlib scipy pandas
 ```
-
-#### Sublime 3 Todo
-
-- jedi
-- Ipython
 
 ### 5.12 Ruby
 
