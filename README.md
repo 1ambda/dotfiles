@@ -388,6 +388,36 @@ $ ;; Installation Guide: http://www.smlnj.org/
 
 2. install cabal See [here](http://www.haskell.org/haskellwiki/Cabal/How_to_install_a_Cabal_package) 
 
+### 5.15 R
+
+[References](http://www.korecky.org/?p=1254)
+
+1. Install R
+
+`$sudo vi /etc/apt/sources.list.d/r-base.list`
+
+paste these lines into thefile
+
+```
+# R-Base repository
+deb http://mirrors.nic.cz/R/bin/linux/ubuntu trusty/
+```
+
+import repository signature
+
+`$ sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9`
+
+update and install
+
+```
+$ sudo apt-get update
+$ sudo apt-get install r-base r-base-dev r-cran-rjava r-cran-xml libxml2-dev
+```
+
+2. Install R studio
+
+Download and install R studio from [here](http://www.rstudio.com/products/rstudio/download/)
+
 ## 6. Ghost
 
 Install `buster`
