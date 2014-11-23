@@ -56,8 +56,7 @@ $ mkdir ~/.go
 
 
 # ghq
-$ go get github.com/motemen/ghq
-
+$ go get github.com/motemen/ghq 
 # peco
 $ go get github.com/peco/peco/cmd/peco
 ```
@@ -295,38 +294,6 @@ $ curl -s get.gvmtool.net | bash
 $ $ gvm install springboot
 $ spring --version
 Spring Boot v1.2.0.BUILD-SNAPSHOT
-```
-
-### 5.7 PHP and Nginx
-
-```
-$ sudo apt-get install mysql-server php5-fpm php5-curl php5-mysql nginx
-sudo usermod -a -G www-data $USER
-sudo shutdown -r now
-```
-
-`/etc/php5/fpm/php.ini` setting should be
-
-```
-...
-...
-cgi.fix_pathinfo=0
-...
-...
-```
-
-and In `/etc/php5/fpm/pool.d/www.conf`, Uncomment all permission lines, like:
-
-```
-listen.owner = www-data
-listen.group = www-data
-listen.mode = 0660
-```
-
-Then restart php5-fpm
-
-```
-$ sudo service php5-fpm restart
 ```
 
 ### 5.8 Emacs
