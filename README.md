@@ -338,6 +338,13 @@ sudo apt-get install liblapack-dev libatlas-dev python-dev gfortran
 sudo pip install numpy sympy matplotlib scipy pandas
 ```
 
+#### Python3
+
+```
+sudo apt-get install python3-pip
+sudo pip3 install matplotlib
+```
+
 ### 5.12 Ruby
 
 See https://gorails.com/setup/ubuntu/14.04
