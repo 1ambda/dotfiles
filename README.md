@@ -16,7 +16,7 @@ $ # install chrome dropbox
 ####  Vim source build
 
 see https://github.com/Valloric/YouCompleteMe/wiki/Building-Vim-from-source
-<br/>p
+<br/>
 ```
 cp dotfiles/.vimrc ~/.vimrc
 ```
