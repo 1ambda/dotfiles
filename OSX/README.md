@@ -15,3 +15,8 @@ $ make && make install
 ### Keys
 
 - [replace Capslock to Escape](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
+
+### 3rd-party Apps
+
+(1) [Sizeup](http://www.irradiatedsoftware.com/sizeup/), [Cinch](http://www.irradiatedsoftware.com/cinch/) (Window Mgmt) 
+
