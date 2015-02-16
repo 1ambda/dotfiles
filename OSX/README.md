@@ -12,6 +12,12 @@ $ ./configure --with-mac --enable-mac-app
 $ make && make install
 ```
 
+### Vim
+
+```
+$ brew install vim --with-python --with-ruby --with-perl
+```
+
 ### Keys
 
 - [replace Capslock to Escape](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
