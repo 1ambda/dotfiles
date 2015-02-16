@@ -1,16 +1,11 @@
 # Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
+export ZSH=/Users/1002471/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
-# ZSH_THEME="clean"
-
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -27,8 +22,8 @@ ZSH_THEME="robbyrussell"
 # Uncomment the following line to disable auto-setting terminal title.
 # DISABLE_AUTO_TITLE="true"
 
-# Uncomment the following line to disable command auto-correction.
-# DISABLE_CORRECTION="true"
+# Uncomment the following line to enable command auto-correction.
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # COMPLETION_WAITING_DOTS="true"
@@ -49,39 +44,10 @@ ZSH_THEME="robbyrussell"
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git fasd tmux zsh-syntax-highlighting yeoman docker bower command-not-found compleat git-extras npm pip tmuxinator grunt spring)
-
-source $ZSH/oh-my-zsh.sh
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(git)
 
 # User configuration
-
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-#
-
-# solarized theme
-# eval 'dircolors ~/.dircolors'
-
-export TERM=xterm-256color
-
-# git clone https://github.com/seoh/buster.git && cd buster  
-# sudo python setup.py install  
 
 ## Custom Configuration
 ### alias sugar
@@ -100,6 +66,16 @@ alias godl='cd ~/Downloads'
 alias gob='cd ~/Dropbox/Blog'
 alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+
+### fasd
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias f='fasd -f'        # file
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+alias z='fasd_cd -d'     # cd, same functionality as j in autojump
+alias zz='fasd_cd -d -i' # cd with interactive selection
 
 alias gnp="git --no-pager"
 
@@ -138,103 +114,50 @@ alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 
-### dev
-alias gt="grunt test"
-
 ### git
 alias plom="git pull origin master"
 alias plod="git pull origin dev"
 alias psom="git push oritin master"
 alias psod="git push oritin dev"
 
-### geeknote
+### ssh
+alias skp-ssh="ssh -i ~/.ssh/key-1ambda.pem ubuntu@175.126.56.190"
 
-alias geeknote="sudo geeknote"
-alias gn="sudo geeknote"
-alias gnf="sudo geeknote find"
-gnfc() { sudo geeknote find $1 --content-search }
-alias gns="sudo geeknote show"
+export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+# export MANPATH="/usr/local/man:$MANPATH"
 
-alias gnsw="sudo geeknote show words"
-alias gnew="sudo geeknote edit words"
-
-### emacs
-alias emacs-server="emacs --daemon"
-alias emacs-client="emacsclient -c"
-alias emcl="emacs-client -c ."
-
-### touchpad
-alias tpd="gsettings set org.gnome.settings-daemon.peripherals.touchpad touchpad-enabled false"
-alias tpe="gsettings set org.gnome.settings-daemon.peripherals.touchpad touchpad-enabled true"
-alias tpc="gsettings get org.gnome.settings-daemon.peripherals.touchpad touchpad-enabled"
-
-tt() {
-  if $(tpc);
-    then 
-      tpd;
-      sleep 0.05;
-      tpd;
-      echo "Touchpad disabled";
-    else 
-      tpe;
-      echo "Touchpad enabled";
-  fi
-}
-
-### Java
-alias jdk-change="sudo update-alternatives --config java"
-
-### Blog
-alias ghost="node $HOME/github/ghost/index.js"
-alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/1ambda.github.io' --base='http://1ambda.github.io'  
-alias busm=$HOME/Dropbox/Blog/ghost-tools/gen-sitemap.sh
-alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
-
-### path
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
-export PATH=~/.composer/vendor/bin:$PATH
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source ~/.rvm/scripts/rvm
-
-### go
-export GOPATH=$HOME/.go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-
-### fasd
-eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
-
-### tmuxinator
-export EDITOR=vim
-
-### play
-export PATH=$PATH:~/Application/activator-1.2.10
-
-### coursera-algorithm
-export PATH=$PATH:~/Coursera/algorithm1/bin
-
-### SML
-export PATH=$PATH:~/Application/sml/bin
-
-### Python
-export PYTHONPATH=$PYTHONPATH:~/Dropbox/dotfiles/python
+### PATH
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home
+export PATH=$PATH:~/Applications/maven-3.2.5/bin
+export PATH=$PATH:~/Applications/gradle-2.3/bin
+export PATH=$PATH:~/Library/Python/2.7/bin
+export PATH=$PATH:$HOME/.cask/bin
 
 
-### Functions
+source $ZSH/oh-my-zsh.sh
 
-gi() {
-  curl http://www.gitignore.io/api/$@;
-}
+# You may need to manually set your language environment
+# export LANG=en_US.UTF-8
 
-desc(){
-  USAGE="desc <application> <switch>"
-  if [[ "$#" -ne "2" ]]
-  then
-    echo "Usage: $USAGE"
-  else
-    man "$1" | sed -n "/ *"$2", -/,+3p"
-  fi
-}
+# Preferred editor for local and remote sessions
+# if [[ -n $SSH_CONNECTION ]]; then
+#   export EDITOR='vim'
+# else
+#   export EDITOR='mvim'
+# fi
 
+# Compilation flags
+# export ARCHFLAGS="-arch x86_64"
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/home/anster/.gvm/bin/gvm-init.sh" ]] && source "/home/anster/.gvm/bin/gvm-init.sh"
+# ssh
+# export SSH_KEY_PATH="~/.ssh/dsa_id"
+
+# Set personal aliases, overriding those provided by oh-my-zsh libs,
+# plugins, and themes. Aliases can be placed here, though oh-my-zsh
+# users are encouraged to define aliases within the ZSH_CUSTOM folder.
+# For a full list of active aliases, run `alias`.
+#
+# Example aliases
+# alias zshconfig="mate ~/.zshrc"
+# alias ohmyzsh="mate ~/.oh-my-zsh"
+
