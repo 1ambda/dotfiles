@@ -12,6 +12,8 @@ $ ./configure --with-mac --enable-mac-app
 $ make && make install
 ```
 
+(2) Configure [.emacs](https://github.com/1ambda/emacs-osx)
+
 ### Vim
 
 ```
