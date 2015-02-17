@@ -19,6 +19,9 @@ colorscheme desert
 Bundle 'gmarik/Vundle.vim'
 Bundle 'surround.vim'
 Bundle 'matchit.zip'
+Bundle 'scrooloose/nerdcommenter'
+
+""" language 
 Bundle 'jade.vim'
 Bundle 'groenewege/vim-less'
 Bundle 'jelera/vim-javascript-syntax'
@@ -48,6 +51,9 @@ let g:EasyMotion_use_smartsign_us = 1
 
 "" git gutter
 Plugin 'airblade/vim-gitgutter'
+
+"" vim-exchange
+Plugin 'tommcdo/vim-exchange.git'
 
 "Plugin 'Valloric/YouCompleteMe'
 "let g:ycm_add_preview_to_completeopt=0
@@ -135,8 +141,8 @@ vnoremap <slient> * :call VisualSelection('f')<CR>
 vnoremap <slient> # :call VisualSelection('b')<CR>
 
 "" leader
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = "\\"
+let g:mapleader = "\\"
 
 nmap <leader>w :w!<cr>
 nmap <leader>q :q<cr>
