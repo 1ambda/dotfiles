@@ -23,6 +23,8 @@ $ brew install vim --with-python --with-ruby --with-perl
 ### Keys
 
 - [replace Capslock to Escape](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
+- [use Command_R as HanEng key](http://jaebok.tistory.com/38)
+- Spotlight: `Op-S`, Finder: `Op-F`, Dashboard: `Op-L`, Dock: 'Op-D'
 
 ### 3rd-party Apps
 
