@@ -298,6 +298,12 @@ Spring Boot v1.2.0.BUILD-SNAPSHOT
 
 ### 5.8 Emacs
 
+(1) install
+
+[Emacs 24.4 installation](http://ubuntuhandbook.org/index.php/2014/10/emacs-24-4-released-install-in-ubuntu-14-04/)
+
+(2) configure
+
 See : https://github.com/ansterd/emacs-linux/
 
 ### 5.9 Git

@@ -138,6 +138,9 @@ alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 
+### flux
+alias xflux="xflux -l 37.2786 -g 127.0437"
+
 ### dev
 alias gt="grunt test"
 
@@ -218,6 +221,9 @@ export PATH=$PATH:~/Application/sml/bin
 ### Python
 export PYTHONPATH=$PYTHONPATH:~/Dropbox/dotfiles/python
 
+### Cask
+
+export PATH=$PATH:/home/anster/.cask/bin
 
 ### Functions
 
