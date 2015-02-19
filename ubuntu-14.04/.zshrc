@@ -219,7 +219,7 @@ export PATH=$PATH:~/Coursera/algorithm1/bin
 export PATH=$PATH:~/Application/sml/bin
 
 ### Python
-export PYTHONPATH=$PYTHONPATH:~/Dropbox/dotfiles/python
+export PYTHONPATH=$PYTHONPATH:~/Dropbox/dotfiles/ubuntu-14.04/python
 
 ### Cask
 
