@@ -45,7 +45,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git fasd)
 
 # User configuration
 
@@ -113,6 +113,10 @@ alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
+
+### tree
+
+alias tree="tree -C"
 
 ### git
 alias plom="git pull origin master"
