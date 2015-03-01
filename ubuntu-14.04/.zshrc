@@ -75,15 +75,9 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 #
 
-# solarized theme
-# eval 'dircolors ~/.dircolors'
-
-export TERM=xterm-256color
-
 # git clone https://github.com/seoh/buster.git && cd buster  
 # sudo python setup.py install  
 
-## Custom Configuration
 ### alias sugar
 alias vh='sudo vim /etc/hosts'
 alias vt='vi ~/.tmux.conf'
@@ -193,37 +187,8 @@ alias busg='buster generate --domain=http://127.0.0.1:2368 --dir=~/Dropbox/Blog/
 alias busm=$HOME/Dropbox/Blog/ghost-tools/gen-sitemap.sh
 alias busd='buster deploy --dir=~/Dropbox/Blog/1ambda.github.io'  
 
-### path
-export PATH="$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/jvm/java-8-oracle/bin:/usr/lib/jvm/java-8-oracle/db/bin:/usr/lib/jvm/java-8-oracle/jre/bin"
-export PATH=~/.composer/vendor/bin:$PATH
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-source ~/.rvm/scripts/rvm
-
-### go
-export GOPATH=$HOME/.go
-export PATH=$PATH:/usr/local/go/bin:$GOPATH/bin
-
 ### fasd
 eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install zsh-wcomp zsh-wcomp-install)"
-
-### tmuxinator
-export EDITOR=vim
-
-### play
-export PATH=$PATH:~/Application/activator-1.2.10
-
-### coursera-algorithm
-export PATH=$PATH:~/Coursera/algorithm1/bin
-
-### SML
-export PATH=$PATH:~/Application/sml/bin
-
-### Python
-export PYTHONPATH=$PYTHONPATH:~/Dropbox/dotfiles/ubuntu-14.04/python
-
-### Cask
-
-export PATH=$PATH:/home/anster/.cask/bin
 
 ### Functions
 
