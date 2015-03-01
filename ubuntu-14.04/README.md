@@ -326,12 +326,9 @@ VIM Configuration using **vundle** as package management tool
 
 ### 5.11 Python
 
-#### Virtualenv
-
-```
-sudo pip install virtualenv
-sudo pip install virtualenvwrapper
-```
+- [pyenv](https://github.com/yyuu/pyenv)
+- [pyenv-virtualenv](https://github.com/yyuu/pyenv-virtualenv)
+- [autoenv](https://github.com/kennethreitz/autoenv)
 
 #### Ipython
 
