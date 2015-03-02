@@ -39,5 +39,10 @@ export PATH=$PATH:~/Application/activator-1.2.10
 ## TMUXINATOR
 export EDITOR=vim
 
+## NODE
+export NVM_DIR="/home/anster/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+
+
 
 
