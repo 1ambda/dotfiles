@@ -14,7 +14,6 @@ fi
 export TERM=xterm-256color
 
 ## PYTHON
-export PYTHONPATH=$PYTHONPATH:~/Dropbox/dotfiles/ubuntu-14.04/python
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init -)"

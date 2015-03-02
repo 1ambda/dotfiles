@@ -82,6 +82,7 @@ source $ZSH/oh-my-zsh.sh
 alias vh='sudo vim /etc/hosts'
 alias vt='vi ~/.tmux.conf'
 alias vz='vi ~/.zshrc'
+alias vze='vi ~/.zshenv'
 alias vv='vi ~/.vimrc'
 alias vg='vi ~/.gitconfig'
 alias vs='vi ~/.ssh/config'
