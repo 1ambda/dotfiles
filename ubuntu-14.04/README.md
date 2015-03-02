@@ -199,22 +199,9 @@ sudo add-apt-repository -y ppa:jincreator/freetype && sudo apt update && sudo ap
 <br>
 ## 5. Development Environment
 
-### 5.1 Node.js
+### Node.js
 
-```
-$ sudo add-apt-repository ppa:chris-lea/node.js
-$ sudo apt-get update
-$ sudo apt-get install python-software-properties python g++ make nodejs
-$ sudo npm install -g bower supervisor grunt-cli karma karma-cli 
-```
-
-If you get permission error when run `npm install`, try this
-
-```
-$ sudo chown -R $USER:$USER ~/tmp
-$ sudo chown -R $USER:$USER ~/.npm
-```
-
+- nvm
 
 ### 5.2 MongoDB
 ```
@@ -268,7 +255,7 @@ $ # install mysql workbench
 ### 5.6 Spring
 ```
 $ # get STS 
-$ tar -zxvf sts*
+$ tar -zxvf sts
 $ sudo mv sts-bundle /opt
 $ cd /opt/sts-bundle/sts-3.5.1.RELEASE
 $ sudo ln -s /opt/sts-bundle/sts-3.5.1.RELEASE/STS /usr/local/bin/sts
