@@ -3,7 +3,7 @@
 	name = 1ambda 
 [core]
 	warnAmbiguousRefs = false
-	editor = vim
+  editor = vim
 [color]
 	diff = auto
 	status = auto
@@ -48,17 +48,20 @@
   insp = "!f() { git ll "$1"^.."$1"; }; f"
   inspd = "!f() { git diff "$1"^.."$1"; }; f"
 
-	ra = remote add
-	rm = remote remove
-  ro = remote show origin -n
+	rma = remote add
+  rmr = remote remove
+  rmv = remote -v
+  rmso = remote show origin -n
 
   rp = rev-parse
 
 	rsa = reset HEAD
 	rsc = reset HEAD^
+  rsm = reset --mixed
+  rss = reset --soft
 	rsh = reset --hard
 
-	br = branch
+	br = branch -vv -a
 	bv = branch -v
   bd = branch -d
 
@@ -90,3 +93,5 @@
 	outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
 	incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
 
+[push]
+	default = matching

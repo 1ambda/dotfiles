@@ -5,6 +5,7 @@ export ZSH=/Users/1002471/.oh-my-zsh
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+# PS1
 ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
@@ -45,7 +46,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fasd)
+plugins=(osx brew web-search git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt pyenv sbt scala)
 
 # User configuration
 
@@ -54,6 +55,7 @@ plugins=(git fasd)
 alias vh='sudo vim /etc/hosts'
 alias vt='vi ~/.tmux.conf'
 alias vz='vi ~/.zshrc'
+alias vze='vi ~/.zshenv'
 alias vv='vi ~/.vimrc'
 alias vg='vi ~/.gitconfig'
 alias vs='vi ~/.ssh/config'
@@ -130,13 +132,9 @@ alias skp-ssh="ssh -i ~/.ssh/key-1ambda.pem ubuntu@175.126.56.190"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-### PATH
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.8.0_31.jdk/Contents/Home
-export PATH=$PATH:~/Applications/maven-3.2.5/bin
-export PATH=$PATH:~/Applications/gradle-2.3/bin
-export PATH=$PATH:~/Library/Python/2.7/bin
-export PATH=$PATH:$HOME/.cask/bin
-
+### node
+source $(brew --prefix nvm)/nvm.sh
+nvm use iojs
 
 source $ZSH/oh-my-zsh.sh
 

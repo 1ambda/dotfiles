@@ -1,5 +1,22 @@
 ## Mac OS
 
+### Tools
+
+- brew, wget, curl
+- peco
+- fasd
+- Xcode, macvim
+- zsh, antigen
+
+### Python
+
+- [pyenv](https://github.com/yyuu/pyenv)
+- [virtualenv](https://github.com/yyuu/pyenv-virtualenv)
+- [autoenv](https://github.com/kennethreitz/autoenv)
+
+### Node
+
+- [nvm](https://github.com/creationix/nvm)
 
 ### Emacs
 
