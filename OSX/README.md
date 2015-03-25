@@ -2,11 +2,15 @@
 
 ### Tools
 
-- brew, wget, curl
+- brew, wget, curl, tree
 - peco
 - fasd
-- Xcode, macvim
+- Xcode
 - zsh, antigen
+- [trash-cli](https://github.com/andreafrancia/trash-cli)
+- [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
+- [vundle](https://github.com/gmarik/Vundle.vim)
+- [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
 
 ### Python
 
@@ -31,10 +35,16 @@ $ make && make install
 
 (2) Configure [.emacs](https://github.com/1ambda/emacs-osx)
 
-### Vim
+### Powerline
+
+- [ref 1](http://powerline.readthedocs.org/en/latest/installation/osx.html?highlight=install)
+- [ref 2](http://blog.outsider.ne.kr/879)
 
 ```
-$ brew install vim --with-python --with-ruby --with-perl
+$ pip install powerline-status
+$ brew install Caskroom/cask/xquartz
+$ brew update && brew install -vd fontforge
+$ # set powerline font for non-ascii chars 
 ```
 
 ### Keys
@@ -45,5 +55,6 @@ $ brew install vim --with-python --with-ruby --with-perl
 
 ### 3rd-party Apps
 
-(1) [Sizeup](http://www.irradiatedsoftware.com/sizeup/), [Cinch](http://www.irradiatedsoftware.com/cinch/) (Window Mgmt) 
-
+- [Sizeup](http://www.irradiatedsoftware.com/sizeup/), [Cinch](http://www.irradiatedsoftware.com/cinch/) (Window Mgmt)
+- Karabiner
+- Seil

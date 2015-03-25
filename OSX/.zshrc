@@ -132,9 +132,7 @@ alias skp-ssh="ssh -i ~/.ssh/key-1ambda.pem ubuntu@175.126.56.190"
 export PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export MANPATH="/usr/local/man:$MANPATH"
 
-### node
-source $(brew --prefix nvm)/nvm.sh
-nvm use iojs
+export TERM=screen-256color
 
 source $ZSH/oh-my-zsh.sh
 
@@ -162,4 +160,5 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 

@@ -1,0 +1,8 @@
+{
+	"segments": {
+		"right": [
+			{ "function": "powerline.segments.common.time.date" },
+			{ "function": "powerline.segments.common.env.user" }
+		]
+	}
+}
