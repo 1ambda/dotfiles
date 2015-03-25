@@ -11,6 +11,7 @@
 - [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
 - [vundle](https://github.com/gmarik/Vundle.vim)
 - [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
+- [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 
 ### Python
 

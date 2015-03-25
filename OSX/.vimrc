@@ -15,6 +15,9 @@ call vundle#begin()
 " theme
 colorscheme desert
 
+" clipboard
+set clipboard=unnamed
+
 " let Vundle manage Vundle, required
 Bundle 'gmarik/Vundle.vim'
 Bundle 'surround.vim'
