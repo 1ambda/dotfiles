@@ -46,7 +46,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx brew web-search git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt pyenv sbt scala)
+plugins=(osx brew web-search git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt pyenv sbt scala heroku git-flow-completion)
 
 # User configuration
 
@@ -120,24 +120,31 @@ alias psp="ps -ef | peco"
 
 alias tree="tree -C"
 
-### git
+### git, gitflow
 alias plom="git pull origin master"
 alias plod="git pull origin dev"
 alias psom="git push oritin master"
 alias psod="git push oritin dev"
+alias gf="git flow"
 
-### ssh
-alias skp-ssh="ssh -i ~/.ssh/key-1ambda.pem ubuntu@175.126.56.190"
+### hadoop
+alias hstart="/usr/local/Cellar/hadoop/2.6.0/sbin/start-dfs.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/start-yarn.sh"
+alias hstop="/usr/local/Cellar/hadoop/2.6.0/sbin/stop-yarn.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/stop-dfs.sh"
+
+### thgfuck
+alias fuck='$(thefuck $(fc -ln -1))'
+alias FUCK='fuck'
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
 export TERM=screen-256color
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export PATH="/usr/local/sbin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
 # You may need to manually set your language environment
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
 # if [[ -n $SSH_CONNECTION ]]; then
@@ -162,3 +169,6 @@ export LANG=en_US.UTF-8
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 
+
+### Added by the Heroku Toolbelt
+export PATH="/usr/local/heroku/bin:$PATH"

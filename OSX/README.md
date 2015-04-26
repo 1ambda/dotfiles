@@ -12,6 +12,17 @@
 - [vundle](https://github.com/gmarik/Vundle.vim)
 - [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
 - [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
+- htop
+- [rest-shell](https://github.com/spring-projects/rest-shell)
+- [the fuck](https://github.com/nvbn/thefuck)
+- [git-extras](https://github.com/tj/git-extras/wiki/Installation)
+- [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
+- [git-flow-completion](https://github.com/bobthecow/git-flow-completion)
+- [git-up](https://github.com/aanand/git-up)
+
+### Spring
+
+[Spring Boot CLI Install](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started-installing-the-cli)
 
 ### Python
 
@@ -59,3 +70,7 @@ $ # set powerline font for non-ascii chars
 - [Sizeup](http://www.irradiatedsoftware.com/sizeup/), [Cinch](http://www.irradiatedsoftware.com/cinch/) (Window Mgmt)
 - Karabiner
 - Seil
+
+### Idea Key
+
+`~/library/Preferences/IdeaIC14/keymaps/`

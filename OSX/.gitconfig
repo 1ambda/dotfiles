@@ -1,9 +1,10 @@
 [user]
 	email = 1amb4a@gmail.com
-	name = 1ambda 
+	name = 1ambda  
 [core]
 	warnAmbiguousRefs = false
   editor = vim
+	excludesfile = /Users/1002471/.gitignore_global
 [color]
 	diff = auto
 	status = auto
@@ -18,14 +19,18 @@
 	
 	co = checkout
   com = checkout master
-  cod = checkout dev
+  cod = checkout develop
+  cor = checkout release
+
+  find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
 
   cl = clone
 
   ps = push
   pso = push origin
   psom = push origin master
-  psod = push origin dev
+  psod = push origin develop
+  psor = push origin release
 
   pl = pull
   plom = pull origin master
@@ -44,6 +49,7 @@
   dfh = diff HEAD
   dfhs = "!git --no-pager diff HEAD --stat"
   dfl = diff HEAD~1 HEAD
+  dff = diff --name-only
 
   insp = "!f() { git ll "$1"^.."$1"; }; f"
   inspd = "!f() { git diff "$1"^.."$1"; }; f"
@@ -63,7 +69,7 @@
 
 	br = branch -vv -a
 	bv = branch -v
-  bd = branch -d
+  bd = branch -D
 
   sl = stash list
   sa = stash apply
@@ -95,3 +101,9 @@
 
 [push]
 	default = matching
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
