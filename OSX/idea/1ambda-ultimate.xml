@@ -14,6 +14,9 @@
   <action id="CloseContent">
     <keyboard-shortcut first-keystroke="control X" second-keystroke="K" />
   </action>
+  <action id="CloseProject">
+    <keyboard-shortcut first-keystroke="control X" second-keystroke="control C" />
+  </action>
   <action id="CodeCompletion">
     <keyboard-shortcut first-keystroke="control SPACE" />
     <keyboard-shortcut first-keystroke="meta PERIOD" />
@@ -25,8 +28,18 @@
     <keyboard-shortcut first-keystroke="meta SLASH" />
   </action>
   <action id="Console.Execute.Multiline" />
+  <action id="Console.TableResult.EditValue">
+    <keyboard-shortcut first-keystroke="F2" />
+    <keyboard-shortcut first-keystroke="ENTER" />
+  </action>
+  <action id="DatabaseView.DropAction">
+    <keyboard-shortcut first-keystroke="meta ENTER" />
+  </action>
   <action id="Debug" />
   <action id="EditorSplitLine" />
+  <action id="EmmetEverywhere" />
+  <action id="EmmetNextEditPoint" />
+  <action id="EmmetPreviousEditPoint" />
   <action id="GotoAction">
     <keyboard-shortcut first-keystroke="meta X" />
   </action>
@@ -74,6 +87,10 @@
     <keyboard-shortcut first-keystroke="meta DIVIDE" />
   </action>
   <action id="Images.ShowThumbnails" />
+  <action id="MoveEditorToOppositeTabGroup">
+    <keyboard-shortcut first-keystroke="control X" second-keystroke="shift control RIGHT" />
+    <keyboard-shortcut first-keystroke="control X" second-keystroke="shift control LEFT" />
+  </action>
   <action id="MoveTabDown">
     <keyboard-shortcut first-keystroke="control X" second-keystroke="2" />
   </action>
@@ -110,6 +127,7 @@
   <action id="SaveAsTemplate">
     <keyboard-shortcut first-keystroke="meta A" />
   </action>
+  <action id="Scala.MakeExplicit" />
   <action id="Scala.TypeInfo" />
   <action id="ScalaConsole.Execute" />
   <action id="ShowErrorDescription">
@@ -117,7 +135,6 @@
     <keyboard-shortcut first-keystroke="shift control L" />
   </action>
   <action id="ShowIntentionActions">
-    <keyboard-shortcut first-keystroke="alt ENTER" />
     <keyboard-shortcut first-keystroke="meta ENTER" />
   </action>
   <action id="ShowNavBar">

@@ -19,6 +19,7 @@
 - [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
 - [git-flow-completion](https://github.com/bobthecow/git-flow-completion)
 - [git-up](https://github.com/aanand/git-up)
+- [huffshell](https://github.com/paulmars/huffshell)
 
 ### Spring
 
