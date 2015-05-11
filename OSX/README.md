@@ -1,5 +1,7 @@
 ## Mac OS
 
+Last update - 2015. 05. 12
+
 ### Tools
 
 - brew, wget, curl, tree
