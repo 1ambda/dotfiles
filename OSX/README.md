@@ -1,4 +1,6 @@
-## Mac OS
+## Mac OS config
+
+Last update - 2015. 05. 12
 
 ### Tools
 
