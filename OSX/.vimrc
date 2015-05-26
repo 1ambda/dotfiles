@@ -136,7 +136,6 @@ autocmd BufReadPost *
 "" remember info about open buffers on close
 set viminfo^=%
 
-
 " Custom Keys
 
 "" visual mode related

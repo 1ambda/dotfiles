@@ -11,6 +11,7 @@
 - [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
 - [vundle](https://github.com/gmarik/Vundle.vim)
 - [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
+- [vim input source switcher](http://yisangwook.tumblr.com/post/106780445189/vim-insert-mode-keyboard-switch)
 - [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 - htop
 - [rest-shell](https://github.com/spring-projects/rest-shell)
@@ -20,6 +21,8 @@
 - [git-flow-completion](https://github.com/bobthecow/git-flow-completion)
 - [git-up](https://github.com/aanand/git-up)
 - [huffshell](https://github.com/paulmars/huffshell)
+- [gvm](http://www.groovy-lang.org/download.html)
+- [clojure](https://gist.github.com/technomancy/2395913)
 
 ### Spring
 

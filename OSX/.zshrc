@@ -96,6 +96,7 @@ alias rmdir='echo "Use trash-cli to remove files instead of rmdir." false'
 alias tp='trash-put'
 alias tl='trash-list'
 
+alias pp="pwd | pbcopy"
 
 alias zsh-count="cut -f2 -d';' $HOME/.zsh_history | sort | uniq -c | sort -nr | head -n 30"
 
@@ -174,3 +175,6 @@ source $ZSH/oh-my-zsh.sh
 export PATH="/usr/local/heroku/bin:$PATH"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/Users/1002471/.gvm/bin/gvm-init.sh" ]] && source "/Users/1002471/.gvm/bin/gvm-init.sh"
