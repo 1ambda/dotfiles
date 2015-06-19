@@ -145,6 +145,11 @@ export PATH="/usr/local/sbin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
+# ssh
+
+source ~/.ssh/alias.sh
+alias con=~/Applications/connector
+
 # You may need to manually set your language environment
 
 # Preferred editor for local and remote sessions
@@ -178,3 +183,4 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/1002471/.gvm/bin/gvm-init.sh" ]] && source "/Users/1002471/.gvm/bin/gvm-init.sh"
+

@@ -16,7 +16,6 @@ Last update - 2015. 05. 12
 - [vim input source switcher](http://yisangwook.tumblr.com/post/106780445189/vim-insert-mode-keyboard-switch)
 - [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 - htop
-- [rest-shell](https://github.com/spring-projects/rest-shell)
 - [the fuck](https://github.com/nvbn/thefuck)
 - [git-extras](https://github.com/tj/git-extras/wiki/Installation)
 - [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
@@ -25,6 +24,7 @@ Last update - 2015. 05. 12
 - [huffshell](https://github.com/paulmars/huffshell)
 - [gvm](http://www.groovy-lang.org/download.html)
 - [clojure](https://gist.github.com/technomancy/2395913)
+- [httpie](https://github.com/jakubroztocil/httpie)
 
 ### Spring
 
