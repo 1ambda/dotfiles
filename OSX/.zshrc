@@ -46,7 +46,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(osx brew web-search git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt pyenv sbt scala heroku git-flow-completion vagrant)
+plugins=(osx brew web-search git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt pyenv sbt scala heroku git-flow-completion vagrant tmuxinator)
 
 # User configuration
 
@@ -148,7 +148,10 @@ source $ZSH/oh-my-zsh.sh
 # ssh
 
 source ~/.ssh/alias.sh
-alias con=~/Applications/connector
+
+# tmux
+export EDITOR='vim'
+alias tmx="tmuxinator"
 
 # You may need to manually set your language environment
 

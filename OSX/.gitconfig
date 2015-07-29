@@ -5,6 +5,7 @@
 	warnAmbiguousRefs = false
   editor = vim
 	excludesfile = /Users/1002471/.gitignore_global
+	autocrlf = input
 [color]
 	diff = auto
 	status = auto
