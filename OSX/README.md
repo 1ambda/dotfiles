@@ -4,9 +4,8 @@ Last update - 2015. 05. 12
 
 ### Tools
 
-- brew, wget, curl, tree
-- peco
-- fasd
+- brew, wget, curl, tree, htop
+- peco, fasd
 - Xcode
 - zsh, antigen
 - [trash-cli](https://github.com/andreafrancia/trash-cli)
@@ -15,7 +14,6 @@ Last update - 2015. 05. 12
 - [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
 - [vim input source switcher](http://yisangwook.tumblr.com/post/106780445189/vim-insert-mode-keyboard-switch)
 - [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
-- htop
 - [the fuck](https://github.com/nvbn/thefuck)
 - [git-extras](https://github.com/tj/git-extras/wiki/Installation)
 - [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
