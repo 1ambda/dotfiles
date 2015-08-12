@@ -8,6 +8,7 @@ Last update - 2015. 05. 12
 - peco, fasd
 - Xcode
 - zsh, antigen
+- goaccess
 - [trash-cli](https://github.com/andreafrancia/trash-cli)
 - [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
 - [vundle](https://github.com/gmarik/Vundle.vim)
