@@ -6,6 +6,7 @@
   editor = vim
 	excludesfile = /Users/1002471/.gitignore_global
 	autocrlf = input
+	ignorecase = false
 [color]
 	diff = auto
 	status = auto

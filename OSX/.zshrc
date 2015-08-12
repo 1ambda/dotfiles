@@ -149,6 +149,9 @@ source $ZSH/oh-my-zsh.sh
 
 source ~/.ssh/alias.sh
 
+# jdk
+
+
 # tmux
 export EDITOR='vim'
 alias tmx="tmuxinator"
@@ -187,3 +190,16 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
 [[ -s "/Users/1002471/.gvm/bin/gvm-init.sh" ]] && source "/Users/1002471/.gvm/bin/gvm-init.sh"
 
+funciton n setjdk() {
+  if [ $# -ne 0 ]; then
+  removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
+  if [ -n "${JAVA_HOME+x}" ]; then
+    removeFromPath $JAVA_HOME
+  fi
+  export JAVA_HOME=`/usr/libexec/java_home -v $@`
+  export PATH=$JAVA_HOME/bin:$PATH
+  fi
+}
+function removeFromPath() {
+  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
+}
