@@ -27,6 +27,12 @@ set incsearch
 set ignorecase
 set smartcase
 
+" backup
+set noswapfile
+set nobackup
+set nowb
+set autoread
+
 " editor settings
 set history=1000
 set nocompatible
@@ -174,6 +180,14 @@ imap <C-k> <Plug>(neocomplcache_snippets_force_expand)
 smap <C-k> <Plug>(neocomplcache_snippets_force_expand)
 imap <C-l> <Plug>(neocomplcache_snippets_force_jump)
 smap <C-l> <Plug>(neocomplcache_snippets_force_jump)
+
+" Emacs Style
+imap <C-A> <C-o>0
+imap <C-E> <C-o>$
+imap <C-F> <C-o>l
+imap <C-B> <C-o>h
+imap <C-N> <C-o>j
+imap <C-P> <C-o>k
 
 " Enable omni completion.
 autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
