@@ -11,9 +11,6 @@ Last update - 2015. 05. 12
 - goaccess
 - [trash-cli](https://github.com/andreafrancia/trash-cli)
 - [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
-- [vundle](https://github.com/gmarik/Vundle.vim)
-- [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
-- [vim input source switcher](http://yisangwook.tumblr.com/post/106780445189/vim-insert-mode-keyboard-switch)
 - [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 - [the fuck](https://github.com/nvbn/thefuck)
 - [git-extras](https://github.com/tj/git-extras/wiki/Installation)
@@ -40,6 +37,12 @@ Last update - 2015. 05. 12
 ### Node
 
 - [nvm](https://github.com/creationix/nvm)
+
+## Vim
+
+- [vundle](https://github.com/gmarik/Vundle.vim)
+- [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
+- [vim input source switcher](http://yisangwook.tumblr.com/post/106780445189/vim-insert-mode-keyboard-switch)
 
 ### Emacs
 
