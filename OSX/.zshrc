@@ -116,6 +116,8 @@ alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
+alias zp="z | peco"
+alias zc="history | peco"
 
 ### tree
 
@@ -145,12 +147,19 @@ export PATH="/usr/local/sbin:$PATH"
 
 source $ZSH/oh-my-zsh.sh
 
+# git api
+function __gapi {
+    if [ $# -eq 0  ]; then
+        echo "no parameters"
+    elif [ $# -eq 1 ]; then
+        curl -u 1ambda "https://api.github.com$1"
+    fi
+}
+alias gapi="__gapi"
+
 # ssh
-
 source ~/.ssh/alias.sh
-
-# jdk
-
+source ~/.ssh/ghost.sh
 
 # tmux
 export EDITOR='vim'
@@ -203,3 +212,6 @@ funciton n setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
+
+# added by travis gem
+[ -f /Users/1002471/.travis/travis.sh ] && source /Users/1002471/.travis/travis.sh

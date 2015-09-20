@@ -1,6 +1,6 @@
 [user]
 	email = 1amb4a@gmail.com
-	name = 1ambda  
+	name = 1ambda
 [core]
 	warnAmbiguousRefs = false
   editor = vim
@@ -12,107 +12,107 @@
 	status = auto
 	branch = auto
 [alias]
-	ci = commit -v
-	ca = commit --amend
-  cm = commit -m
-  cc = commit -c
-  cam = commit -a -m
-  c = commit
-	
-	co = checkout
-  com = checkout master
-  cod = checkout develop
-  cor = checkout release
+    ci = commit -v
+    ca = commit --amend
+    cm = commit -m
+    cc = commit -c
+    cam = commit -a -m
+    c = commit
 
-  find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+    co = checkout
+    com = checkout master
+    cod = checkout develop
+    cor = checkout release
 
-  cl = clone
+    find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
 
-  ps = push
-  pso = push origin
-  psom = push origin master
-  psod = push origin develop
-  psor = push origin release
+    cl = clone
 
-  pl = pull
-  plom = pull origin master
-  plod = pull origin dev
+    ps = push
+    pso = push origin
+    psom = push origin master
+    psod = push origin develop
+    psor = push origin release
 
-	a = !git add . && git status
-	aa = !git add --all . && git status
-	
-	s = status --short --branch
-	st = status
+    pl = pull
+    plom = pull origin master
+    plod = pull origin dev
 
-  df = diff
-  dfs = "!git --no-pager diff --stat"
-  dfc = diff --cached
-  dfcs = "!git --no-pager diff --cached --stat"
-  dfh = diff HEAD
-  dfhs = "!git --no-pager diff HEAD --stat"
-  dfl = diff HEAD~1 HEAD
-  dff = diff --name-only
+    a = !git add . && git status
+    aa = !git add --all . && git status
 
-  insp = "!f() { git ll "$1"^.."$1"; }; f"
-  inspd = "!f() { git diff "$1"^.."$1"; }; f"
+    s = status --short --branch
+    st = status
 
-	rma = remote add
-  rmr = remote remove
-  rmv = remote -v
-  rmso = remote show origin -n
+    df = diff
+    dfs = "!git --no-pager diff --stat"
+    dfc = diff --cached
+    dfcs = "!git --no-pager diff --cached --stat"
+    dfh = diff HEAD
+    dfhs = "!git --no-pager diff HEAD --stat"
+    dfl = diff HEAD~1 HEAD
+    dff = diff --name-only
 
-  rp = rev-parse
+    insp = "!f() { git ll "$1"^.."$1"; }; f"
+    inspd = "!f() { git diff "$1"^.."$1"; }; f"
 
-	rsa = reset HEAD
-	rsc = reset HEAD^
-  rsm = reset --mixed
-  rss = reset --soft
-	rsh = reset --hard
+    rma = remote add
+    rmr = remote remove
+    rmv = remote -v
+    rmso = remote show origin -n
 
-	br = branch -vv -a
-	bv = branch -v
-  bd = branch -D
+    rp = rev-parse
 
-  sl = stash list
-  sa = stash apply
-  ss = stash save
+    rsa = reset HEAD
+    rsc = reset HEAD^
+    rsm = reset --mixed
+    rss = reset --soft
+    rsh = reset --hard
 
-  fi = flow init
-  fv = flow version
+    br = branch -vv -a
+    bv = branch -v
+    bd = branch -D
 
-  ffs = flow feature start
-  fff = flow feature finish
-  ffl = flow feature list
+    sl = stash list
+    sa = stash apply
+    ss = stash save
 
-  lr = log --grep
-  lp = log -p
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
-  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
-  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-  lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
-  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+    fi = flow init
+    fv = flow version
 
-  last = "!git ll -1"
+    ffs = flow feature start
+    fff = flow feature finish
+    ffl = flow feature list
 
-	type = cat-file -t
-	dump = cat-file -p
+    lr = log --grep
+    lp = log -p
+    ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+    ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+    lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+    ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+    lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+    lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
 
-  me = config user.name
-  rank = shortlog -sn --no-merges
-  root = rev-parse --git-dir
+    last = "!git ll -1"
 
-	today = "log --since=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
-	yesterday = "log --since yesterday --until=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
- 
-	outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
-	incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
+    type = cat-file -t
+    dump = cat-file -p
+
+    me = config user.name
+    rank = shortlog -sn --no-merges
+    root = rev-parse --git-dir
+
+    today = "log --since=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+    yesterday = "log --since yesterday --until=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+
+    outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
+    incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
 
 [push]
-	default = matching
+    default = matching
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+    cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+    path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+    cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+    trustExitCode = true
