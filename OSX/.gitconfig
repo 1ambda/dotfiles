@@ -28,8 +28,11 @@
 
     cl = clone
 
+    fo = fetch origin
+
     ps = push
     pso = push origin
+    psoh = push origin HEAD
     psom = push origin master
     psod = push origin develop
     psor = push origin release
@@ -112,7 +115,6 @@
     default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
