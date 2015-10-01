@@ -23,6 +23,7 @@ Last update - 2015. 05. 12
 - [httpie](https://github.com/jakubroztocil/httpie)
 - [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 - [rbenv](https://github.com/sstephenson/rbenv#homebrew-on-mac-os-x)
+- [bumpversion](pip install --upgrade bumpversion)
 
 ### Spring
 

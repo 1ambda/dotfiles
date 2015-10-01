@@ -106,11 +106,6 @@ alias svi='sudo vi'
 alias smv='sudo mv'
 alias service='sudo service'
 
-alias apt-get='sudo apt-get'
-alias apt-update='apt-get update'
-alias apt-upgrade='apt-get upgrade'
-alias apt-dist-upgrade='apt-get dist-upgrade'
-
 alias disk-usage='du -h | sort -h | tail -n 1000'
 alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
