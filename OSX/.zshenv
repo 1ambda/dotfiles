@@ -29,10 +29,9 @@ export PATH=$HIVE_HOME:$PATH
 export HCAT_HOME=/usr/local/Cellar/hive/1.0.0/libexec/hcatalog
 export PATH=$HCAT_HOME:$PATH
 
-## resty
-
-. ~/Applications/resty
-
 ## dex2jar
 export DEX2JAR_HOME="/Users/1002471/Applications/dex2jar"
 export PATH=$DEX2JAR_HOME:$PATH
+
+# haskell
+export PATH=~/.cabal/bin/:$PATH

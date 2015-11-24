@@ -25,16 +25,26 @@ values."
      ;; ----------------------------------------------------------------
      auto-completion
      better-defaults
+
      emacs-lisp
+     scala
+     python
+     sql
+     (haskell :variables
+        haskell-enable-ghc-mod-support t
+        haskell-enable-ghci-ng-support t
+        haskell-enable-shm-support t
+        haskell-enable-hindent-style "johan-tibell")
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
+
      git
-     ;; markdown
-     ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     version-control
+     markdown
+
      spell-checking
      syntax-checking
-     ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -78,13 +88,15 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light
-                         solarized-light
-                         solarized-dark
-                         leuven
-                         monokai
-                         zenburn)
+   dotspacemacs-themes '(
+           solarized-dark
+           zenburn
+           monokai
+           spacemacs-dark
+           spacemacs-light
+           solarized-light
+           leuven
+           )
    ;; If non nil the cursor color matches the state color.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font. `powerline-scale' allows to quickly tweak the mode-line
@@ -190,12 +202,17 @@ values."
   "Initialization function for user code.
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
+    (add-to-list 'exec-path "~/.cabal/bin/")
   )
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
+    (setq-default
+        js2-basic-offset 2
+        js-indent-level 2
+    )
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

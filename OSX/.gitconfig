@@ -29,17 +29,23 @@
     cl = clone
 
     fo = fetch origin
+    fs = fetch stash
 
     ps = push
-    pso = push origin
     psoh = push origin HEAD
     psom = push origin master
     psod = push origin develop
     psor = push origin release
+    psoh = push stash HEAD
+    psom = push stash master
+    psod = push stash develop
+    psor = push stash release
 
     pl = pull
     plom = pull origin master
     plod = pull origin dev
+    plsm = pull stash master
+    plsd = pull stash dev
 
     a = !git add . && git status
     aa = !git add --all . && git status
@@ -115,6 +121,7 @@
     default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
