@@ -36,10 +36,10 @@
     psom = push origin master
     psod = push origin develop
     psor = push origin release
-    psoh = push stash HEAD
-    psom = push stash master
-    psod = push stash develop
-    psor = push stash release
+    pssh = push stash HEAD
+    pssm = push stash master
+    pssd = push stash develop
+    pssr = push stash release
 
     pl = pull
     plom = pull origin master

@@ -21,6 +21,7 @@ Last update - 2015. 05. 12
 - [gvm](http://www.groovy-lang.org/download.html)
 - [clojure](https://gist.github.com/technomancy/2395913)
 - [httpie](https://github.com/jakubroztocil/httpie)
+- [ammonite](curl -L -o amm http://git.io/vBTzM; chmod +x amm; ./amm)
 - [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 - [rbenv](https://github.com/sstephenson/rbenv#homebrew-on-mac-os-x)
 - [bumpversion](pip install --upgrade bumpversion)

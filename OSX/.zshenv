@@ -17,6 +17,10 @@ export PATH=$SCALA_HOME/bin:$PATH
 export ACTIVATOR_HOME=~/Applications/activator
 export PATH=$ACTIVATOR_HOME:$PATH
 
+## applications bin
+export APPLICATION_HOME=~/Applications
+export PATH=$APPLICATION_HOME:$PATH
+
 ## nvm
 export NVM_DIR="/Users/1002471/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
