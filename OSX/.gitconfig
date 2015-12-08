@@ -43,9 +43,9 @@
 
     pl = pull
     plom = pull origin master
-    plod = pull origin dev
+    plod = pull origin develop
     plsm = pull stash master
-    plsd = pull stash dev
+    plsd = pull stash develop
 
     a = !git add . && git status
     aa = !git add --all . && git status
