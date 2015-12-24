@@ -117,11 +117,14 @@
     outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
     incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
 
+    assume = update-index --assume-unchanged
+    unassume = update-index --no-assume-unchanged
+    assumels = "!git ls-files -v | grep '^[[:lower:]]'"
+
 [push]
     default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
