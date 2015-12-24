@@ -46,7 +46,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(pod osx brew web-search git-flow git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt pyenv sbt scala heroku tmuxinator)
+plugins=(pod osx brew web-search git-flow git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt gulp pyenv sbt scala heroku tmuxinator history-peco)
 
 # User configuration
 
@@ -69,7 +69,10 @@ alias gob='cd ~/Dropbox/Blog'
 alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
-### fasd
+#### Path
+alias cpwd='pwd | tr -d "\n" | pbcopy'
+
+#### fasd
 alias a='fasd -a'        # any
 alias s='fasd -si'       # show / search / select
 alias d='fasd -d'        # directory
@@ -86,11 +89,13 @@ alias today='date'
 
 alias dir='nautilus .'
 
+#### TMUX
 alias tm="tmux"
 alias tma='tmux a -t'
 alias tmn="tmux new"
 alias tmk='tmux kill-session -t'
 
+#### TRASH
 alias rm='echo "Use trash-cli to remove files instead of rm." false'
 alias rmdir='echo "Use trash-cli to remove files instead of rmdir." false'
 alias tp='trash-put'
@@ -111,19 +116,37 @@ alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
+alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
 alias zp="z | peco"
 alias zc="history | peco"
+
+alias untar='tar -zxvf'
+alias untarxz='tar -xJf'
 
 ### tree
 
 alias tree="tree -C"
 
 ### git, gitflow
-alias plom="git pull origin master"
-alias plod="git pull origin dev"
-alias psom="git push oritin master"
-alias psod="git push oritin dev"
 alias gf="git flow"
+function __git_peco {
+    if [ $# -eq 0 ]; then
+        echo "no parameters"
+    elif [ $# -eq  1 ]; then
+        git $1 | peco
+    fi
+}
+alias gitp="__git_peco"
+
+function __gapi {
+    if [ $# -eq 0  ]; then
+        echo "no parameters"
+    elif [ $# -eq 1 ]; then
+        curl -u 1ambda "https://api.github.com$1"
+    fi
+}
+alias gapi="__gapi"
+
 
 ### hadoop
 alias hstart="/usr/local/Cellar/hadoop/2.6.0/sbin/start-dfs.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/start-yarn.sh"
@@ -140,17 +163,10 @@ export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export PATH="/usr/local/sbin:$PATH"
 
-source $ZSH/oh-my-zsh.sh
+HISTSIZE=100000000
+SAVEHIST=100000000
 
-# git api
-function __gapi {
-    if [ $# -eq 0  ]; then
-        echo "no parameters"
-    elif [ $# -eq 1 ]; then
-        curl -u 1ambda "https://api.github.com$1"
-    fi
-}
-alias gapi="__gapi"
+source $ZSH/oh-my-zsh.sh
 
 # ssh
 source ~/.ssh/alias.sh
