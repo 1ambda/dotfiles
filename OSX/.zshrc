@@ -129,14 +129,47 @@ alias tree="tree -C"
 
 ### git, gitflow
 alias gf="git flow"
-function __git_peco {
-    if [ $# -eq 0 ]; then
-        echo "no parameters"
-    elif [ $# -eq  1 ]; then
-        git $1 | peco
+
+function __head_number {
+    if [ $# -le 1 ]; then
+        echo "usage: hn 5 command"
+    else
+        count=$1
+        shift
+        $@ | head -n $count
     fi
 }
-alias gitp="__git_peco"
+alias hn=__head_number
+
+function __tail_number {
+    if [ $# -le 1 ]; then
+        echo "usage: tn 5 command"
+    else
+        count=$1
+        shift
+        $@ | tail -n $count
+    fi
+}
+alias tn=__tail_number
+
+function __git_peco {
+    if [ $# -eq 1 ]; then
+        git $1 | peco
+    else
+        echo "usage: gpc arg1"
+    fi
+}
+alias gpc="__git_peco"
+
+function __git_log_peco {
+    if [ $# -eq 1 ]; then
+        # add wipe, wip, filter WIP message from WIP
+        git log --oneline --graph | peco | head -n1 | grep -o '[a-z0-9]\+' | head -n1 | awk '{ print $1 }' | xargs -I % sh -c "git $1 %;"
+    else
+        echo "usage: glpc arg1"
+    fi
+}
+alias glpc=__git_log_peco
 
 function __gapi {
     if [ $# -eq 0  ]; then
