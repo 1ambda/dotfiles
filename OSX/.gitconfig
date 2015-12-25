@@ -55,6 +55,9 @@
     plsm = pull stash master
     plsd = pull stash develop
 
+    pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+    pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+
     a = !git add . && git status
     aa = !git add --all . && git status
 
@@ -94,6 +97,7 @@
     sl = stash list
     sa = stash apply
     ss = stash save
+    ssu = stash save -u
 
     fi = flow init
     fv = flow version
