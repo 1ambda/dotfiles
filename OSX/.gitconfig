@@ -13,11 +13,16 @@
 	branch = auto
 [alias]
     ci = commit -v
-    ca = commit --amend
+    cam = commit --amend
     cm = commit -m
     cc = commit -c
-    cam = commit -a -m
+    cma = commit -m -a
     c = commit
+
+    merge-span = "!f() { echo $(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f1)$1$(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f2); }; f"
+    merge-log = "!git lg `git merge-span .. $1`"
+    merge-diff = "!git diff `git merge-span ... $1`"
+    merge-difftool = "!git difftool `git merge-span ... $1`"
 
     co = checkout
     com = checkout master
@@ -31,7 +36,6 @@
     fo = fetch origin
     fs = fetch stash
 
-    ps = push
     psoh = push origin HEAD
     psom = push origin master
     psod = push origin develop
@@ -41,7 +45,11 @@
     pssd = push stash develop
     pssr = push stash release
 
-    pl = pull
+    publish = "!git push -u origin $(git bn)"
+    unpublish = "!git push origin :$(git bn)"
+    recreate = "!f() { [[ -n $@ ]] && git checkout \"$1\" && git unpublish && git checkout \"$2\" && git branch -D \"$1\" && git checkout -b \"$1\" && git publish; }; f"
+
+    plr = pull origin --rebase
     plom = pull origin master
     plod = pull origin develop
     plsm = pull stash master
@@ -81,6 +89,7 @@
     br = branch -vv -a
     bv = branch -v
     bd = branch -D
+    bn = "!git rev-parse --abbrev-ref HEAD"
 
     sl = stash list
     sa = stash apply
@@ -116,6 +125,9 @@
 
     outgoing = "log --pretty=oneline --abbrev-commit --graph @{u}.."
     incoming = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
+
+    ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+    theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 
     assume = update-index --assume-unchanged
     unassume = update-index --no-assume-unchanged
