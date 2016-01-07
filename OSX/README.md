@@ -17,6 +17,7 @@ Last update - 2015. 05. 12
 - [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
 - [git-flow-completion](https://github.com/bobthecow/git-flow-completion)
 - [git-up](https://github.com/aanand/git-up)
+- [launchy](https://github.com/eddiezane/lunchy)
 - [huffshell](https://github.com/paulmars/huffshell)
 - [gvm](http://www.groovy-lang.org/download.html)
 - [clojure](https://gist.github.com/technomancy/2395913)
@@ -25,6 +26,7 @@ Last update - 2015. 05. 12
 - [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 - [rbenv](https://github.com/sstephenson/rbenv#homebrew-on-mac-os-x)
 - [bumpversion](pip install --upgrade bumpversion)
+- [tldr](https://github.com/tldr-pages/tldr)
 
 ### Spring
 
@@ -76,6 +78,7 @@ $ # set powerline font for non-ascii chars
 - [replace Capslock to Escape](http://stackoverflow.com/questions/127591/using-caps-lock-as-esc-in-mac-os-x)
 - [use Command_R as HanEng key](http://jaebok.tistory.com/38)
 - Spotlight: `Op-S`, Finder: `Op-F`, Dashboard: `Op-L`, Dock: 'Op-D'
+- [Word/Line deletion and navigation shortcuts in iTerm2](https://coderwall.com/p/ds2dha/word-line-deletion-and-navigation-shortcuts-in-iterm2)
 
 ### 3rd-party Apps
 

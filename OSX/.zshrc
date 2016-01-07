@@ -209,6 +209,11 @@ source ~/.ssh/ghost.sh
 export EDITOR='vim'
 alias tmx="tmuxinator"
 
+# volumn up, down
+alias vup="osascript -e 'set volume output volume ((output volume of (get volume settings)) + 10)'"
+alias vdown="osascript -e 'set volume output volume ((output volume of (get volume settings)) - 10)'"
+alias vmute="osascript -e 'set Volume 0'"
+
 # You may need to manually set your language environment
 
 # Preferred editor for local and remote sessions

@@ -39,3 +39,8 @@ export PATH=$DEX2JAR_HOME:$PATH
 
 # haskell
 export PATH=~/.cabal/bin/:$PATH
+
+# android
+#
+export PATH=~/Library/Android/sdk/platform-tools:$PATH
+
