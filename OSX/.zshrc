@@ -46,7 +46,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(pod osx brew web-search git-flow git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt gulp pyenv sbt scala heroku tmuxinator history-peco)
+plugins=(pod osx brew web-search git-flow git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt gulp pyenv sbt scala heroku tmuxinator history-peco karma)
 
 # User configuration
 

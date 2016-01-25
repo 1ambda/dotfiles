@@ -4,7 +4,7 @@
 [core]
 	warnAmbiguousRefs = false
   editor = vim
-	excludesfile = /Users/1002471/.gitignore_global
+	excludesfile = ~/.gitignore
 	autocrlf = input
 	ignorecase = false
 [color]
@@ -12,12 +12,14 @@
 	status = auto
 	branch = auto
 [alias]
-    ci = commit -v
-    cam = commit --amend
-    cm = commit -m
-    cc = commit -c
-    cma = commit -m -a
     c = commit
+    ci = commit  -v
+    cm = commit -m
+    cf = commit --fixup
+    amend = commit --amend -C HEAD
+
+    wip = !"git add -A; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"[WIP]\" && git commit --amend"
+    unwip = !"git log -n 1 | grep -q -c -e \"\\[WIP\\]\" && git reset HEAD~1"
 
     merge-span = "!f() { echo $(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f1)$1$(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f2); }; f"
     merge-log = "!git lg `git merge-span .. $1`"
@@ -75,6 +77,8 @@
 
     insp = "!f() { git ll "$1"^.."$1"; }; f"
     inspd = "!f() { git diff "$1"^.."$1"; }; f"
+    head = !"git log -n1"
+    lost = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
 
     rma = remote add
     rmr = remote remove
@@ -89,7 +93,9 @@
     rss = reset --soft
     rsh = reset --hard
 
-    br = branch -vv -a
+    sb = show-branch
+    br = branch
+    bra = branch -vv -a
     bv = branch -v
     bd = branch -D
     bn = "!git rev-parse --abbrev-ref HEAD"
