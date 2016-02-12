@@ -46,7 +46,6 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(pod osx brew web-search git-flow git git-extras zsh-syntax-highlighting command-not-found common-aliases fasd tmux npm nvm bower grunt gulp pyenv sbt scala heroku tmuxinator history-peco karma)
 
 # User configuration
 
@@ -89,15 +88,7 @@ alias today='date'
 
 alias dir='nautilus .'
 
-#### TMUX
-alias tm="tmux"
-alias tma='tmux a -t'
-alias tmn="tmux new"
-alias tmk='tmux kill-session -t'
-
 #### TRASH
-alias rm='echo "Use trash-cli to remove files instead of rm." false'
-alias rmdir='echo "Use trash-cli to remove files instead of rmdir." false'
 alias tp='trash-put'
 alias tl='trash-list'
 
@@ -114,6 +105,7 @@ alias service='sudo service'
 alias disk-usage='du -h | sort -h | tail -n 1000'
 alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
+
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
@@ -123,62 +115,93 @@ alias zc="history | peco"
 alias untar='tar -zxvf'
 alias untarxz='tar -xJf'
 
-### tree
+## fzf aliases
+export FZF_DEFAULT_OPTS='
+  --bind ctrl-f:page-down,ctrl-b:page-up
+  --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
+  --color info:254,prompt:37,spinner:108,pointer:235,marker:235
+'
+#   - CTRL-O to open with `open` command,
+#   - CTRL-E or Enter key to open with the $EDITOR
+fo() {
+  local out file key
+  out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
 
+fcd() {
+  local dir
+  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
+}
+
+#### TMUX
+alias tm="tmux"
+alias tma='tmux a -t'
+alias tmn="tmux new"
+alias tmk='tmux kill-session -t'
+
+tms() {
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0) &&
+  tmux switch-client -t "$session"
+}
+
+tmw() {
+  local panes current_window current_pane target target_window
+  panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
+  current_pane=$(tmux display-message -p '#I:#P')
+  current_window=$(tmux display-message -p '#I')
+
+  target=$(echo "$panes" | grep -v "$current_pane" | fzf +m --reverse) || return
+  target_window=$(echo $target | awk 'BEGIN{FS=":|-"} {print$1}')
+
+  if [[ $current_window -ne $target_window ]]; then
+  else
+    tmux select-window -t $target_window
+  fi
+}
+
+alias tmh="tmux list-keys | percol"
+
+tmp() {
+  local panes current_window current_pane target target_window target_pane
+  panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
+  current_pane=$(tmux display-message -p '#I:#P')
+  current_window=$(tmux display-message -p '#I')
+
+  target=$(echo "$panes" | grep -v "$current_pane" | fzf +m --reverse) || return
+
+  target_window=$(echo $target | awk 'BEGIN{FS=":|-"} {print$1}')
+  target_pane=$(echo $target | awk 'BEGIN{FS=":|-"} {print$2}' | cut -c 1)
+
+  if [[ $current_window -eq $target_window ]]; then
+    tmux select-pane -t ${target_window}.${target_pane}
+  else
+    tmux select-pane -t ${target_window}.${target_pane} &&
+    tmux select-window -t $target_window
+  fi
+}
+
+fz() {
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
+fv() {
+  local file
+  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
+}
+
+### tree
 alias tree="tree -C"
 
 ### git, gitflow
 alias gf="git flow"
-
-function __head_number {
-    if [ $# -le 1 ]; then
-        echo "usage: hn 5 command"
-    else
-        count=$1
-        shift
-        $@ | head -n $count
-    fi
-}
-alias hn=__head_number
-
-function __tail_number {
-    if [ $# -le 1 ]; then
-        echo "usage: tn 5 command"
-    else
-        count=$1
-        shift
-        $@ | tail -n $count
-    fi
-}
-alias tn=__tail_number
-
-function __git_peco {
-    if [ $# -eq 1 ]; then
-        git $1 | peco
-    else
-        echo "usage: gpc arg1"
-    fi
-}
-alias gpc="__git_peco"
-
-function __git_log_peco {
-    if [ $# -eq 1 ]; then
-        # add wipe, wip, filter WIP message from WIP
-        git log --oneline --graph | peco | head -n1 | grep -o '[a-z0-9]\+' | head -n1 | awk '{ print $1 }' | xargs -I % sh -c "git $1 %;"
-    else
-        echo "usage: glpc arg1"
-    fi
-}
-alias glpc=__git_log_peco
-
-function __gapi {
-    if [ $# -eq 0  ]; then
-        echo "no parameters"
-    elif [ $# -eq 1 ]; then
-        curl -u 1ambda "https://api.github.com$1"
-    fi
-}
-alias gapi="__gapi"
 
 
 ### hadoop
@@ -264,3 +287,58 @@ function removeFromPath() {
 
 # added by travis gem
 [ -f /Users/1002471/.travis/travis.sh ] && source /Users/1002471/.travis/travis.sh
+
+# zplug
+source ~/.zplug/zplug
+
+zplug "plugins/brew", from:oh-my-zsh
+zplug "plugins/brew-cask", from:oh-my-zsh
+zplug "plugins/osx", from:oh-my-zsh
+zplug "plugins/pod", from:oh-my-zsh
+zplug "plugins/scala", from:oh-my-zsh
+zplug "plugins/sbt", from:oh-my-zsh
+zplug "plugins/npm", from:oh-my-zsh
+zplug "plugins/nvm", from:oh-my-zsh
+zplug "plugins/pyenv", from:oh-my-zsh
+zplug "plugins/pip", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-flow", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/fasd", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/tmuxinator", from:oh-my-zsh
+zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "plugins/web-search", from:oh-my-zsh
+zplug "zsh-users/zsh-completions"
+zplug "b4b4r07/enhancd", of:enhancd.sh
+zplug "supercrabtree/k"
+# 
+# zplug "tarruda/zsh-autosuggestions", of:"dist/autosuggestions.zsh"
+# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
+
+zplug "zsh-users/zsh-history-substring-search", nice:18
+zplug "jimmijj/zsh-syntax-highlighting", nice:19
+
+if zplug check tarruda/zsh-autosuggestions; then
+  #ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
+  #ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
+  #autosuggest_start # Enable autosuggestions
+  #bindkey '^ ' autosuggest-accept
+fi
+
+## ZSH plugin: auto-fu
+
+zplug load
+
+if which peco &> /dev/null; then
+  function peco_select_history() {
+    BUFFER=$(fc -l -n -r 1 | \
+                peco --layout=bottom-up --query "$LBUFFER")
+    CURSOR=$#BUFFER # move cursor
+    zle -R -c       # refresh
+  }
+ 
+  zle -N peco_select_history
+  bindkey '^R' peco_select_history
+fi

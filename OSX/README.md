@@ -5,18 +5,10 @@ Last update - 2015. 05. 12
 ### Tools
 
 - brew, wget, curl, tree, htop
-- peco, fasd
 - Xcode
-- zsh, antigen
-- goaccess
 - [trash-cli](https://github.com/andreafrancia/trash-cli)
 - [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
 - [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
-- [the fuck](https://github.com/nvbn/thefuck)
-- [git-extras](https://github.com/tj/git-extras/wiki/Installation)
-- [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
-- [git-flow-completion](https://github.com/bobthecow/git-flow-completion)
-- [git-up](https://github.com/aanand/git-up)
 - [launchy](https://github.com/eddiezane/lunchy)
 - [huffshell](https://github.com/paulmars/huffshell)
 - [gvm](http://www.groovy-lang.org/download.html)
@@ -27,6 +19,28 @@ Last update - 2015. 05. 12
 - [rbenv](https://github.com/sstephenson/rbenv#homebrew-on-mac-os-x)
 - [bumpversion](pip install --upgrade bumpversion)
 - [tldr](https://github.com/tldr-pages/tldr)
+- [maybe](https://github.com/p-e-w/maybe)
+
+#### Terminal: Git
+
+- [diff-so-fancy (git-related)](https://github.com/stevemao/diff-so-fancy)
+- [git-extras](https://github.com/tj/git-extras/wiki/Installation)
+- [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
+- [git-flow-completion](https://github.com/bobthecow/git-flow-completion)
+- [git-up](https://github.com/aanand/git-up)
+
+#### Terminal: Command Line
+
+- [zplug](https://github.com/b4b4r07/zplug)
+- [k](https://github.com/supercrabtree/k)
+- [peco](https://github.com/peco/peco)
+- [fasd](https://github.com/clvv/fasd)
+- [fzf](https://github.com/junegunn/fzf)
+- [auto-fu](http://itpass.scitec.kobe-u.ac.jp/~okazakis/%E3%83%A1%E3%83%A2/2015/04/22/zsh_azfu/)
+
+#### Terinal: Window
+
+- [tmuxinator](https://github.com/tmuxinator/tmuxinator)
 
 ### Spring
 

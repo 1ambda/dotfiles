@@ -22,11 +22,12 @@
     unwip = !"git log -n 1 | grep -q -c -e \"\\[WIP\\]\" && git reset HEAD~1"
 
     merge-span = "!f() { echo $(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f1)$1$(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f2); }; f"
-    merge-log = "!git lg `git merge-span .. $1`"
-    merge-diff = "!git diff `git merge-span ... $1`"
-    merge-difftool = "!git difftool `git merge-span ... $1`"
+    merge-log = "!git lg "git merge-span .. $1""
+    merge-diff = "!git diff "git merge-span ... $1""
+    merge-difftool = "!git difftool "git merge-span ... $1""
 
-    co = checkout
+    co = "!git checkout $(git branch | fzf-tmux -d 20)"
+    cob = checkout -b
     com = checkout master
     cod = checkout develop
     cor = checkout release
@@ -67,6 +68,7 @@
     st = status
 
     df = diff
+    dsf = "!git diff --color $@ | diff-so-fancy"
     dfs = "!git --no-pager diff --stat"
     dfc = diff --cached
     dfcs = "!git --no-pager diff --cached --stat"
