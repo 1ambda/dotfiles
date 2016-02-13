@@ -197,6 +197,15 @@ fv() {
   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
 }
 
+fkill() {
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    kill -${1:-9} $pid
+  fi
+}
+
 ### tree
 alias tree="tree -C"
 
@@ -313,6 +322,14 @@ zplug "plugins/web-search", from:oh-my-zsh
 zplug "zsh-users/zsh-completions"
 zplug "b4b4r07/enhancd", of:enhancd.sh
 zplug "supercrabtree/k"
+zplug "mgryszko/jvm"
+zplug "peterhurford/git-it-on.zsh", of:git-it-on.plugin.zsh
+zplug "hlissner/zsh-autopair", of:autopair.zsh
+# zplug "willghatch/zsh-snippets"
+# zplug "zsh-users/zaw", of:zaw.zsh
+# zplug "hchbaw/zce.zsh", of:zce.zsh
+# zplug "benclark/parallels-zsh-plugin", of:_parallels
+
 # 
 # zplug "tarruda/zsh-autosuggestions", of:"dist/autosuggestions.zsh"
 # export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
