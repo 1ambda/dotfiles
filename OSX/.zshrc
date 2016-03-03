@@ -330,7 +330,6 @@ zplug "hlissner/zsh-autopair", of:autopair.zsh
 # zplug "hchbaw/zce.zsh", of:zce.zsh
 # zplug "benclark/parallels-zsh-plugin", of:_parallels
 
-# 
 # zplug "tarruda/zsh-autosuggestions", of:"dist/autosuggestions.zsh"
 # export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
 
