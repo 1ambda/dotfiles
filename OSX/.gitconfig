@@ -4,7 +4,7 @@
 [core]
 	warnAmbiguousRefs = false
   editor = vim
-	excludesfile = ~/.gitignore
+	excludesfile = /Users/1002471/.gitignore
 	autocrlf = input
 	ignorecase = false
 [color]
@@ -26,8 +26,8 @@
     merge-diff = "!git diff "git merge-span ... $1""
     merge-difftool = "!git difftool "git merge-span ... $1""
 
-    co = "!git checkout $(git branch | fzf-tmux -d 20)"
-    cob = checkout -b
+    co = checkout
+    cob = "!git checkout $(git branch | fzf-tmux -d 20)"
     com = checkout master
     cod = checkout develop
     cor = checkout release
@@ -149,6 +149,7 @@
     default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

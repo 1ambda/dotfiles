@@ -24,8 +24,11 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      auto-completion
+     syntax-checking
+     spell-checking
      better-defaults
 
+     go
      emacs-lisp
      scala
      python
@@ -89,12 +92,12 @@ values."
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
    dotspacemacs-themes '(
+           spacemacs-dark
            solarized-dark
            zenburn
            monokai
-           spacemacs-dark
            spacemacs-light
-           solarized-light
+           solarized-ligh
            leuven
            )
    ;; If non nil the cursor color matches the state color.
@@ -203,16 +206,27 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put any
 user code."
     (add-to-list 'exec-path "~/.cabal/bin/")
-  )
+    (setq auto-save-interval 3)
+)
 
 (defun dotspacemacs/user-config ()
   "Configuration function for user code.
  This function is called at the very end of Spacemacs initialization after
 layers configuration. You are free to put any user code."
-    (setq-default
-        js2-basic-offset 2
-        js-indent-level 2
-    )
+  (global-linum-mode)
+  (setq-default
+   js2-basic-offset 2
+   js-indent-level 2)
+
+  ;; evil
+  (define-key evil-insert-state-map (kbd "C-p") nil)
+  (define-key evil-insert-state-map (kbd "C-n") nil)
+  (define-key evil-insert-state-map (kbd "C-a") nil)
+  (define-key evil-insert-state-map (kbd "C-e") nil)
+  (define-key evil-insert-state-map (kbd "C-w") 'kill-region)
+  (define-key evil-insert-state-map (kbd "C-y") 'yank)
+  (define-key evil-insert-state-map (kbd "C-d") 'delete-char)
+  (define-key evil-insert-state-map (kbd "M-DEL") 'clean-aindent--bsunindent)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will

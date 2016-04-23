@@ -358,3 +358,5 @@ if which peco &> /dev/null; then
   zle -N peco_select_history
   bindkey '^R' peco_select_history
 fi
+
+[[ -s "/Users/1002471/.gvm/scripts/gvm" ]] && source "/Users/1002471/.gvm/scripts/gvm"
