@@ -13,9 +13,12 @@
 	branch = auto
 [alias]
     c = commit
-    ci = commit  -v
+    ci = commit -v
     cm = commit -m
     cf = commit --fixup
+    ca = commit --amend
+    cane = commit --amend --no-edit
+
     amend = commit --amend -C HEAD
 
     wip = !"git add -A; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"[WIP]\" && git commit --amend"
@@ -76,6 +79,7 @@
     dfhs = "!git --no-pager diff HEAD --stat"
     dfl = diff HEAD~1 HEAD
     dff = diff --name-only
+    dfcf = git diff --name-only --diff-filter=U
 
     insp = "!f() { git ll "$1"^.."$1"; }; f"
     inspd = "!f() { git diff "$1"^.."$1"; }; f"
@@ -145,11 +149,14 @@
     unassume = update-index --no-assume-unchanged
     assumels = "!git ls-files -v | grep '^[[:lower:]]'"
 
+    lsft = ls-files -t
+    lsfo = ls-files --others
+    lsfe = ls-files --others -i --exclude-standard
+
 [push]
     default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true

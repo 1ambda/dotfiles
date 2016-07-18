@@ -246,6 +246,11 @@ alias vup="osascript -e 'set volume output volume ((output volume of (get volume
 alias vdown="osascript -e 'set volume output volume ((output volume of (get volume settings)) - 10)'"
 alias vmute="osascript -e 'set Volume 0'"
 
+# docker
+alias dk="docker"
+alias dkm="docker-machine"
+alias dkc="docker-compose"
+
 # You may need to manually set your language environment
 
 # Preferred editor for local and remote sessions
@@ -269,8 +274,6 @@ alias vmute="osascript -e 'set Volume 0'"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
