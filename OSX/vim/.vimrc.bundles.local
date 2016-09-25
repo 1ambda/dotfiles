@@ -1,1 +1,6 @@
-
+Plugin 'airblade/vim-gitgutter'
+Plugin 'derekwyatt/vim-scala'
+Plugin 'junegunn/goyo.vim'
+Plugin 'junegunn/limelight.vim'
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
+Plugin 'junegunn/fzf.vim'
