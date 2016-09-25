@@ -1,0 +1,4 @@
+include /usr/local/share/doc/task/rc/solarized-dark-256.theme
+
+data.location=~/Dropbox/daily/taskwarrior
+

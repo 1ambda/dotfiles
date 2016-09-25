@@ -2,11 +2,12 @@
 	email = 1amb4a@gmail.com
 	name = 1ambda
 [core]
-	warnAmbiguousRefs = false
-  editor = vim
-	excludesfile = /Users/1002471/.gitignore
+    warnAmbiguousRefs = false
+    editor = vim
+	excludesfile = /Users/lambda/.gitignore
 	autocrlf = input
 	ignorecase = false
+	pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
 	diff = auto
 	status = auto
@@ -29,8 +30,9 @@
     merge-diff = "!git diff "git merge-span ... $1""
     merge-difftool = "!git difftool "git merge-span ... $1""
 
-    co = checkout
-    cob = "!git checkout $(git branch | fzf-tmux -d 20)"
+	# use `gco` instead
+    co = "!git checkout $(git branch | fzf-tmux -d 20)"
+    cob = checkout -b
     com = checkout master
     cod = checkout develop
     cor = checkout release
@@ -55,11 +57,10 @@
     unpublish = "!git push origin :$(git bn)"
     recreate = "!f() { [[ -n $@ ]] && git checkout \"$1\" && git unpublish && git checkout \"$2\" && git branch -D \"$1\" && git checkout -b \"$1\" && git publish; }; f"
 
+	up = pull --rebase --autostash
     plr = pull origin --rebase
     plom = pull origin master
     plod = pull origin develop
-    plsm = pull stash master
-    plsd = pull stash develop
 
     pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
     pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
@@ -70,19 +71,16 @@
     s = status --short --branch
     st = status
 
-    df = diff
-    dsf = "!git diff --color $@ | diff-so-fancy"
+	df = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     dfs = "!git --no-pager diff --stat"
-    dfc = diff --cached
-    dfcs = "!git --no-pager diff --cached --stat"
-    dfh = diff HEAD
+	dfc = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff --cached --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+	dfh = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff HEAD --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     dfhs = "!git --no-pager diff HEAD --stat"
-    dfl = diff HEAD~1 HEAD
     dff = diff --name-only
     dfcf = git diff --name-only --diff-filter=U
 
     insp = "!f() { git ll "$1"^.."$1"; }; f"
-    inspd = "!f() { git diff "$1"^.."$1"; }; f"
+	inspd = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff "$1"^.."$1"; --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     head = !"git log -n1"
     lost = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
 
@@ -124,6 +122,7 @@
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+	# use `gl` instead
     lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
     lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
 
@@ -160,3 +159,8 @@
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22

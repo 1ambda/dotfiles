@@ -1,91 +1,86 @@
 ## Mac OS config
 
-Last update - 2015. 05. 12
+Last update - 2016. 09. 22
 
 ### Tools
 
-- brew, wget, curl, tree, htop
-- Xcode
+- brew, wget, curl, tree, htop, coretuils, ctags
+- xcode, xcode-select install
+- update bash (`brew install bash`)
+- [httpie](https://httpie.org/)
+- [jq](https://stedolan.github.io/jq/)
 - [trash-cli](https://github.com/andreafrancia/trash-cli)
-- [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
-- [reattach-to-user-namespace](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 - [launchy](https://github.com/eddiezane/lunchy)
-- [huffshell](https://github.com/paulmars/huffshell)
-- [gvm](http://www.groovy-lang.org/download.html)
-- [clojure](https://gist.github.com/technomancy/2395913)
-- [httpie](https://github.com/jakubroztocil/httpie)
 - [ammonite](curl -L -o amm http://git.io/vBTzM; chmod +x amm; ./amm)
 - [tmux, tmuxinator](https://github.com/tmuxinator/tmuxinator)
-- [rbenv](https://github.com/sstephenson/rbenv#homebrew-on-mac-os-x)
-- [bumpversion](pip install --upgrade bumpversion)
+- [powerline](http://powerline.readthedocs.io/en/master/installation/linux.html)
+- [powerline-font](http://powerline.readthedocs.io/en/master/installation/linux.html#patched-font-installation)
+- [powerline for tmux (change iterm font in profile)](https://gist.github.com/wm/4750511)
+- [reattach-to-user-namespace for tmux](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 - [tldr](https://github.com/tldr-pages/tldr)
 - [maybe](https://github.com/p-e-w/maybe)
+
+#### Terminal: Productivity
+
+- [buku](https://github.com/jarun/Buku)
+- [taskwarrior](http://taskwarrior.org/)
+- [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
+- [zplug](https://github.com/b4b4r07/zplug)
+- [k](https://github.com/supercrabtree/k)
+- [peco](https://github.com/peco/peco)
+- [percol](https://github.com/mooz/percol)
+- [fasd](https://github.com/clvv/fasd)
+- [fzf (check key-bindings)](https://github.com/junegunn/fzf)
 
 #### Terminal: Git
 
 - [diff-so-fancy (git-related)](https://github.com/stevemao/diff-so-fancy)
-- [git-extras](https://github.com/tj/git-extras/wiki/Installation)
+- [git-extras](https://github.com/tj/git-extras/blob/master/Installation.md)
+- [git-open](https://github.com/paulirish/git-open)
+- [git-hub](https://github.com/github/hub)
 - [git-flow](https://github.com/nvie/gitflow/wiki/Mac-OS-X)
-- [git-flow-completion](https://github.com/bobthecow/git-flow-completion)
-- [git-up](https://github.com/aanand/git-up)
 
-#### Terminal: Command Line
+### Language
 
-- [zplug](https://github.com/b4b4r07/zplug)
-- [k](https://github.com/supercrabtree/k)
-- [peco](https://github.com/peco/peco)
-- [fasd](https://github.com/clvv/fasd)
-- [fzf](https://github.com/junegunn/fzf)
-- [auto-fu](http://itpass.scitec.kobe-u.ac.jp/~okazakis/%E3%83%A1%E3%83%A2/2015/04/22/zsh_azfu/)
-
-#### Terinal: Window
-
-- [tmuxinator](https://github.com/tmuxinator/tmuxinator)
-
-### Spring
-
-[Spring Boot CLI Install](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#getting-started-installing-the-cli)
-
-### Python
+#### Python
 
 - [pyenv](https://github.com/yyuu/pyenv)
 - [virtualenv](https://github.com/yyuu/pyenv-virtualenv)
 - [autoenv](https://github.com/kennethreitz/autoenv)
 
-### Node
+#### Java
 
-- [nvm](https://github.com/creationix/nvm)
+- [java7, java8 using cask](http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/)
+- [jenv](https://github.com/gcuisinier/jenv)
+- [brew install maven scala sbt gradle]
 
-## Vim
+#### Go
+
+- [go]()
+- [docker for OSX]()
+
+### Editors
+
+#### Vim
 
 - [vundle](https://github.com/gmarik/Vundle.vim)
-- [macvim](http://stackoverflow.com/questions/21012203/gvim-or-macvim-in-mac-os-x)
+- [macvim]()
+
+```
+brew reinstall vim --HEAD --with-cscope --with-lua --with-override-system-vim 
+brew reinstall macvim --HEAD --with-cscope --with-lua --with-override-system-vim
+```
+
+- [vim startkit: spf13](http://vim.spf13.com/)
 - [vim input source switcher](http://yisangwook.tumblr.com/post/106780445189/vim-insert-mode-keyboard-switch)
 
-### Emacs
+#### Emacs
 
-(1) Build [emacs-mac-port](https://github.com/railwaycat/emacs-mac-port)  
+- [spacemacs](https://github.com/syl20bnr/spacemacs)
 
-```
-$ git clone git://github.com/railwaycat/emacs-mac-port.git
-$ brew install autoconf automake libtool
-$ ./configure --with-mac --enable-mac-app
-$ make && make install
-```
+#### IDEA
 
-(2) Configure [.emacs](https://github.com/1ambda/emacs-osx)
-
-### Powerline
-
-- [ref 1](http://powerline.readthedocs.org/en/latest/installation/osx.html?highlight=install)
-- [ref 2](http://blog.outsider.ne.kr/879)
-
-```
-$ pip install powerline-status
-$ brew install Caskroom/cask/xquartz
-$ brew update && brew install -vd fontforge
-$ # set powerline font for non-ascii chars 
-```
+Export settings as a JAR file and import it
 
 ### Keys
 
@@ -93,13 +88,12 @@ $ # set powerline font for non-ascii chars
 - [use Command_R as HanEng key](http://jaebok.tistory.com/38)
 - Spotlight: `Op-S`, Finder: `Op-F`, Dashboard: `Op-L`, Dock: 'Op-D'
 - [Word/Line deletion and navigation shortcuts in iTerm2](https://coderwall.com/p/ds2dha/word-line-deletion-and-navigation-shortcuts-in-iterm2)
+- [Read: bash shortcut](http://ss64.com/bash/syntax-keyboard.html)
 
 ### 3rd-party Apps
 
 - [Sizeup](http://www.irradiatedsoftware.com/sizeup/), [Cinch](http://www.irradiatedsoftware.com/cinch/) (Window Mgmt)
 - Karabiner
 - Seil
-
-### Idea Key
-
-`~/library/Preferences/IdeaIC14/keymaps/`
+- [GIPHY](http://giphy.com/)
+- [keycastr](https://github.com/keycastr/keycastr)

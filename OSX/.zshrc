@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/1002471/.oh-my-zsh
+export ZSH=/Users/lambda/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -48,9 +48,17 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 
 # User configuration
+export EDITOR='vim'
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export PATH="/usr/local/sbin:$PATH"
+
+HISTSIZE=100000000
+SAVEHIST=100000000
+
+source $ZSH/oh-my-zsh.sh
 
 ## Custom Configuration
-### alias sugar
 alias vh='sudo vim /etc/hosts'
 alias vt='vi ~/.tmux.conf'
 alias vz='vi ~/.zshrc'
@@ -68,222 +76,58 @@ alias gob='cd ~/Dropbox/Blog'
 alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 
-#### Path
-alias cpwd='pwd | tr -d "\n" | pbcopy'
-
-#### fasd
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias f='fasd -f'        # file
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-alias z='fasd_cd -d'     # cd, same functionality as j in autojump
-alias zz='fasd_cd -d -i' # cd with interactive selection
-
-alias gnp="git --no-pager"
+#### zsh-snippets
+alias spl="_list_zsh_snippets"
+alias spa="_add_zsh_snippets"
+alias spc="_clean_zsh_snippets"
 
 alias me='whoami'
 alias today='date'
-
 alias dir='nautilus .'
 
 #### TRASH
 alias tp='trash-put'
 alias tl='trash-list'
-
 alias pp="pwd | pbcopy"
-
-alias zsh-count="cut -f2 -d';' $HOME/.zsh_history | sort | uniq -c | sort -nr | head -n 30"
-
 alias hs="history | grep -i $1"
-
-alias svi='sudo vi'
-alias smv='sudo mv'
-alias service='sudo service'
-
 alias disk-usage='du -h | sort -h | tail -n 1000'
 alias xc="xclip -selection clipboard"
 alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
-
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
 alias zp="z | peco"
 alias zc="history | peco"
-
 alias untar='tar -zxvf'
 alias untarxz='tar -xJf'
 
-## fzf aliases
-export FZF_DEFAULT_OPTS='
-  --bind ctrl-f:page-down,ctrl-b:page-up
-  --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
-  --color info:254,prompt:37,spinner:108,pointer:235,marker:235
-'
-#   - CTRL-O to open with `open` command,
-#   - CTRL-E or Enter key to open with the $EDITOR
-fo() {
-  local out file key
-  out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
-  key=$(head -1 <<< "$out")
-  file=$(head -2 <<< "$out" | tail -1)
-  if [ -n "$file" ]; then
-    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
-  fi
-}
-
-fcd() {
-  local dir
-  dir=$(find ${1:-.} -type d 2> /dev/null | fzf +m) && cd "$dir"
-}
-
-#### TMUX
+# tmux
+alias tmx="tmuxinator"
 alias tm="tmux"
 alias tma='tmux a -t'
 alias tmn="tmux new"
 alias tmk='tmux kill-session -t'
-
-tms() {
-  local session
-  session=$(tmux list-sessions -F "#{session_name}" | \
-    fzf --query="$1" --select-1 --exit-0) &&
-  tmux switch-client -t "$session"
-}
-
-tmw() {
-  local panes current_window current_pane target target_window
-  panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
-  current_pane=$(tmux display-message -p '#I:#P')
-  current_window=$(tmux display-message -p '#I')
-
-  target=$(echo "$panes" | grep -v "$current_pane" | fzf +m --reverse) || return
-  target_window=$(echo $target | awk 'BEGIN{FS=":|-"} {print$1}')
-
-  if [[ $current_window -ne $target_window ]]; then
-  else
-    tmux select-window -t $target_window
-  fi
-}
-
 alias tmh="tmux list-keys | percol"
 
-tmp() {
-  local panes current_window current_pane target target_window target_pane
-  panes=$(tmux list-panes -s -F '#I:#P - #{pane_current_path} #{pane_current_command}')
-  current_pane=$(tmux display-message -p '#I:#P')
-  current_window=$(tmux display-message -p '#I')
+alias b=~/github/dotfiles/OSX/fzf/b.rb
 
-  target=$(echo "$panes" | grep -v "$current_pane" | fzf +m --reverse) || return
-
-  target_window=$(echo $target | awk 'BEGIN{FS=":|-"} {print$1}')
-  target_pane=$(echo $target | awk 'BEGIN{FS=":|-"} {print$2}' | cut -c 1)
-
-  if [[ $current_window -eq $target_window ]]; then
-    tmux select-pane -t ${target_window}.${target_pane}
-  else
-    tmux select-pane -t ${target_window}.${target_pane} &&
-    tmux select-window -t $target_window
-  fi
-}
-
-fz() {
-  local dir
-  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-}
-
-fv() {
-  local file
-  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
-}
-
-fkill() {
-  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
-
-  if [ "x$pid" != "x" ]
-  then
-    kill -${1:-9} $pid
-  fi
-}
-
-### tree
 alias tree="tree -C"
-
-### git, gitflow
+alias gf="hub"
 alias gf="git flow"
 
-
-### hadoop
-alias hstart="/usr/local/Cellar/hadoop/2.6.0/sbin/start-dfs.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/start-yarn.sh"
-alias hstop="/usr/local/Cellar/hadoop/2.6.0/sbin/stop-yarn.sh;/usr/local/Cellar/hadoop/2.6.0/sbin/stop-dfs.sh"
-
-### thgfuck
-alias fuck='$(thefuck $(fc -ln -1))'
-alias FUCK='fuck'
-
-# export MANPATH="/usr/local/man:$MANPATH"
-
-export TERM=screen-256color
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export PATH="/usr/local/sbin:$PATH"
-
-HISTSIZE=100000000
-SAVEHIST=100000000
-
-source $ZSH/oh-my-zsh.sh
-
-# ssh
-source ~/.ssh/alias.sh
-source ~/.ssh/ghost.sh
-
-# tmux
-export EDITOR='vim'
-alias tmx="tmuxinator"
-
-# volumn up, down
 alias vup="osascript -e 'set volume output volume ((output volume of (get volume settings)) + 10)'"
 alias vdown="osascript -e 'set volume output volume ((output volume of (get volume settings)) - 10)'"
 alias vmute="osascript -e 'set Volume 0'"
 
-# docker
 alias dk="docker"
 alias dkm="docker-machine"
 alias dkc="docker-compose"
 
-# You may need to manually set your language environment
+alias e="emacsclient -t"
+alias ed="emacs --daemon"
+alias ek="emacsclient -e \"(kill-emacs)\""
 
-# Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
-
-# Compilation flags
-# export ARCHFLAGS="-arch x86_64"
-
-# ssh
-# export SSH_KEY_PATH="~/.ssh/dsa_id"
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-
-### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/Users/1002471/.gvm/bin/gvm-init.sh" ]] && source "/Users/1002471/.gvm/bin/gvm-init.sh"
-
-funciton n setjdk() {
+function setjdk() {
   if [ $# -ne 0 ]; then
   removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
   if [ -n "${JAVA_HOME+x}" ]; then
@@ -296,59 +140,8 @@ funciton n setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
+setjdk 1.8
 
-# added by travis gem
-[ -f /Users/1002471/.travis/travis.sh ] && source /Users/1002471/.travis/travis.sh
-
-# zplug
-source ~/.zplug/zplug
-
-zplug "plugins/brew", from:oh-my-zsh
-zplug "plugins/brew-cask", from:oh-my-zsh
-zplug "plugins/osx", from:oh-my-zsh
-zplug "plugins/pod", from:oh-my-zsh
-zplug "plugins/scala", from:oh-my-zsh
-zplug "plugins/sbt", from:oh-my-zsh
-zplug "plugins/npm", from:oh-my-zsh
-zplug "plugins/nvm", from:oh-my-zsh
-zplug "plugins/pyenv", from:oh-my-zsh
-zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-flow", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/fasd", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/tmuxinator", from:oh-my-zsh
-zplug "plugins/common-aliases", from:oh-my-zsh
-zplug "plugins/web-search", from:oh-my-zsh
-zplug "zsh-users/zsh-completions"
-zplug "b4b4r07/enhancd", of:enhancd.sh
-zplug "supercrabtree/k"
-zplug "mgryszko/jvm"
-zplug "peterhurford/git-it-on.zsh", of:git-it-on.plugin.zsh
-zplug "hlissner/zsh-autopair", of:autopair.zsh
-# zplug "willghatch/zsh-snippets"
-# zplug "zsh-users/zaw", of:zaw.zsh
-# zplug "hchbaw/zce.zsh", of:zce.zsh
-# zplug "benclark/parallels-zsh-plugin", of:_parallels
-
-# zplug "tarruda/zsh-autosuggestions", of:"dist/autosuggestions.zsh"
-# export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=243"
-
-zplug "zsh-users/zsh-history-substring-search", nice:18
-zplug "jimmijj/zsh-syntax-highlighting", nice:19
-
-if zplug check tarruda/zsh-autosuggestions; then
-  #ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=(history-substring-search-up history-substring-search-down) # Add history-substring-search-* widgets to list of widgets that clear the autosuggestion
-  #ZSH_AUTOSUGGEST_CLEAR_WIDGETS=("${(@)ZSH_AUTOSUGGEST_CLEAR_WIDGETS:#(up|down)-line-or-history}") # Remove *-line-or-history widgets from list of widgets that clear the autosuggestion to avoid conflict with history-substring-search-* widgets
-  #autosuggest_start # Enable autosuggestions
-  #bindkey '^ ' autosuggest-accept
-fi
-
-## ZSH plugin: auto-fu
-
-zplug load
 
 if which peco &> /dev/null; then
   function peco_select_history() {
@@ -362,4 +155,232 @@ if which peco &> /dev/null; then
   bindkey '^R' peco_select_history
 fi
 
-[[ -s "/Users/1002471/.gvm/scripts/gvm" ]] && source "/Users/1002471/.gvm/scripts/gvm"
+# zplug
+export ZPLUG_HOME=~/.zplug
+source ~/.zplug/init.zsh
+
+zplug "chrissicool/zsh-256color"
+zplug "plugins/brew", from:oh-my-zsh
+zplug "plugins/brew-cask", from:oh-my-zsh
+zplug "plugins/osx", from:oh-my-zsh
+zplug "plugins/taskwarrior", from:oh-my-zsh # not working
+zplug "plugins/scala", from:oh-my-zsh
+zplug "plugins/nvm", from:oh-my-zsh 	# not working
+zplug "plugins/pip", from:oh-my-zsh
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/git-flow", from:oh-my-zsh
+zplug "plugins/git-extras", from:oh-my-zsh
+zplug "plugins/github", from:oh-my-zsh  # conflict
+zplug "plugins/git-hubflow", from:oh-my-zsh # conflit
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/fasd", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/tmuxinator", from:oh-my-zsh
+zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "plugins/web-search", from:oh-my-zsh
+zplug "b4b4r07/enhancd", use:init.sh
+zplug "supercrabtree/k"
+zplug "mgryszko/jvm"
+zplug "peterhurford/git-it-on.zsh", use:git-it-on.plugin.zsh
+zplug "hlissner/zsh-autopair", use:autopair.zsh
+zplug "1ambda/zsh-snippets", use:snippets.plugin.zsh
+# zplug "$HOME/github/1ambda/zsh-snippets", from:local, use:'snippets.plugin.zsh'
+alias zsp=zsh_snippets
+bindkey '^S^S' zsh-snippets-widget-expand
+bindkey '^S^A' zsh-snippets-widget-list
+zplug "zsh-users/zsh-history-substring-search", nice:18
+zplug "jimmijj/zsh-syntax-highlighting", nice:19
+# zplug "zsh-users/zsh-autosuggestions", use:"zsh-autosuggestions.plugin.zsh"
+zplug "zsh-users/zsh-completions"
+
+# zplug "marzocchi/zsh-notify"
+# zplug "plugins/vi-mode", from:oh-my-zsh
+# zplug "hchbaw/zce.zsh", use:zce.zsh
+
+zplug load
+
+# fzf related aliases
+
+export FZF_DEFAULT_OPTS="
+--color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
+--color info:254,prompt:37,spinner:108,pointer:235,marker:235
+"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+alias agf="ag --nobreak --nonumbers --noheading . | fzf"
+
+unalias v
+v() {
+  local file
+  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
+}
+
+unalias o
+o() {
+  local out file key
+  out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+
+unalias z
+z() {
+  local dir
+  dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
+}
+
+j() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
+# fh - repeat history
+unalias h
+h() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 0 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
+}
+
+# fkill - kill process
+fk() {
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  if [ "x$pid" != "x" ]
+  then
+    kill -${1:-9} $pid
+  fi
+}
+
+# gco - checkout git branch/tag
+unalias gco
+gco() { local tags branches target; tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') }
+
+# gl - git commit browser
+unalias gl
+gl() {
+  git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort --bind "ctrl-m:execute: (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
+                {} FZF-EOF"
+}
+
+# gs - get git commit sha
+# example usage: git rebase -i `gs`
+gs() {
+  local commits commit
+  commits=$(git log --color=always --pretty=oneline --abbrev-commit --reverse) &&
+  commit=$(echo "$commits" | fzf --tac +s +m -e --ansi --reverse) &&
+  echo -n $(echo "$commit" | sed "s/ .*//")
+}
+
+# fstash - easier way to deal with stashes
+# type fstash to get a list of your stashes
+# enter shows you the contents of the stash
+# ctrl-d shows a diff of the stash against your current HEAD
+# ctrl-b checks the stash out as a branch, for easier merging
+gt() {
+  local out q k sha
+    while out=$(
+      git stash list --pretty="%C(yellow)%h %>(14)%Cgreen%cr %C(blue)%gs" |
+      fzf --ansi --no-sort --query="$q" --print-query \
+          --expect=ctrl-d,ctrl-b);
+    do
+      q=$(head -1 <<< "$out")
+      k=$(head -2 <<< "$out" | tail -1)
+      sha=$(tail -1 <<< "$out" | cut -d' ' -f1)
+      [ -z "$sha" ] && continue
+      if [ "$k" = 'ctrl-d' ]; then
+        git diff $sha
+      elif [ "$k" = 'ctrl-b' ]; then
+        git stash branch "stash-$sha" $sha
+        break;
+      else
+        git stash show -p $sha
+      fi
+    done
+}
+# fs [FUZZY PATTERN] - Select selected tmux session
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+fs() {
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0) &&
+  tmux switch-client -t "$session"
+}
+
+# https://gist.github.com/muralisc/d1ed7226533ab23e4e1e
+fp() {
+	panes=$(tmux list-panes -s -F '#I:#P #W #{pane_current_path} #{pane_current_command} #{pane_title}')
+	current_window=$(tmux display-message  -p '#I')
+
+	target=$(echo "$panes" | fzf) || return
+
+	target_window=$(echo $target | awk 'BEGIN{FS=":|-"} {print$1}')
+	target_pane=$(echo $target | awk 'BEGIN{FS=":|-"} {print$2}' | cut -c 1)
+
+	if [[ $current_window -eq $target_window ]]; then
+		tmux select-pane -t ${target_window}.${target_pane}
+	else
+		tmux select-pane -t ${target_window}.${target_pane} &&
+			tmux select-window -t $target_window
+	fi
+}
+
+# c - browse chrome history
+c() {
+  local cols sep
+  cols=$(( COLUMNS / 3 ))
+  sep='{{::}}'
+
+  # Copy History DB to circumvent the lock
+  # - See http://stackoverflow.com/questions/8936878 for the file path
+  cp -f ~/Library/Application\ Support/Google/Chrome/Default/History /tmp/h
+
+  sqlite3 -separator $sep /tmp/h \
+    "select substr(title, 1, $cols), url
+     from urls order by last_visit_time desc" |
+  awk -F $sep '{printf "%-'$cols's  \x1b[36m%s\n", $1, $2}' |
+  fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs open
+}
+
+# web_search from terminal: https://github.com/robbyrussell/oh-my-zsh/blob/master/plugins/web-search/web-search.plugin.zsh
+function _web_search() {
+  emulate -L zsh
+
+  # define search engine URLS
+  typeset -A urls
+  urls=(
+    google      	"https://www.google.com/search?q="
+    github      	"https://github.com/search?q="
+    naver			"https://search.naver.com/search.naver?query="
+    stackoverlfow	"http://stackoverflow.com/search?q="
+  )
+
+  # check whether the search engine is supported
+  if [[ -z "$urls[$1]" ]]; then
+    echo "Search engine $1 not supported."
+    return 1
+  fi
+
+  # search or go to main page depending on number of arguments passed
+  if [[ $# -gt 1 ]]; then
+    # build search url:
+    # join arguments passed with '+', then append to search engine URL
+    url="${urls[$1]}${(j:+:)@[2,-1]}"
+  else
+    # build main page url:
+    # split by '/', then rejoin protocol (1) and domain (2) parts with '//'
+    url="${(j://:)${(s:/:)urls[$1]}[1,2]}"
+  fi
+
+  open_command "$url"
+}
+
+alias google='_web_search google'
+alias github='_web_search github'
+alias naver='_web_search naver'
+alias stackoverflow='_web_search stackoverflow'
