@@ -123,7 +123,7 @@ alias dk="docker"
 alias dkm="docker-machine"
 alias dkc="docker-compose"
 
-alias e="emacsclient -t"
+alias ec="emacsclient -c &"
 alias ed="emacs --daemon"
 alias ek="emacsclient -e \"(kill-emacs)\""
 
@@ -384,3 +384,5 @@ alias google='_web_search google'
 alias github='_web_search github'
 alias naver='_web_search naver'
 alias stackoverflow='_web_search stackoverflow'
+
+[[ -s "/Users/lambda/.gvm/scripts/gvm" ]] && source "/Users/lambda/.gvm/scripts/gvm"

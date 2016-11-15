@@ -4,7 +4,7 @@
 [core]
     warnAmbiguousRefs = false
     editor = vim
-	excludesfile = /Users/lambda/.gitignore
+	excludesfile = ~/.global_gitignore
 	autocrlf = input
 	ignorecase = false
 	pager = diff-so-fancy | less --tabs=4 -RFX
@@ -31,7 +31,7 @@
     merge-difftool = "!git difftool "git merge-span ... $1""
 
 	# use `gco` instead
-    co = "!git checkout $(git branch | fzf-tmux -d 20)"
+    co =  checkout
     cob = checkout -b
     com = checkout master
     cod = checkout develop
@@ -48,10 +48,10 @@
     psom = push origin master
     psod = push origin develop
     psor = push origin release
-    pssh = push stash HEAD
-    pssm = push stash master
-    pssd = push stash develop
-    pssr = push stash release
+    psuh = push upstream HEAD
+    psum = push upstream master
+    psud = push upstream develop
+    psur = push upstream release
 
     publish = "!git push -u origin $(git bn)"
     unpublish = "!git push origin :$(git bn)"
@@ -62,7 +62,7 @@
     plom = pull origin master
     plod = pull origin develop
 
-    pr = "!f() { git fetch -fu ${2:-upstream} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+    pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
     pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 
     a = !git add . && git status

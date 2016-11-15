@@ -19,12 +19,13 @@ Last update - 2016. 09. 22
 - [reattach-to-user-namespace for tmux](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 - [tldr](https://github.com/tldr-pages/tldr)
 - [maybe](https://github.com/p-e-w/maybe)
+- [kap](https://github.com/wulkano/kap)
 
 #### Terminal: Productivity
 
 - [buku](https://github.com/jarun/Buku)
 - [taskwarrior](http://taskwarrior.org/)
-- [silversearcher-ag](https://github.com/ggreer/the_silver_searcher)
+- [the platinum searchert](https://github.com/monochromegane/the_platinum_searcher)
 - [zplug](https://github.com/b4b4r07/zplug)
 - [k](https://github.com/supercrabtree/k)
 - [peco](https://github.com/peco/peco)

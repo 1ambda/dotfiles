@@ -23,14 +23,18 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     auto-completion
+     (auto-completion :variables
+                      auto-completion-enable-sort-by-usage t
+                      auto-completion-enable-snippets-in-popup t)
      syntax-checking
      spell-checking
      better-defaults
 
-     go
+     (go :variables
+	     gofmt-command "goimports"
+         go-tab-width 4
+         go-use-gometalinter t)
      emacs-lisp
-     scala
      python
      sql
      (haskell :variables
@@ -219,14 +223,28 @@ layers configuration. You are free to put any user code."
    js-indent-level 2)
 
   ;; evil
+  ;;; http://ergoemacs.org/emacs/keyboard_shortcuts_examples.html
   (define-key evil-insert-state-map (kbd "C-p") nil)
   (define-key evil-insert-state-map (kbd "C-n") nil)
   (define-key evil-insert-state-map (kbd "C-a") nil)
   (define-key evil-insert-state-map (kbd "C-e") nil)
-  (define-key evil-insert-state-map (kbd "C-w") 'kill-region)
+  (define-key evil-insert-state-map (kbd "C-w") 'backward-kill-word)
   (define-key evil-insert-state-map (kbd "C-y") 'yank)
   (define-key evil-insert-state-map (kbd "C-d") 'delete-char)
+  (define-key evil-insert-state-map (kbd "C-k") 'kill-line)
   (define-key evil-insert-state-map (kbd "M-DEL") 'clean-aindent--bsunindent)
+  (define-key evil-normal-state-map (kbd "M-?") 'spacemacs/helm-yas)
+  (define-key evil-insert-state-map (kbd "M-?") 'spacemacs/helm-yas)
+  (define-key evil-normal-state-map (kbd "M-X") 'helm-descbinds)
+  (define-key evil-insert-state-map (kbd "M-X") 'helm-descbinds)
+
+  ;;; evil: go-mode
+  (evil-define-key 'normal go-mode-map (kbd "M-r") 'spacemacs/go-run-main)
+  (evil-define-key 'insert go-mode-map (kbd "M-r") 'spacemacs/go-run-main)
+  (evil-define-key 'normal go-mode-map (kbd "M-t") 'spacemacs/go-run-package-tests)
+  (evil-define-key 'insert go-mode-map (kbd "M-t") 'spacemacs/go-run-package-tests)
+  (evil-define-key 'normal go-mode-map (kbd "M-T") 'spacemacs/go-run-tests)
+  (evil-define-key 'insert go-mode-map (kbd "M-T") 'spacemacs/go-run-tests)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
