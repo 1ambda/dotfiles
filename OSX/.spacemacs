@@ -31,17 +31,11 @@ values."
      better-defaults
 
      (go :variables
-	     gofmt-command "goimports"
+         gofmt-command "goimports"
          go-tab-width 4
          go-use-gometalinter t)
      emacs-lisp
-     python
-     sql
-     (haskell :variables
-        haskell-enable-ghc-mod-support t
-        haskell-enable-ghci-ng-support t
-        haskell-enable-shm-support t
-        haskell-enable-hindent-style "johan-tibell")
+     yaml
      (shell :variables
             shell-default-height 30
             shell-default-position 'bottom)
@@ -49,7 +43,6 @@ values."
      git
      version-control
      markdown
-
      spell-checking
      syntax-checking
      )
@@ -57,7 +50,10 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages then consider to create a layer, you can also put the
    ;; configuration in `dotspacemacs/config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      go-dlv
+                                      golint
+                                      )
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -245,7 +241,27 @@ layers configuration. You are free to put any user code."
   (evil-define-key 'insert go-mode-map (kbd "M-t") 'spacemacs/go-run-package-tests)
   (evil-define-key 'normal go-mode-map (kbd "M-T") 'spacemacs/go-run-tests)
   (evil-define-key 'insert go-mode-map (kbd "M-T") 'spacemacs/go-run-tests)
+
+  ;; auto-complete (should be followed by evil key maps)
+  ;; (define-key ac-completing-map (kbd "C-n") 'ac-next)
+  ;; (define-key ac-completing-map (kbd "C-p") 'ac-previous)
 )
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(evil-want-Y-yank-to-eol nil)
+ '(package-selected-packages
+   (quote
+    (livid-mode skewer-mode js2-refactor multiple-cursors web-beautify simple-httpd json-mode json-snatcher json-reformat js2-mode js-doc company-tern dash-functional tern coffee-mode yaml-mode yapfify uuidgen toc-org py-isort org-plus-contrib org-bullets mwim live-py-mode link-hint intero hlint-refactor hide-comnt helm-hoogle go-guru git-link flyspell-correct-helm flyspell-correct flycheck-gometalinter eyebrowse evil-visual-mark-mode evil-unimpaired evil-ediff eshell-z dumb-jump company-ghci column-enforce-mode golint go-dlv xterm-color ws-butler window-numbering which-key volatile-highlights vi-tilde-fringe use-package sql-indent spacemacs-theme spaceline smooth-scrolling smeargle shm shell-pop restart-emacs rainbow-delimiters quelpa pyvenv pytest pyenv-mode py-yapf popwin pip-requirements persp-mode pcre2el paradox page-break-lines orgit open-junk-file neotree multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative leuven-theme info+ indent-guide ido-vertical-mode hy-mode hungry-delete hl-todo hindent highlight-parentheses highlight-numbers highlight-indentation help-fns+ helm-themes helm-swoop helm-pydoc helm-projectile helm-mode-manager helm-make helm-gitignore helm-flyspell helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag haskell-snippets google-translate golden-ratio go-eldoc gitconfig-mode gitattributes-mode git-timemachine git-messenger git-gutter-fringe git-gutter-fringe+ gh-md flycheck-pos-tip flycheck-haskell flx-ido fill-column-indicator fancy-battery expand-region exec-path-from-shell evil-visualstar evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-args evil-anzu eval-sexp-fu eshell-prompt-extras esh-help elisp-slime-nav diff-hl define-word cython-mode company-statistics company-quickhelp company-go company-ghc company-cabal company-anaconda cmm-mode clean-aindent-mode buffer-move bracketed-paste auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(company-tooltip-common ((t (:inherit company-tooltip :weight bold :underline nil))))
+ '(company-tooltip-common-selection ((t (:inherit company-tooltip-selection :weight bold :underline nil)))))

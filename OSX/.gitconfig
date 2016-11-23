@@ -126,6 +126,8 @@
     lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
     lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
 
+
+
     last = "!git ll -1"
 
     type = cat-file -t

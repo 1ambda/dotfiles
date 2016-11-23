@@ -4,4 +4,4 @@ Plugin 'junegunn/goyo.vim'
 Plugin 'junegunn/limelight.vim'
 Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all'  }
 Plugin 'junegunn/fzf.vim'
-Plugin 'typescript-vim'
+Plugin 'fatih/vim-go'
