@@ -45,6 +45,7 @@ Last update - 2016. 09. 22
 
 #### Python
 
+- [article: How to set python dev env](https://dobest.io/how-to-set-python-dev-env)
 - [pyenv](https://github.com/yyuu/pyenv)
 - [virtualenv](https://github.com/yyuu/pyenv-virtualenv)
 - [autoenv](https://github.com/kennethreitz/autoenv)
@@ -54,11 +55,16 @@ Last update - 2016. 09. 22
 - [java7, java8 using cask](http://davidcai.github.io/blog/posts/install-multiple-jdk-on-mac/)
 - [jenv](https://github.com/gcuisinier/jenv)
 - [brew install maven scala sbt gradle]
+- [svm](https://github.com/yuroyoro/svm)
 
 #### Go
 
 - [go]()
 - [docker for OSX]()
+
+#### R
+
+- [install R using homebrew](http://bionicprofessor.com/2016/05/15/installing-r-in-os-x-with-homebrew-and-cask/)
 
 ### Editors
 

@@ -385,4 +385,10 @@ alias github='_web_search github'
 alias naver='_web_search naver'
 alias stackoverflow='_web_search stackoverflow'
 
+# python env
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
+source /usr/local/opt/autoenv/activate.sh # autoenv
+
+
 [[ -s "/Users/lambda/.gvm/scripts/gvm" ]] && source "/Users/lambda/.gvm/scripts/gvm"
