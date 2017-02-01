@@ -96,6 +96,7 @@ alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
+alias jpk="jps | peco | awk '{ print $1 }' | xargs kill -15"
 alias zp="z | peco"
 alias zc="history | peco"
 alias untar='tar -zxvf'
@@ -389,6 +390,16 @@ alias stackoverflow='_web_search stackoverflow'
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
 source /usr/local/opt/autoenv/activate.sh # autoenv
-
+export PATH="/Users/lambda/.miniconda2/bin:$PATH"
 
 [[ -s "/Users/lambda/.gvm/scripts/gvm" ]] && source "/Users/lambda/.gvm/scripts/gvm"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/lambda/google-cloud-sdk/path.zsh.inc ]; then
+  source '/Users/lambda/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/lambda/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/Users/lambda/google-cloud-sdk/completion.zsh.inc'
+fi

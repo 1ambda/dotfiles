@@ -4,7 +4,7 @@
 [core]
     warnAmbiguousRefs = false
     editor = vim
-	excludesfile = ~/.global_gitignore
+	excludesfile = /Users/lambda/.global_gitignore
 	autocrlf = input
 	ignorecase = false
 	pager = diff-so-fancy | less --tabs=4 -RFX
