@@ -1,17 +1,17 @@
 [user]
-	email = 1amb4a@gmail.com
-	name = 1ambda
+    email = 1amb4a@gmail.com
+    name = 1ambda
 [core]
     warnAmbiguousRefs = false
     editor = vim
-	excludesfile = /Users/1ambda/.gitignore_global
-	autocrlf = input
-	ignorecase = false
-	pager = diff-so-fancy | less --tabs=4 -RFX
+    excludesfile = ~/.gitignore_global
+    autocrlf = input
+    ignorecase = false
+    pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+    diff = auto
+    status = auto
+    branch = auto
 [alias]
     c = commit
     ci = commit -v

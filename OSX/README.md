@@ -32,6 +32,8 @@ Last update - 2016. 09. 22
 - [percol](https://github.com/mooz/percol)
 - [fasd](https://github.com/clvv/fasd)
 - [fzf (check key-bindings)](https://github.com/junegunn/fzf)
+- [textql](https://github.com/dinedal/textql)
+- [gitql](https://github.com/cloudson/gitql)
 
 #### Terminal: Git
 
@@ -49,6 +51,7 @@ Last update - 2016. 09. 22
 - [pyenv](https://github.com/yyuu/pyenv)
 - [virtualenv](https://github.com/yyuu/pyenv-virtualenv)
 - [autoenv](https://github.com/kennethreitz/autoenv)
+- [conda](http://conda.pydata.org/miniconda.html)
 
 #### Java
 

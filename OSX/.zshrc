@@ -96,6 +96,7 @@ alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
+alias jpk="jps | peco | awk '{ print $1 }' | xargs kill -15"
 alias zp="z | peco"
 alias zc="history | peco"
 alias untar='tar -zxvf'
@@ -394,11 +395,22 @@ alias stackoverflow='_web_search stackoverflow'
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
 source /usr/local/opt/autoenv/activate.sh # autoenv
-# added by Miniconda2 4.2.12 installer
-export PATH="/Users/1ambda/miniconda2/bin:$PATH"
-
+export PATH="~/miniconda2/bin:$PATH"
 
 [[ -s "/Users/1ambda/.gvm/scripts/gvm" ]] && source "/Users/1ambda/.gvm/scripts/gvm"
 
 export NVM_DIR="/Users/1ambda/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+[[ -s "/Users/lambda/.gvm/scripts/gvm" ]] && source "/Users/lambda/.gvm/scripts/gvm"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /Users/lambda/google-cloud-sdk/path.zsh.inc ]; then
+  source '/Users/lambda/google-cloud-sdk/path.zsh.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /Users/lambda/google-cloud-sdk/completion.zsh.inc ]; then
+  source '/Users/lambda/google-cloud-sdk/completion.zsh.inc'
+fi
+>>>>>>> fdba9e7a9a22018225dfb5abf10459d05367e44a
