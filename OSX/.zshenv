@@ -1,5 +1,9 @@
 # tools
 export PATH="$PATH:$HOME/tools/bin:$HOME/.svm/current/rt/bin"
+source ~/tools/k/k.sh
+
+# svm
+source ~/.svm/svm.sh
 
 # rvm
 export PATH="$PATH:$HOME/.rvm/bin"

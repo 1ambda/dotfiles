@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/lambda/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -156,8 +156,8 @@ if which peco &> /dev/null; then
 fi
 
 # zplug
-export ZPLUG_HOME=~/.zplug
-source ~/.zplug/init.zsh
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 zplug "chrissicool/zsh-256color"
 zplug "plugins/brew", from:oh-my-zsh
@@ -188,8 +188,8 @@ zplug "1ambda/zsh-snippets", use:snippets.plugin.zsh
 alias zsp=zsh_snippets
 bindkey '^S^S' zsh-snippets-widget-expand
 bindkey '^S^A' zsh-snippets-widget-list
-zplug "zsh-users/zsh-history-substring-search", nice:18
-zplug "jimmijj/zsh-syntax-highlighting", nice:19
+zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "jimmijj/zsh-syntax-highlighting", defer:3
 # zplug "zsh-users/zsh-autosuggestions", use:"zsh-autosuggestions.plugin.zsh"
 zplug "zsh-users/zsh-completions"
 
@@ -198,6 +198,9 @@ zplug "zsh-users/zsh-completions"
 # zplug "hchbaw/zce.zsh", use:zce.zsh
 
 zplug load
+
+# fasd
+eval "$(fasd --init auto)"
 
 # fzf related aliases
 
@@ -210,13 +213,13 @@ export FZF_DEFAULT_OPTS="
 
 alias agf="ag --nobreak --nonumbers --noheading . | fzf"
 
-unalias v
+# unalias v
 v() {
   local file
   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
 }
 
-unalias o
+# unalias o
 o() {
   local out file key
   out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
@@ -227,7 +230,7 @@ o() {
   fi
 }
 
-unalias z
+# unalias z
 z() {
   local dir
   dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
@@ -241,7 +244,7 @@ j() {
 }
 
 # fh - repeat history
-unalias h
+# unalias h
 h() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 0 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
@@ -257,11 +260,11 @@ fk() {
 }
 
 # gco - checkout git branch/tag
-unalias gco
+# unalias gco
 gco() { local tags branches target; tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') }
 
 # gl - git commit browser
-unalias gl
+# unalias gl
 gl() {
   git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort --bind "ctrl-m:execute: (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
                 {} FZF-EOF"
@@ -380,6 +383,8 @@ function _web_search() {
   open_command "$url"
 }
 
+alias l="k -ah"
+
 alias google='_web_search google'
 alias github='_web_search github'
 alias naver='_web_search naver'
@@ -389,6 +394,11 @@ alias stackoverflow='_web_search stackoverflow'
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
 source /usr/local/opt/autoenv/activate.sh # autoenv
+# added by Miniconda2 4.2.12 installer
+export PATH="/Users/1ambda/miniconda2/bin:$PATH"
 
 
-[[ -s "/Users/lambda/.gvm/scripts/gvm" ]] && source "/Users/lambda/.gvm/scripts/gvm"
+[[ -s "/Users/1ambda/.gvm/scripts/gvm" ]] && source "/Users/1ambda/.gvm/scripts/gvm"
+
+export NVM_DIR="/Users/1ambda/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
