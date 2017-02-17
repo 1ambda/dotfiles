@@ -59,6 +59,8 @@ SAVEHIST=100000000
 source $ZSH/oh-my-zsh.sh
 
 ## Custom Configuration
+alias vi="/usr/local/bin/vi"
+alias vim="/usr/local/bin/vim"
 alias vh='sudo vim /etc/hosts'
 alias vt='vi ~/.tmux.conf'
 alias vz='vi ~/.zshrc'
@@ -75,6 +77,7 @@ alias godl='cd ~/Downloads'
 alias gob='cd ~/Dropbox/Blog'
 alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+alias g="git"
 
 #### zsh-snippets
 alias spl="_list_zsh_snippets"
@@ -113,8 +116,8 @@ alias tmh="tmux list-keys | percol"
 alias b=~/github/dotfiles/OSX/fzf/b.rb
 
 alias tree="tree -C"
-alias gf="hub"
-alias gf="git flow"
+alias gh="hub"
+alias gf="git-flow"
 
 alias vup="osascript -e 'set volume output volume ((output volume of (get volume settings)) + 10)'"
 alias vdown="osascript -e 'set volume output volume ((output volume of (get volume settings)) - 10)'"
@@ -157,32 +160,27 @@ if which peco &> /dev/null; then
 fi
 
 # zplug
-export ZPLUG_HOME=/usr/local/opt/zplug
+export ZPLUG_HOME=~/.zplug
 source $ZPLUG_HOME/init.zsh
 
 zplug "chrissicool/zsh-256color"
-zplug "plugins/brew", from:oh-my-zsh
+
 zplug "plugins/brew-cask", from:oh-my-zsh
 zplug "plugins/osx", from:oh-my-zsh
-zplug "plugins/taskwarrior", from:oh-my-zsh # not working
-zplug "plugins/scala", from:oh-my-zsh
-zplug "plugins/nvm", from:oh-my-zsh 	# not working
-zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-flow", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "plugins/github", from:oh-my-zsh  # conflict
-zplug "plugins/git-hubflow", from:oh-my-zsh # conflit
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/fasd", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/tmuxinator", from:oh-my-zsh
-zplug "plugins/common-aliases", from:oh-my-zsh
+#zplug "plugins/common-aliases", from:oh-my-zsh #hang
+#zplug "plugins/fasd", from:oh-my-zsh #hang
 zplug "plugins/web-search", from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+# zplug "plugins/tmux", from:oh-my-zsh
+# zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "b4b4r07/enhancd", use:init.sh
-zplug "supercrabtree/k"
-zplug "mgryszko/jvm"
-zplug "peterhurford/git-it-on.zsh", use:git-it-on.plugin.zsh
+# zplug "supercrabtree/k"
+# zplug "mgryszko/jvm"
+zplug "peterhurford/git-it-on.zsh"
+alias go="gitit"
+alias gop="gitit pulls $@"
+alias gor="gitit repo $2 $3"
+alias gof="gitit ctrlp $@"
 zplug "hlissner/zsh-autopair", use:autopair.zsh
 zplug "1ambda/zsh-snippets", use:snippets.plugin.zsh
 # zplug "$HOME/github/1ambda/zsh-snippets", from:local, use:'snippets.plugin.zsh'
@@ -191,9 +189,9 @@ bindkey '^S^S' zsh-snippets-widget-expand
 bindkey '^S^A' zsh-snippets-widget-list
 zplug "zsh-users/zsh-history-substring-search", defer:3
 zplug "jimmijj/zsh-syntax-highlighting", defer:3
-# zplug "zsh-users/zsh-autosuggestions", use:"zsh-autosuggestions.plugin.zsh"
 zplug "zsh-users/zsh-completions"
 
+# zplug "zsh-users/zsh-autosuggestions"
 # zplug "marzocchi/zsh-notify"
 # zplug "plugins/vi-mode", from:oh-my-zsh
 # zplug "hchbaw/zce.zsh", use:zce.zsh
@@ -397,20 +395,7 @@ eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
 source /usr/local/opt/autoenv/activate.sh # autoenv
 export PATH="~/miniconda2/bin:$PATH"
 
-[[ -s "/Users/1ambda/.gvm/scripts/gvm" ]] && source "/Users/1ambda/.gvm/scripts/gvm"
+[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
 
-export NVM_DIR="/Users/1ambda/.nvm"
+export NVM_DIR="~/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-
-[[ -s "/Users/lambda/.gvm/scripts/gvm" ]] && source "/Users/lambda/.gvm/scripts/gvm"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/lambda/google-cloud-sdk/path.zsh.inc ]; then
-  source '/Users/lambda/google-cloud-sdk/path.zsh.inc'
-fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f /Users/lambda/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/Users/lambda/google-cloud-sdk/completion.zsh.inc'
-fi
->>>>>>> fdba9e7a9a22018225dfb5abf10459d05367e44a

@@ -91,7 +91,7 @@
 
     rp = rev-parse
 
-    rsa = reset HEAD
+    rs = reset HEAD
     rsc = reset HEAD^
     rsm = reset --mixed
     rss = reset --soft
