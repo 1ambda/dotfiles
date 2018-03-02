@@ -1,39 +1,55 @@
 ## Mac OS config
 
-Last update - 2016. 09. 22
+Last update - 2017. 03. 10
 
 ### Tools
 
-- brew, wget, curl, tree, htop, coretuils, ctags
+- brew, wget, curl, tree, htop, ctop, coretuils, ctags
+
 - xcode, xcode-select install
 - update bash (`brew install bash`)
-- [httpie](https://httpie.org/)
+
 - [jq](https://stedolan.github.io/jq/)
 - [trash-cli](https://github.com/andreafrancia/trash-cli)
 - [launchy](https://github.com/eddiezane/lunchy)
-- [ammonite](curl -L -o amm http://git.io/vBTzM; chmod +x amm; ./amm)
-- [tmux, tmuxinator](https://github.com/tmuxinator/tmuxinator)
+- [tmux, tmuxinator, tpm](https://github.com/tmuxinator/tmuxinator)
 - [powerline](http://powerline.readthedocs.io/en/master/installation/linux.html)
 - [powerline-font](http://powerline.readthedocs.io/en/master/installation/linux.html#patched-font-installation)
 - [powerline for tmux (change iterm font in profile)](https://gist.github.com/wm/4750511)
 - [reattach-to-user-namespace for tmux](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
-- [tldr](https://github.com/tldr-pages/tldr)
-- [maybe](https://github.com/p-e-w/maybe)
 - [kap](https://github.com/wulkano/kap)
 
 #### Terminal: Productivity
 
-- [buku](https://github.com/jarun/Buku)
-- [taskwarrior](http://taskwarrior.org/)
-- [the platinum searchert](https://github.com/monochromegane/the_platinum_searcher)
+- [ag](https://github.com/ggreer/the_silver_searcher)
 - [zplug](https://github.com/b4b4r07/zplug)
-- [k](https://github.com/supercrabtree/k)
 - [peco](https://github.com/peco/peco)
-- [percol](https://github.com/mooz/percol)
 - [fasd](https://github.com/clvv/fasd)
 - [fzf (check key-bindings)](https://github.com/junegunn/fzf)
+- [lnav](http://lnav.org/)
+- [fd](https://github.com/sharkdp/fd)
+- [osquery](https://osquery.io/downloads/)
+- [tldr](https://github.com/tldr-pages/tldr)
+
+
+### Terminal: Unused (Let's try next time)
+
+- [maybe](https://github.com/p-e-w/maybe)
+- [buku](https://github.com/jarun/Buku)
+- [taskwarrior](http://taskwarrior.org/)
+- [http-prompt](https://github.com/eliangcs/http-prompt), [gotty](https://github.com/yudai/gotty)
+- [gitsome](https://github.com/donnemartin/gitsome)
+- [lolcat](https://github.com/busyloop/lolcat)
+- [sift](https://sift-tool.org/samples)
+- [the platinum searchert](https://github.com/monochromegane/the_platinum_searcher)
+- [percol](https://github.com/mooz/percol)
+- [http-prompt](http://http-prompt.com/#install)
+- [httpie](https://httpie.org/)
+- [ammonite](curl -L -o amm http://git.io/vBTzM; chmod +x amm; ./amm)
 - [textql](https://github.com/dinedal/textql)
 - [gitql](https://github.com/cloudson/gitql)
+- [fakedata](https://github.com/lucapette/fakedata)
+- [usql](https://github.com/knq/usql)
 
 #### Terminal: Git
 
@@ -91,6 +107,7 @@ brew reinstall macvim --HEAD --with-cscope --with-lua --with-override-system-vim
 #### IDEA
 
 Export settings as a JAR file and import it
+- [Font: source code pro](https://github.com/adobe-fonts/source-code-pro)
 
 ### Keys
 

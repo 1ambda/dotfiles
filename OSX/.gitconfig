@@ -8,10 +8,18 @@
     autocrlf = input
     ignorecase = false
     pager = diff-so-fancy | less --tabs=4 -RFX
+	commentChar = ";"
 [color]
     diff = auto
     status = auto
     branch = auto
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[push]
+    default = matching
 [alias]
     c = commit
     ci = commit -v
@@ -30,7 +38,7 @@
     merge-diff = "!git diff "git merge-span ... $1""
     merge-difftool = "!git difftool "git merge-span ... $1""
 
-	# use `gco` instead
+    # use `gco` instead
     co =  checkout
     cob = checkout -b
     com = checkout master
@@ -48,6 +56,7 @@
     psom = push origin master
     psod = push origin develop
     psor = push origin release
+    ps1h = push 1ambda HEAD
     psuh = push upstream HEAD
     psum = push upstream master
     psud = push upstream develop
@@ -62,8 +71,9 @@
     plom = pull origin master
     plod = pull origin develop
 
-    pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-    pr-clean = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+    # use git-extras
+    # pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pull/$1 && git checkout pull/$1; }; f"
+    # pr-clean = "!git for-each-ref refs/heads/pull/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 
     a = !git add . && git status
     aa = !git add --all . && git status
@@ -90,6 +100,8 @@
     rmso = remote show origin -n
 
     rp = rev-parse
+
+    cfd = clean -fd
 
     rs = reset HEAD
     rsc = reset HEAD^
@@ -122,10 +134,9 @@
     ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
     lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
     ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
-	# use `gl` instead
+    # use `gl` instead
     lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
     lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
-
 
 
     last = "!git ll -1"
@@ -153,17 +164,9 @@
     lsft = ls-files -t
     lsfo = ls-files --others
     lsfe = ls-files --others -i --exclude-standard
-
-[push]
-    default = matching
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22

@@ -167,6 +167,7 @@ zplug "chrissicool/zsh-256color"
 
 zplug "plugins/brew-cask", from:oh-my-zsh
 zplug "plugins/osx", from:oh-my-zsh
+zplug "plugins/terraform", from:oh-my-zsh
 #zplug "plugins/common-aliases", from:oh-my-zsh #hang
 #zplug "plugins/fasd", from:oh-my-zsh #hang
 zplug "plugins/web-search", from:oh-my-zsh
@@ -177,7 +178,7 @@ zplug "b4b4r07/enhancd", use:init.sh
 # zplug "supercrabtree/k"
 # zplug "mgryszko/jvm"
 zplug "peterhurford/git-it-on.zsh"
-alias go="gitit"
+alias gi="gitit"
 alias gop="gitit pulls $@"
 alias gor="gitit repo $2 $3"
 alias gof="gitit ctrlp $@"
@@ -229,7 +230,17 @@ o() {
   fi
 }
 
-# unalias z
+# unalias y
+y() {
+  local file
+  file=$(git status --porcelain | sed s/^...// | fzf -1 -0 --no-sort +m)
+  if [ -n "$file" ]; then
+    echo "$file"
+    echo "$file" | pbcopy
+  fi
+}
+
+unalias z
 z() {
   local dir
   dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
@@ -389,13 +400,24 @@ alias github='_web_search github'
 alias naver='_web_search naver'
 alias stackoverflow='_web_search stackoverflow'
 
+alias tf='terraform'
+
 # python env
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
-source /usr/local/opt/autoenv/activate.sh # autoenv
-export PATH="~/miniconda2/bin:$PATH"
+# source /usr/local/opt/autoenv/activate.sh # autoenv
+export PATH="$HOME/miniconda2/bin:$PATH"
 
-[[ -s "~/.gvm/scripts/gvm" ]] && source "~/.gvm/scripts/gvm"
+export GVM_DIR="$HOME/.gvm"
+[[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"
 
-export NVM_DIR="~/.nvm"
+export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+alias k=kubectl
