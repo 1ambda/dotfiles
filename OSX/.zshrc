@@ -188,11 +188,34 @@ zplug "1ambda/zsh-snippets", use:snippets.plugin.zsh
 alias zsp=zsh_snippets
 bindkey '^S^S' zsh-snippets-widget-expand
 bindkey '^S^A' zsh-snippets-widget-list
-zplug "zsh-users/zsh-history-substring-search", defer:3
-zplug "jimmijj/zsh-syntax-highlighting", defer:3
-zplug "zsh-users/zsh-completions"
 
-# zplug "zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions",              defer:0
+zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
+
+zplug "modules/tmux",       from:prezto
+zplug "modules/history",    from:prezto
+zplug "modules/utility",    from:prezto
+zplug "modules/ssh",        from:prezto
+zplug "modules/terminal",   from:prezto
+zplug "modules/directory",  from:prezto
+zplug "modules/completion", from:prezto
+zplug "docker/compose", use:contrib/completion/zsh/
+
+zstyle ':prezto:module:utility:ls'    color 'yes'
+zstyle ':prezto:module:utility:diff'  color 'yes'
+zstyle ':prezto:module:utility:wdiff' color 'yes'
+zstyle ':prezto:module:utility:make'  color 'yes'
+
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
+
+
 # zplug "marzocchi/zsh-notify"
 # zplug "plugins/vi-mode", from:oh-my-zsh
 # zplug "hchbaw/zce.zsh", use:zce.zsh
@@ -421,3 +444,15 @@ if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '
 if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 alias k=kubectl
+
+### ZSH History config ###
+
+setopt append_history
+setopt hist_expire_dups_first
+setopt hist_fcntl_lock
+setopt hist_ignore_all_dups
+setopt hist_lex_words
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt share_history
+
