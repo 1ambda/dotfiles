@@ -38,6 +38,8 @@
     merge-diff = "!git diff "git merge-span ... $1""
     merge-difftool = "!git difftool "git merge-span ... $1""
 
+    cp =  cherry-pick
+
     # use `gco` instead
     co =  checkout
     cob = checkout -b

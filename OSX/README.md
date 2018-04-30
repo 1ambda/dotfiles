@@ -30,9 +30,13 @@ Last update - 2017. 03. 10
 - [fd](https://github.com/sharkdp/fd)
 - [osquery](https://osquery.io/downloads/)
 - [tldr](https://github.com/tldr-pages/tldr)
+- [cz-cli](https://github.com/commitizen/cz-cli)
+- [my-cli](https://github.com/dbcli/mycli)
 
 
 ### Terminal: Unused (Let's try next time)
+
+- [tpm](https://github.com/tmux-plugins/tpm)
 
 - [maybe](https://github.com/p-e-w/maybe)
 - [buku](https://github.com/jarun/Buku)
