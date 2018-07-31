@@ -32,6 +32,7 @@ Last update - 2017. 03. 10
 - [tldr](https://github.com/tldr-pages/tldr)
 - [cz-cli](https://github.com/commitizen/cz-cli)
 - [my-cli](https://github.com/dbcli/mycli)
+- [kubectx](https://github.com/ahmetb/kubectx)
 
 
 ### Terminal: Unused (Let's try next time)

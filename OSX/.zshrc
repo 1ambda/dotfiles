@@ -126,6 +126,7 @@ alias vmute="osascript -e 'set Volume 0'"
 alias dk="docker"
 alias dkm="docker-machine"
 alias dkc="docker-compose"
+alias dks=" docker stop $(docker ps -a -q); docker rm -f $(docker ps -a -q); docker volume rm $(docker volume ls -f dangling=true -q);"
 
 alias ec="emacsclient -c &"
 alias ed="emacs --daemon"
@@ -175,7 +176,7 @@ zplug "plugins/command-not-found", from:oh-my-zsh
 # zplug "plugins/tmux", from:oh-my-zsh
 # zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "b4b4r07/enhancd", use:init.sh
-# zplug "supercrabtree/k"
+zplug "plugins/terraform", from:oh-my-zsh
 # zplug "mgryszko/jvm"
 zplug "peterhurford/git-it-on.zsh"
 alias gi="gitit"
@@ -292,9 +293,23 @@ fk() {
   fi
 }
 
+# git add with FZF
+
+ga() {
+  local result
+  result=$(git ls-files -m --others --exclude-standard | fzf -m)
+  if [ "x$result" != "x" ]
+  then
+    git add $result
+  fi
+}
+
 # gco - checkout git branch/tag
 # unalias gco
-gco() { local tags branches target; tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') }
+gco() { 
+  local tags branches target; 
+  tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') 
+}
 
 # gl - git commit browser
 # unalias gl
@@ -426,10 +441,15 @@ alias stackoverflow='_web_search stackoverflow'
 alias tf='terraform'
 
 # python env
+export PATH="/Users/username/.pyenv:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
-# source /usr/local/opt/autoenv/activate.sh # autoenv
-export PATH="$HOME/miniconda2/bin:$PATH"
+
+# autoenv
+source $(brew --prefix autoenv)/activate.sh
+
+# conda
+# export PATH="$HOME/miniconda2/bin:$PATH"
 
 export GVM_DIR="$HOME/.gvm"
 [[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"
@@ -444,6 +464,42 @@ if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '
 if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
 
 alias k=kubectl
+alias kx=kubectx
+alias ke=kubens
+
+# fzf color theme
+_gen_fzf_default_opts() {
+  local base03="234"
+  local base02="235"
+  local base01="240"
+  local base00="241"
+  local base0="244"
+  local base1="245"
+  local base2="254"
+  local base3="230"
+  local yellow="136"
+  local orange="166"
+  local red="160"
+  local magenta="125"
+  local violet="61"
+  local blue="33"
+  local cyan="37"
+  local green="64"
+
+  # Comment and uncomment below for the light theme.
+
+  # Solarized Dark color scheme for fzf
+  export FZF_DEFAULT_OPTS="
+    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
+    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
+  "
+  ## Solarized Light color scheme for fzf
+  #export FZF_DEFAULT_OPTS="
+  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
+  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
+  #"
+}
+_gen_fzf_default_opts
 
 ### ZSH History config ###
 
@@ -456,3 +512,25 @@ setopt hist_reduce_blanks
 setopt hist_save_no_dups
 setopt share_history
 
+pb-yank () {
+  CUTBUFFER=$(pbpaste)
+  zle yank
+}
+zle -N pb-yank
+bindkey '^y'   pb-yank
+
+copy-to-xclip() {
+    zle kill-buffer
+    print -rn -- $CUTBUFFER | pbcopy
+}; 
+zle -N copy-to-xclip
+bindkey '^]'   copy-to-xclip
+
+pb-kill-whole-line () {
+  zle kill-whole-line
+  echo -n $CUTBUFFER | pbcopy
+}
+zle -N pb-kill-whole-line
+bindkey '^U'   pb-kill-whole-line
+
+RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'

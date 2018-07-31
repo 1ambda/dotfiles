@@ -68,7 +68,7 @@
     unpublish = "!git push origin :$(git bn)"
     recreate = "!f() { [[ -n $@ ]] && git checkout \"$1\" && git unpublish && git checkout \"$2\" && git branch -D \"$1\" && git checkout -b \"$1\" && git publish; }; f"
 
-	up = pull --rebase --autostash
+    up = pull --rebase --autostash
     plr = pull origin --rebase
     plom = pull origin master
     plod = pull origin develop
@@ -83,16 +83,16 @@
     s = status --short --branch
     st = status
 
-	df = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+    df = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     dfs = "!git --no-pager diff --stat"
-	dfc = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff --cached --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
-	dfh = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff HEAD --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+    dfc = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff --cached --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+    dfh = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff HEAD --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     dfhs = "!git --no-pager diff HEAD --stat"
     dff = diff --name-only
     dfcf = git diff --name-only --diff-filter=U
 
     insp = "!f() { git ll "$1"^.."$1"; }; f"
-	inspd = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff "$1"^.."$1"; --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+    inspd = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff "$1"^.."$1"; --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
     head = !"git log -n1"
     lost = !"git fsck | awk '/dangling commit/ {print $3}' | git show --format='SHA1: %C(yellow)%h%Creset %f' --stdin | awk '/SHA1/ {sub(\"SHA1: \", \"\"); print}'"
 
