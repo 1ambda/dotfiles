@@ -457,12 +457,6 @@ export GVM_DIR="$HOME/.gvm"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
-
 alias k=kubectl
 alias kx=kubectx
 alias ke=kubens
@@ -534,3 +528,9 @@ zle -N pb-kill-whole-line
 bindkey '^U'   pb-kill-whole-line
 
 RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
