@@ -255,7 +255,7 @@ v() {
 }
 
 # unalias o
-o() {
+i() {
   local out file key
   out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
   key=$(head -1 <<< "$out")
@@ -264,6 +264,7 @@ o() {
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
   fi
 }
+
 
 # unalias y
 y() {
