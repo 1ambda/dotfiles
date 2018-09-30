@@ -99,13 +99,24 @@ alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
+alias nsp="lsof -iTCP -sTCP:LISTEN -n -P | peco"
+alias nspk="lsof -iTCP -sTCP:LISTEN -n -P | peco | awk '{ print $2 }' | xargs kill"
+
 alias jpk="jps | peco | awk '{ print $1 }' | xargs kill -15"
 alias zp="z | peco"
 alias zc="history | peco"
 alias untar='tar -zxvf'
 alias untarxz='tar -xJf'
 
-# tmux
+#### kubernetes
+alias k=kubectl
+alias kx=kubectx
+alias ke=kubens
+
+#### make
+alias m=mmake
+
+#### tmux
 alias tmx="tmuxinator"
 alias tm="tmux"
 alias tma='tmux a -t'
@@ -306,6 +317,9 @@ ga() {
 
 # gco - checkout git branch/tag
 # unalias gco
+
+alias gm="git com; git pull origin master"
+
 gco() { 
   local tags branches target; 
   tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') 
@@ -457,10 +471,6 @@ export GVM_DIR="$HOME/.gvm"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
-alias k=kubectl
-alias kx=kubectx
-alias ke=kubens
-
 # fzf color theme
 _gen_fzf_default_opts() {
   local base03="234"
@@ -530,7 +540,7 @@ bindkey '^U'   pb-kill-whole-line
 RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+if [ -f '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc'; fi
