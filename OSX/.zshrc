@@ -1,5 +1,5 @@
 # Path to your oh-my-zsh installation.
-export ZSH=/Users/lambda/.oh-my-zsh
+export ZSH=~/.oh-my-zsh
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
@@ -59,6 +59,8 @@ SAVEHIST=100000000
 source $ZSH/oh-my-zsh.sh
 
 ## Custom Configuration
+alias vi="/usr/local/bin/vi"
+alias vim="/usr/local/bin/vim"
 alias vh='sudo vim /etc/hosts'
 alias vt='vi ~/.tmux.conf'
 alias vz='vi ~/.zshrc'
@@ -75,6 +77,7 @@ alias godl='cd ~/Downloads'
 alias gob='cd ~/Dropbox/Blog'
 alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
+alias g="git"
 
 #### zsh-snippets
 alias spl="_list_zsh_snippets"
@@ -96,13 +99,24 @@ alias fpp='sudo lsof -iTCP -sTCP:LISTEN -n -P'
 alias psef="ps -ef | grep"
 alias psp="ps -ef | peco"
 alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
+alias nsp="lsof -iTCP -sTCP:LISTEN -n -P | peco"
+alias nspk="lsof -iTCP -sTCP:LISTEN -n -P | peco | awk '{ print $2 }' | xargs kill"
+
 alias jpk="jps | peco | awk '{ print $1 }' | xargs kill -15"
 alias zp="z | peco"
 alias zc="history | peco"
 alias untar='tar -zxvf'
 alias untarxz='tar -xJf'
 
-# tmux
+#### kubernetes
+alias k=kubectl
+alias kx=kubectx
+alias ke=kubens
+
+#### make
+alias m=mmake
+
+#### tmux
 alias tmx="tmuxinator"
 alias tm="tmux"
 alias tma='tmux a -t'
@@ -113,8 +127,8 @@ alias tmh="tmux list-keys | percol"
 alias b=~/github/dotfiles/OSX/fzf/b.rb
 
 alias tree="tree -C"
-alias gf="hub"
-alias gf="git flow"
+alias gh="hub"
+alias gf="git-flow"
 
 alias vup="osascript -e 'set volume output volume ((output volume of (get volume settings)) + 10)'"
 alias vdown="osascript -e 'set volume output volume ((output volume of (get volume settings)) - 10)'"
@@ -123,6 +137,7 @@ alias vmute="osascript -e 'set Volume 0'"
 alias dk="docker"
 alias dkm="docker-machine"
 alias dkc="docker-compose"
+alias dks=" docker stop $(docker ps -a -q); docker rm -f $(docker ps -a -q); docker volume rm $(docker volume ls -f dangling=true -q);"
 
 alias ec="emacsclient -c &"
 alias ed="emacs --daemon"
@@ -158,47 +173,69 @@ fi
 
 # zplug
 export ZPLUG_HOME=~/.zplug
-source ~/.zplug/init.zsh
+source $ZPLUG_HOME/init.zsh
 
 zplug "chrissicool/zsh-256color"
-zplug "plugins/brew", from:oh-my-zsh
+
 zplug "plugins/brew-cask", from:oh-my-zsh
 zplug "plugins/osx", from:oh-my-zsh
-zplug "plugins/taskwarrior", from:oh-my-zsh # not working
-zplug "plugins/scala", from:oh-my-zsh
-zplug "plugins/nvm", from:oh-my-zsh 	# not working
-zplug "plugins/pip", from:oh-my-zsh
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/git-flow", from:oh-my-zsh
-zplug "plugins/git-extras", from:oh-my-zsh
-zplug "plugins/github", from:oh-my-zsh  # conflict
-zplug "plugins/git-hubflow", from:oh-my-zsh # conflit
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "plugins/fasd", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/tmuxinator", from:oh-my-zsh
-zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "plugins/terraform", from:oh-my-zsh
+#zplug "plugins/common-aliases", from:oh-my-zsh #hang
+#zplug "plugins/fasd", from:oh-my-zsh #hang
 zplug "plugins/web-search", from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+# zplug "plugins/tmux", from:oh-my-zsh
+# zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "b4b4r07/enhancd", use:init.sh
-zplug "supercrabtree/k"
-zplug "mgryszko/jvm"
-zplug "peterhurford/git-it-on.zsh", use:git-it-on.plugin.zsh
+zplug "plugins/terraform", from:oh-my-zsh
+# zplug "mgryszko/jvm"
+zplug "peterhurford/git-it-on.zsh"
+alias gi="gitit"
+alias gop="gitit pulls $@"
+alias gor="gitit repo $2 $3"
+alias gof="gitit ctrlp $@"
 zplug "hlissner/zsh-autopair", use:autopair.zsh
 zplug "1ambda/zsh-snippets", use:snippets.plugin.zsh
 # zplug "$HOME/github/1ambda/zsh-snippets", from:local, use:'snippets.plugin.zsh'
 alias zsp=zsh_snippets
 bindkey '^S^S' zsh-snippets-widget-expand
 bindkey '^S^A' zsh-snippets-widget-list
-zplug "zsh-users/zsh-history-substring-search", nice:18
-zplug "jimmijj/zsh-syntax-highlighting", nice:19
-# zplug "zsh-users/zsh-autosuggestions", use:"zsh-autosuggestions.plugin.zsh"
-zplug "zsh-users/zsh-completions"
+
+zplug "zsh-users/zsh-completions",              defer:0
+zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
+
+zplug "modules/tmux",       from:prezto
+zplug "modules/history",    from:prezto
+zplug "modules/utility",    from:prezto
+zplug "modules/ssh",        from:prezto
+zplug "modules/terminal",   from:prezto
+zplug "modules/directory",  from:prezto
+zplug "modules/completion", from:prezto
+zplug "docker/compose", use:contrib/completion/zsh/
+
+zstyle ':prezto:module:utility:ls'    color 'yes'
+zstyle ':prezto:module:utility:diff'  color 'yes'
+zstyle ':prezto:module:utility:wdiff' color 'yes'
+zstyle ':prezto:module:utility:make'  color 'yes'
+
+zstyle ':completion:*' rehash true
+zstyle ':completion:*' verbose yes
+zstyle ':completion:*:descriptions' format '%B%d%b'
+zstyle ':completion:*:messages' format '%d'
+zstyle ':completion:*:warnings' format 'No matches for: %d'
+zstyle ':completion:*' group-name ''
+
 
 # zplug "marzocchi/zsh-notify"
 # zplug "plugins/vi-mode", from:oh-my-zsh
 # zplug "hchbaw/zce.zsh", use:zce.zsh
 
 zplug load
+
+# fasd
+eval "$(fasd --init auto)"
 
 # fzf related aliases
 
@@ -211,20 +248,31 @@ export FZF_DEFAULT_OPTS="
 
 alias agf="ag --nobreak --nonumbers --noheading . | fzf"
 
-unalias v
+# unalias v
 v() {
   local file
   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
 }
 
-unalias o
-o() {
+# unalias o
+i() {
   local out file key
   out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
   key=$(head -1 <<< "$out")
   file=$(head -2 <<< "$out" | tail -1)
   if [ -n "$file" ]; then
     [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+
+
+# unalias y
+y() {
+  local file
+  file=$(git status --porcelain | sed s/^...// | fzf -1 -0 --no-sort +m)
+  if [ -n "$file" ]; then
+    echo "$file"
+    echo "$file" | pbcopy
   fi
 }
 
@@ -242,7 +290,7 @@ j() {
 }
 
 # fh - repeat history
-unalias h
+# unalias h
 h() {
   print -z $( ([ -n "$ZSH_NAME" ] && fc -l 0 || history) | fzf +s --tac | sed 's/ *[0-9]* *//')
 }
@@ -257,12 +305,29 @@ fk() {
   fi
 }
 
+# git add with FZF
+
+ga() {
+  local result
+  result=$(git ls-files -m --others --exclude-standard | fzf -m)
+  if [ "x$result" != "x" ]
+  then
+    git add $result
+  fi
+}
+
 # gco - checkout git branch/tag
-unalias gco
-gco() { local tags branches target; tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') }
+# unalias gco
+
+alias gm="git com; git pull origin master"
+
+gco() { 
+  local tags branches target; 
+  tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') 
+}
 
 # gl - git commit browser
-unalias gl
+# unalias gl
 gl() {
   git log --graph --color=always --format="%C(auto)%h%d %s %C(black)%C(bold)%cr" "$@" | fzf --ansi --no-sort --reverse --tiebreak=index --bind=ctrl-s:toggle-sort --bind "ctrl-m:execute: (grep -o '[a-f0-9]\{7\}' | head -1 | xargs -I % sh -c 'git show --color=always % | less -R') << 'FZF-EOF'
                 {} FZF-EOF"
@@ -381,25 +446,102 @@ function _web_search() {
   open_command "$url"
 }
 
+alias l="k -ah"
+
 alias google='_web_search google'
 alias github='_web_search github'
 alias naver='_web_search naver'
 alias stackoverflow='_web_search stackoverflow'
 
+alias tf='terraform'
+
 # python env
+export PATH="/Users/username/.pyenv:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
-source /usr/local/opt/autoenv/activate.sh # autoenv
-export PATH="/Users/lambda/.miniconda2/bin:$PATH"
 
-[[ -s "/Users/lambda/.gvm/scripts/gvm" ]] && source "/Users/lambda/.gvm/scripts/gvm"
+# autoenv
+source $(brew --prefix autoenv)/activate.sh
+
+# conda
+# export PATH="$HOME/miniconda2/bin:$PATH"
+
+export GVM_DIR="$HOME/.gvm"
+[[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+
+# fzf color theme
+_gen_fzf_default_opts() {
+  local base03="234"
+  local base02="235"
+  local base01="240"
+  local base00="241"
+  local base0="244"
+  local base1="245"
+  local base2="254"
+  local base3="230"
+  local yellow="136"
+  local orange="166"
+  local red="160"
+  local magenta="125"
+  local violet="61"
+  local blue="33"
+  local cyan="37"
+  local green="64"
+
+  # Comment and uncomment below for the light theme.
+
+  # Solarized Dark color scheme for fzf
+  export FZF_DEFAULT_OPTS="
+    --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
+    --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
+  "
+  ## Solarized Light color scheme for fzf
+  #export FZF_DEFAULT_OPTS="
+  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
+  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
+  #"
+}
+_gen_fzf_default_opts
+
+### ZSH History config ###
+
+setopt append_history
+setopt hist_expire_dups_first
+setopt hist_fcntl_lock
+setopt hist_ignore_all_dups
+setopt hist_lex_words
+setopt hist_reduce_blanks
+setopt hist_save_no_dups
+setopt share_history
+
+pb-yank () {
+  CUTBUFFER=$(pbpaste)
+  zle yank
+}
+zle -N pb-yank
+bindkey '^y'   pb-yank
+
+copy-to-xclip() {
+    zle kill-buffer
+    print -rn -- $CUTBUFFER | pbcopy
+}; 
+zle -N copy-to-xclip
+bindkey '^]'   copy-to-xclip
+
+pb-kill-whole-line () {
+  zle kill-whole-line
+  echo -n $CUTBUFFER | pbcopy
+}
+zle -N pb-kill-whole-line
+bindkey '^U'   pb-kill-whole-line
+
+RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
 
 # The next line updates PATH for the Google Cloud SDK.
-if [ -f /Users/lambda/google-cloud-sdk/path.zsh.inc ]; then
-  source '/Users/lambda/google-cloud-sdk/path.zsh.inc'
-fi
+if [ -f '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
-if [ -f /Users/lambda/google-cloud-sdk/completion.zsh.inc ]; then
-  source '/Users/lambda/google-cloud-sdk/completion.zsh.inc'
-fi
+if [ -f '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc'; fi
