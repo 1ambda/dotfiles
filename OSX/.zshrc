@@ -78,6 +78,8 @@ alias gob='cd ~/Dropbox/Blog'
 alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 alias g="git"
+alias commit="git cz"
+alias commit-init="commitizen init cz-conventional-changelog --save-dev --save-exact"
 
 #### zsh-snippets
 alias spl="_list_zsh_snippets"
@@ -102,7 +104,7 @@ alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
 alias nsp="lsof -iTCP -sTCP:LISTEN -n -P | peco"
 alias nspk="lsof -iTCP -sTCP:LISTEN -n -P | peco | awk '{ print $2 }' | xargs kill"
 
-alias jpk="jps | peco | awk '{ print $1 }' | xargs kill -15"
+alias jpk="jps | peco | awk '{ print $0 }' | xargs kill -15"
 alias zp="z | peco"
 alias zc="history | peco"
 alias untar='tar -zxvf'
@@ -156,7 +158,6 @@ function setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.8
 
 
 if which peco &> /dev/null; then
@@ -180,20 +181,18 @@ zplug "chrissicool/zsh-256color"
 zplug "plugins/brew-cask", from:oh-my-zsh
 zplug "plugins/osx", from:oh-my-zsh
 zplug "plugins/terraform", from:oh-my-zsh
-#zplug "plugins/common-aliases", from:oh-my-zsh #hang
-#zplug "plugins/fasd", from:oh-my-zsh #hang
 zplug "plugins/web-search", from:oh-my-zsh
 zplug "plugins/command-not-found", from:oh-my-zsh
-# zplug "plugins/tmux", from:oh-my-zsh
-# zplug "plugins/tmuxinator", from:oh-my-zsh
 zplug "b4b4r07/enhancd", use:init.sh
+ENHANCD_FILTER=fzf:peco
 zplug "plugins/terraform", from:oh-my-zsh
-# zplug "mgryszko/jvm"
+
 zplug "peterhurford/git-it-on.zsh"
-alias gi="gitit"
+alias goi="gitit issues"
 alias gop="gitit pulls $@"
 alias gor="gitit repo $2 $3"
 alias gof="gitit ctrlp $@"
+
 zplug "hlissner/zsh-autopair", use:autopair.zsh
 zplug "1ambda/zsh-snippets", use:snippets.plugin.zsh
 # zplug "$HOME/github/1ambda/zsh-snippets", from:local, use:'snippets.plugin.zsh'
@@ -201,10 +200,15 @@ alias zsp=zsh_snippets
 bindkey '^S^S' zsh-snippets-widget-expand
 bindkey '^S^A' zsh-snippets-widget-list
 
-zplug "zsh-users/zsh-completions",              defer:0
-zplug "zsh-users/zsh-autosuggestions",          defer:2, on:"zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting",      defer:3, on:"zsh-users/zsh-autosuggestions"
+zplug "zsh-users/zsh-completions", defer:0
+zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, on:"zsh-users/zsh-autosuggestions"
+# zplug "plugins/vi-mode", from:oh-my-zsh
+# zplug "b4b4r07/zsh-vimode-visual", defer:3
+KEYTIMEOUT=1 # 10ms for key sequences for vi
 zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
+
+zplug 'b4b4r07/httpstat', as:command, use:'(*).sh', rename-to:'$1'
 
 zplug "modules/tmux",       from:prezto
 zplug "modules/history",    from:prezto
@@ -229,7 +233,6 @@ zstyle ':completion:*' group-name ''
 
 
 # zplug "marzocchi/zsh-notify"
-# zplug "plugins/vi-mode", from:oh-my-zsh
 # zplug "hchbaw/zce.zsh", use:zce.zsh
 
 zplug load
@@ -460,8 +463,8 @@ export PATH="/Users/username/.pyenv:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
 
-# autoenv
-source $(brew --prefix autoenv)/activate.sh
+# autoenv: conflit w/ enhancd
+# source $(brew --prefix autoenv)/activate.sh
 
 # conda
 # export PATH="$HOME/miniconda2/bin:$PATH"
@@ -538,10 +541,49 @@ pb-kill-whole-line () {
 zle -N pb-kill-whole-line
 bindkey '^U'   pb-kill-whole-line
 
-RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
+# RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc'; fi
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -s "/Users/lambda/.jabba/jabba.sh" ] && source "/Users/lambda/.jabba/jabba.sh"
+alias jvm="jabba"
+jabba use 1.8
+
+# VI MODE
+# https://qiita.com/b4b4r07/items/8db0257d2e6f6b19ecb9
+# autoload -Uz colors; colors
+# autoload -Uz add-zsh-hook
+# autoload -Uz terminfo
+# 
+# terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
+# left_down_prompt_preexec() {
+#     print -rn -- $terminfo[el]
+# }
+# add-zsh-hook preexec left_down_prompt_preexec
+# 
+# function zle-keymap-select zle-line-init zle-line-finish
+# {
+#     case $KEYMAP in
+#         main|viins)
+#             PROMPT_2="$fg[cyan]-- INSERT --$reset_color"
+#             ;;
+#         vicmd)
+#             PROMPT_2="$fg[white]-- NORMAL --$reset_color"
+#             ;;
+#         vivis|vivli)
+#             PROMPT_2="$fg[yellow]-- VISUAL --$reset_color"
+#             ;;
+#     esac
+# 
+#     PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}]%# "
+#     zle reset-prompt
+# }
+# 
+# zle -N zle-line-init
+# zle -N zle-line-finish
+# zle -N zle-keymap-select
+# zle -N edit-command-line
