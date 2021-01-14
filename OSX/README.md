@@ -18,9 +18,16 @@ Last update - 2017. 03. 10
 - [powerline for tmux (change iterm font in profile)](https://gist.github.com/wm/4750511)
 - [reattach-to-user-namespace for tmux](http://evertpot.com/osx-tmux-vim-copy-paste-clipboard/)
 - [kap](https://github.com/wulkano/kap)
+- [alfred-things](https://github.com/xilopaint/alfred-things/releases)
+- [alfred-blt-workflow](https://github.com/tilmanginzel/alfred-bluetooth-workflow)
+- [alfred-jetbrains-workflow](https://github.com/bchatard/alfred-jetbrains)
+- [alfred-aws-workflow](https://github.com/rkoval/alfred-aws-console-services-workflow)
+- [gping](https://github.com/orf/gping)
+- [parquet-tools](https://pypi.org/project/parquet-tools/)
 
 #### Terminal: Productivity
 
+- [taskbook](https://github.com/klaussinani/taskbook#usage)
 - [ag](https://github.com/ggreer/the_silver_searcher)
 - [zplug](https://github.com/b4b4r07/zplug)
 - [peco](https://github.com/peco/peco)
@@ -33,6 +40,16 @@ Last update - 2017. 03. 10
 - [cz-cli](https://github.com/commitizen/cz-cli)
 - [my-cli](https://github.com/dbcli/mycli)
 - [kubectx](https://github.com/ahmetb/kubectx)
+- [kubectl-fzf](https://github.com/bonnefoa/kubectl-fzf)
+- [k9s](https://github.com/derailed/k9s)
+- [stern](https://github.com/wercker/stern)
+- [exa](https://the.exa.website/)
+
+### Terminal: Auto-Completion
+
+```bash
+terraform -install-autocomplete
+```
 
 
 ### Terminal: Unused (Let's try next time)

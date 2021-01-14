@@ -110,10 +110,38 @@ alias zc="history | peco"
 alias untar='tar -zxvf'
 alias untarxz='tar -xJf'
 
+#### exa
+alias ls='exa --long --header --git'
+alias llt='exa -lbF --git --tree --level=2'
+
+### terminal
+alias b=bat
+
 #### kubernetes
 alias k=kubectl
 alias kx=kubectx
-alias ke=kubens
+alias kn=kubens
+alias k9=k9s
+
+alias kp="open 'http://localhost:8001/api/v1/namespaces/kube-dashboard/services/http:kuda-ui-kubernetes-dashboard:http/proxy'; kubectl proxy"
+alias kd="open 'http://localhost:8001/api/v1/namespaces/kube-dashboard/services/http:kuda-ui-kubernetes-dashboard:http/proxy'"
+
+ka() {
+  local cmd=${1:-/bin/bash}
+  local pod 
+  local namespace 
+  echo -e ""
+  pod=$(kubectl get pods --all-namespaces | tail -n +2 | awk '{print $2}' | fzf -m)
+
+  if [ "x$pod" != "x" ]
+  then
+    namespace=$(kubectl get pods --all-namespaces | grep ${pod} | awk '{print $1}')
+    echo -e ""
+    echo "kubectl -n ${namespace} exec -it ${pod} -- ${cmd};"
+    echo -e ""
+    kubectl -n ${namespace} exec -it ${pod} -- ${cmd};
+  fi
+}
 
 #### make
 alias m=mmake
@@ -145,6 +173,8 @@ alias ec="emacsclient -c &"
 alias ed="emacs --daemon"
 alias ek="emacsclient -e \"(kill-emacs)\""
 
+alias dg="digdag"
+
 function setjdk() {
   if [ $# -ne 0 ]; then
   removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
@@ -158,6 +188,7 @@ function setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
+setjdk 1.8
 
 
 if which peco &> /dev/null; then
@@ -186,6 +217,7 @@ zplug "plugins/command-not-found", from:oh-my-zsh
 zplug "b4b4r07/enhancd", use:init.sh
 ENHANCD_FILTER=fzf:peco
 zplug "plugins/terraform", from:oh-my-zsh
+zplug "plugins/virtualenv", from:oh-my-zsh
 
 zplug "peterhurford/git-it-on.zsh"
 alias goi="gitit issues"
@@ -308,14 +340,23 @@ fk() {
   fi
 }
 
-# git add with FZF
-
+# ga - git add {MODIFIED FILES}
 ga() {
   local result
   result=$(git ls-files -m --others --exclude-standard | fzf -m)
   if [ "x$result" != "x" ]
   then
-    git add $result
+    echo $result | xargs -I % sh -c 'git add %'
+  fi
+}
+
+# gr - git reset HEAD {ADD FILES} 
+gr() { 
+  local result
+  result=$(git --no-pager diff --cached --name-only | fzf -m)
+  if [ "x$result" != "x" ]
+  then
+    echo $result | xargs -I % sh -c 'git reset HEAD %'
   fi
 }
 
@@ -458,22 +499,19 @@ alias stackoverflow='_web_search stackoverflow'
 
 alias tf='terraform'
 
-# python env
-export PATH="/Users/username/.pyenv:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)" # pyenv-virtualenv
+# direnv
+eval "$(direnv hook zsh)"
 
-# autoenv: conflit w/ enhancd
-# source $(brew --prefix autoenv)/activate.sh
+# python env
+export PATH="$HOME/.pyenv:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+# autoenv
+# source /usr/local/opt/autoenv/activate.sh
 
 # conda
 # export PATH="$HOME/miniconda2/bin:$PATH"
-
-export GVM_DIR="$HOME/.gvm"
-[[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 
 # fzf color theme
 _gen_fzf_default_opts() {
@@ -543,15 +581,8 @@ bindkey '^U'   pb-kill-whole-line
 
 # RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
 
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/1ambda/tools/google-cloud-sdk/completion.zsh.inc'; fi
-
-[ -s "/Users/lambda/.jabba/jabba.sh" ] && source "/Users/lambda/.jabba/jabba.sh"
+[ -s "$HOME/.jabba/jabba.sh" ] && source "$HOME/.jabba/jabba.sh"
 alias jvm="jabba"
-jabba use 1.8
 
 # VI MODE
 # https://qiita.com/b4b4r07/items/8db0257d2e6f6b19ecb9
@@ -587,3 +618,23 @@ jabba use 1.8
 # zle -N zle-line-finish
 # zle -N zle-keymap-select
 # zle -N edit-command-line
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+
+export GVM_DIR="$HOME/.gvm"
+[[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"
+
+export GPG_TTY=$(tty)
+
+source /Users/kun/.gvm/pkgsets/go1.12.7/global/src/github.com/bonnefoa/kubectl-fzf/kubectl_fzf.sh
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/kun/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kun/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/kun/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kun/google-cloud-sdk/completion.zsh.inc'; fi
+
+source <(kubectl completion zsh)

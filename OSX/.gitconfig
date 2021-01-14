@@ -1,14 +1,16 @@
 [user]
     email = 1amb4a@gmail.com
     name = 1ambda
+    signingkey = 9B7D4E7AB299B743
+
 [core]
     warnAmbiguousRefs = false
     editor = vim
-    excludesfile = ~/.gitignore_global
+	excludesfile = /Users/kun/.gitignore
     autocrlf = input
     ignorecase = false
     pager = diff-so-fancy | less --tabs=4 -RFX
-	commentChar = ";"
+    commentChar = ";"
 [color]
     diff = auto
     status = auto
@@ -58,7 +60,12 @@
     psom = push origin master
     psod = push origin develop
     psor = push origin release
-    ps1h = push 1ambda HEAD
+
+    psch = push codecommit HEAD
+    pscm = push codecommit master
+    pscd = push codecommit develop
+    pscr = push codecommit release
+
     psuh = push upstream HEAD
     psum = push upstream master
     psud = push upstream develop
@@ -170,5 +177,12 @@
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
 	trustExitCode = true
+[commit]
+	gpgSign = true
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

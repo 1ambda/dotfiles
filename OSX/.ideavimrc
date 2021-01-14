@@ -1,1 +1,44 @@
+set ignorecase
+set smartcase
+set scrolloff=3 " 3 lines above/below cursor when scrolling
+
+set keep-english-in-normal
+" set clipboard+=unnamedplus
+
+" map paste, yank and delete to named register so the content
+" will not be overwritten
+nnoremap d "xd
+vnoremap d "xd
+nnoremap y "xy
+vnoremap y "xy
+nnoremap p "xp
+vnoremap p "xp
+nnoremap x "xx
+vnoremap x "xx
+
 set surround
+set ideajoin
+set commentary
+
+let mapleader=" "
+nmap <Leader>l <Plug>(easymotion-lineforward)
+nmap <Leader>j <Plug>(easymotion-j)
+nmap <Leader>k <Plug>(easymotion-k)
+nmap <Leader>h <Plug>(easymotion-linebackward)
+nmap <Leader>a <Plug>(easymotion-jumptoanywhere)
+set easymotion
+
+" set multiple-cursors
+
+" Naviate the current quickly 
+nmap <C-j> 15gj
+nmap <C-k> 15gk
+
+" These create newlines like o and O but stay in normal mode
+nmap zj o<Esc>k^
+nmap zk O<Esc>j^
+
+" Errors
+nmap <Leader>x :action GotoNextError<cr>
+nmap <Leader>X :action GotoPreviousError<cr>
+
