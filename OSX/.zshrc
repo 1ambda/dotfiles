@@ -59,9 +59,9 @@ SAVEHIST=100000000
 source $ZSH/oh-my-zsh.sh
 
 ## Custom Configuration
-alias vi="/usr/local/bin/vi"
-alias vim="/usr/local/bin/vim"
-alias vh='sudo vim /etc/hosts'
+# alias vi="/usr/local/bin/vi"
+# alias vim="/usr/local/bin/vim"
+alias vh='sudo vi /etc/hosts'
 alias vt='vi ~/.tmux.conf'
 alias vz='vi ~/.zshrc'
 alias vze='vi ~/.zshenv'
@@ -111,8 +111,8 @@ alias untar='tar -zxvf'
 alias untarxz='tar -xJf'
 
 #### exa
-alias ls='exa --long --header --git'
-alias llt='exa -lbF --git --tree --level=2'
+# alias ls='exa --long --header --git'
+# alias llt='exa -lbF --git --tree --level=2'
 
 ### terminal
 alias b=bat
@@ -188,7 +188,6 @@ function setjdk() {
 function removeFromPath() {
   export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
 }
-setjdk 1.8
 
 
 if which peco &> /dev/null; then
@@ -204,8 +203,9 @@ if which peco &> /dev/null; then
 fi
 
 # zplug
-export ZPLUG_HOME=~/.zplug
-source $ZPLUG_HOME/init.zsh
+if [ -f ${HOME}/.zplug/init.zsh ]; then
+    source ${HOME}/.zplug/init.zsh
+fi
 
 zplug "chrissicool/zsh-256color"
 
@@ -581,9 +581,6 @@ bindkey '^U'   pb-kill-whole-line
 
 # RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
 
-[ -s "$HOME/.jabba/jabba.sh" ] && source "$HOME/.jabba/jabba.sh"
-alias jvm="jabba"
-
 # VI MODE
 # https://qiita.com/b4b4r07/items/8db0257d2e6f6b19ecb9
 # autoload -Uz colors; colors
@@ -623,18 +620,20 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
+[ -s "$HOME/.jabba/jabba.sh" ] && source "$HOME/.jabba/jabba.sh"
+alias jvm="jabba"
 
 export GVM_DIR="$HOME/.gvm"
 [[ -s "$GVM_DIR/scripts/gvm" ]] && source "$GVM_DIR/scripts/gvm"
 
 export GPG_TTY=$(tty)
 
-source /Users/kun/.gvm/pkgsets/go1.12.7/global/src/github.com/bonnefoa/kubectl-fzf/kubectl_fzf.sh
+export PATH="$HOME/Library/Python/2.7/bin:$PATH"
 
-# The next line updates PATH for the Google Cloud SDK.
+# source /Users/kun/.gvm/pkgsets/go1.12.7/global/src/github.com/bonnefoa/kubectl-fzf/kubectl_fzf.sh
+
 if [ -f '/Users/kun/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kun/google-cloud-sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
 if [ -f '/Users/kun/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kun/google-cloud-sdk/completion.zsh.inc'; fi
 
 source <(kubectl completion zsh)
+eval "$(scalaenv init -)"
