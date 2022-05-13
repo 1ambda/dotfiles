@@ -8,12 +8,27 @@
 	excludesfile = /Users/kun/.gitignore
     autocrlf = input
     ignorecase = false
-    pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta 
     commentChar = ";"
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
+
+
 [color]
     diff = auto
     status = auto
     branch = auto
+
 [color "diff-highlight"]
     oldNormal = red bold
     oldHighlight = red bold 52
@@ -45,7 +60,7 @@
     co =  checkout
     cob = checkout -b
     cot = checkout -t
-    com = checkout master
+    com = checkout main 
     cod = checkout develop
     cor = checkout release
 
@@ -57,17 +72,17 @@
     fs = fetch stash
 
     psoh = push origin HEAD
-    psom = push origin master
+    psom = push origin main 
     psod = push origin develop
     psor = push origin release
 
     psch = push codecommit HEAD
-    pscm = push codecommit master
+    pscm = push codecommit main 
     pscd = push codecommit develop
     pscr = push codecommit release
 
     psuh = push upstream HEAD
-    psum = push upstream master
+    psum = push upstream main 
     psud = push upstream develop
     psur = push upstream release
 
@@ -77,7 +92,7 @@
 
     up = pull --rebase --autostash
     plr = pull origin --rebase
-    plom = pull origin master
+    plom = pull origin main 
     plod = pull origin develop
 
     # use git-extras

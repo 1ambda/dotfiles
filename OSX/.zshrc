@@ -1,3 +1,5 @@
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Path to your oh-my-zsh installation.
 export ZSH=~/.oh-my-zsh
 
@@ -68,24 +70,15 @@ alias vze='vi ~/.zshenv'
 alias vv='vi ~/.vimrc'
 alias vg='vi ~/.gitconfig'
 alias vs='vi ~/.ssh/config'
+alias va='vi ~/.aws/credentials'
 
 alias gog='cd ~/github'
-alias goe='cd ~/.emacs.d'
-alias gow='cd ~/Workspace'
-alias god='cd ~/Dropbox'
-alias godl='cd ~/Downloads'
-alias gob='cd ~/Dropbox/Blog'
-alias got='cd ~/Dropbox/dotfiles'
 alias cdp='git rev-parse && cd "$(git rev-parse --show-cdup)"'
 alias g="git"
 alias commit="git cz"
 alias commit-init="commitizen init cz-conventional-changelog --save-dev --save-exact"
 
 #### zsh-snippets
-alias spl="_list_zsh_snippets"
-alias spa="_add_zsh_snippets"
-alias spc="_clean_zsh_snippets"
-
 alias me='whoami'
 alias today='date'
 alias dir='nautilus .'
@@ -118,6 +111,9 @@ alias untarxz='tar -xJf'
 alias b=bat
 
 #### kubernetes
+export PATH="$HOME/.krew/bin:$PATH"
+alias helm=helm3
+alias krew=kubectl-krew
 alias k=kubectl
 alias kx=kubectx
 alias kn=kubens
@@ -157,7 +153,6 @@ alias tmh="tmux list-keys | percol"
 alias b=~/github/dotfiles/OSX/fzf/b.rb
 
 alias tree="tree -C"
-alias gh="hub"
 alias gf="git-flow"
 
 alias vup="osascript -e 'set volume output volume ((output volume of (get volume settings)) + 10)'"
@@ -207,62 +202,48 @@ if [ -f ${HOME}/.zplug/init.zsh ]; then
     source ${HOME}/.zplug/init.zsh
 fi
 
+ENHANCD_FILTER=fzf:peco
+
 zplug "chrissicool/zsh-256color"
 
-zplug "plugins/brew-cask", from:oh-my-zsh
-zplug "plugins/osx", from:oh-my-zsh
-zplug "plugins/terraform", from:oh-my-zsh
-zplug "plugins/web-search", from:oh-my-zsh
-zplug "plugins/command-not-found", from:oh-my-zsh
-zplug "b4b4r07/enhancd", use:init.sh
-ENHANCD_FILTER=fzf:peco
-zplug "plugins/terraform", from:oh-my-zsh
-zplug "plugins/virtualenv", from:oh-my-zsh
+# zplug "plugins/brew-cask", from:oh-my-zsh
+# zplug "plugins/osx", from:oh-my-zsh
+# zplug "plugins/terraform", from:oh-my-zsh
+# zplug "plugins/command-not-found", from:oh-my-zsh
+# zplug "b4b4r07/enhancd", use:init.sh
+# zplug "plugins/terraform", from:oh-my-zsh
+# zplug "plugins/virtualenv", from:oh-my-zsh
 
-zplug "peterhurford/git-it-on.zsh"
-alias goi="gitit issues"
-alias gop="gitit pulls $@"
-alias gor="gitit repo $2 $3"
-alias gof="gitit ctrlp $@"
-
-zplug "hlissner/zsh-autopair", use:autopair.zsh
-zplug "1ambda/zsh-snippets", use:snippets.plugin.zsh
-# zplug "$HOME/github/1ambda/zsh-snippets", from:local, use:'snippets.plugin.zsh'
-alias zsp=zsh_snippets
-bindkey '^S^S' zsh-snippets-widget-expand
-bindkey '^S^A' zsh-snippets-widget-list
-
-zplug "zsh-users/zsh-completions", defer:0
-zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, on:"zsh-users/zsh-autosuggestions"
 # zplug "plugins/vi-mode", from:oh-my-zsh
 # zplug "b4b4r07/zsh-vimode-visual", defer:3
+# zplug "zsh-users/zsh-completions", defer:0
+# zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
+zplug "hlissner/zsh-autopair", use:autopair.zsh
+zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-syntax-highlighting", defer:2, on:"zsh-users/zsh-autosuggestions"
 KEYTIMEOUT=1 # 10ms for key sequences for vi
-zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
 
-zplug 'b4b4r07/httpstat', as:command, use:'(*).sh', rename-to:'$1'
+# zplug 'b4b4r07/httpstat', as:command, use:'(*).sh', rename-to:'$1'
+# zplug "modules/tmux",       from:prezto
+# zplug "modules/history",    from:prezto
+# zplug "modules/utility",    from:prezto
+# zplug "modules/ssh",        from:prezto
+# zplug "modules/terminal",   from:prezto
+# zplug "modules/directory",  from:prezto
+# zplug "modules/completion", from:prezto
+# zplug "docker/compose", use:contrib/completion/zsh/
 
-zplug "modules/tmux",       from:prezto
-zplug "modules/history",    from:prezto
-zplug "modules/utility",    from:prezto
-zplug "modules/ssh",        from:prezto
-zplug "modules/terminal",   from:prezto
-zplug "modules/directory",  from:prezto
-zplug "modules/completion", from:prezto
-zplug "docker/compose", use:contrib/completion/zsh/
-
-zstyle ':prezto:module:utility:ls'    color 'yes'
-zstyle ':prezto:module:utility:diff'  color 'yes'
-zstyle ':prezto:module:utility:wdiff' color 'yes'
-zstyle ':prezto:module:utility:make'  color 'yes'
-
-zstyle ':completion:*' rehash true
-zstyle ':completion:*' verbose yes
-zstyle ':completion:*:descriptions' format '%B%d%b'
-zstyle ':completion:*:messages' format '%d'
-zstyle ':completion:*:warnings' format 'No matches for: %d'
-zstyle ':completion:*' group-name ''
-
+# zstyle ':prezto:module:utility:ls'    color 'yes'
+# zstyle ':prezto:module:utility:diff'  color 'yes'
+# zstyle ':prezto:module:utility:wdiff' color 'yes'
+# zstyle ':prezto:module:utility:make'  color 'yes'
+# 
+# zstyle ':completion:*' rehash true
+# zstyle ':completion:*' verbose yes
+# zstyle ':completion:*:descriptions' format '%B%d%b'
+# zstyle ':completion:*:messages' format '%d'
+# zstyle ':completion:*:warnings' format 'No matches for: %d'
+# zstyle ':completion:*' group-name ''
 
 # zplug "marzocchi/zsh-notify"
 # zplug "hchbaw/zce.zsh", use:zce.zsh
@@ -490,22 +471,30 @@ function _web_search() {
   open_command "$url"
 }
 
-alias l="k -ah"
-
-alias google='_web_search google'
-alias github='_web_search github'
-alias naver='_web_search naver'
-alias stackoverflow='_web_search stackoverflow'
-
 alias tf='terraform'
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+# pet
+# function pet-select() {
+#   BUFFER=$(pet search --query "$LBUFFER")
+#   CURSOR=$#BUFFER
+#   zle redisplay
+# }
+# zle -N pet-select
+# stty -ixon
+# bindkey '^S' pet-select
 
 # direnv
 eval "$(direnv hook zsh)"
 
 # python env
 export PATH="$HOME/.pyenv:$PATH"
-eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
+eval "$(pyenv init --path)"
+eval "$(pyenv init -)"
 
 # autoenv
 # source /usr/local/opt/autoenv/activate.sh
@@ -578,43 +567,6 @@ pb-kill-whole-line () {
 }
 zle -N pb-kill-whole-line
 bindkey '^U'   pb-kill-whole-line
-
-# RPROMPT=''$'\u2638 '' ''$(kubectl config current-context | sed -e "s/.io//" -e "s/.k8s.local//" -e "s/kops.//" -e "s/enterprise.zepl/enterprise/")'
-
-# VI MODE
-# https://qiita.com/b4b4r07/items/8db0257d2e6f6b19ecb9
-# autoload -Uz colors; colors
-# autoload -Uz add-zsh-hook
-# autoload -Uz terminfo
-# 
-# terminfo_down_sc=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
-# left_down_prompt_preexec() {
-#     print -rn -- $terminfo[el]
-# }
-# add-zsh-hook preexec left_down_prompt_preexec
-# 
-# function zle-keymap-select zle-line-init zle-line-finish
-# {
-#     case $KEYMAP in
-#         main|viins)
-#             PROMPT_2="$fg[cyan]-- INSERT --$reset_color"
-#             ;;
-#         vicmd)
-#             PROMPT_2="$fg[white]-- NORMAL --$reset_color"
-#             ;;
-#         vivis|vivli)
-#             PROMPT_2="$fg[yellow]-- VISUAL --$reset_color"
-#             ;;
-#     esac
-# 
-#     PROMPT="%{$terminfo_down_sc$PROMPT_2$terminfo[rc]%}[%(?.%{${fg[green]}%}.%{${fg[red]}%})%n%{${reset_color}%}]%# "
-#     zle reset-prompt
-# }
-# 
-# zle -N zle-line-init
-# zle -N zle-line-finish
-# zle -N zle-keymap-select
-# zle -N edit-command-line
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
