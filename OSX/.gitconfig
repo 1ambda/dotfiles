@@ -1,11 +1,11 @@
 [user]
-	email = 1amb4a@gmail.com
-	name = 1ambda
+    email = 1amb4a@gmail.com
+    name = 1ambda
 
 [core]
     warnAmbiguousRefs = false
     editor = vim
-	excludesfile = /Users/kun/.gitignore
+    excludesfile = /Users/kun/.gitignore
     autocrlf = input
     ignorecase = false
     pager = delta 
@@ -16,6 +16,8 @@
 
 [delta]
     navigate = true  # use n and N to move between diff sections
+    line-numbers = true
+    side-by-side = true    
 
 [merge]
     conflictstyle = diff3
