@@ -198,9 +198,12 @@ if which peco &> /dev/null; then
 fi
 
 # zplug
-if [ -f ${HOME}/.zplug/init.zsh ]; then
-    source ${HOME}/.zplug/init.zsh
-fi
+# if [ -f ${HOME}/.zplug/init.zsh ]; then
+#     source ${HOME}/.zplug/init.zsh
+# fi
+export ZPLUG_HOME=$(brew --prefix)/opt/zplug
+source $ZPLUG_HOME/init.zsh
+
 
 ENHANCD_FILTER=fzf:peco
 
@@ -498,6 +501,8 @@ eval "$(pyenv init -)"
 
 # autoenv
 # source /usr/local/opt/autoenv/activate.sh
+source $(brew --prefix autoenv)/activate.sh
+
 
 # conda
 # export PATH="$HOME/miniconda2/bin:$PATH"
@@ -589,3 +594,5 @@ if [ -f '/Users/kun/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kun/g
 
 source <(kubectl completion zsh)
 eval "$(scalaenv init -)"
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
