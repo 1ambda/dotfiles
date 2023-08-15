@@ -41,6 +41,7 @@ brew "trash-cli"
 brew "knqyf263/pet/pet"
 brew "the_silver_searcher"
 brew "peco"
+brew "exa"
 
 # Environment
 brew "direnv"
@@ -78,6 +79,7 @@ brew "openssl"
 brew "libressl"
 
 # Languages
+brew "asdf"
 brew "awscli"
 brew "python"
 brew "pyenv"

@@ -29,7 +29,7 @@ ZSH_THEME="robbyrussell"
 # ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
-# COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
@@ -49,16 +49,36 @@ ZSH_THEME="robbyrussell"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 
+# plugins
+plugins=(
+  fzf-tab F-Sy-H zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search fast-syntax-highlighting
+  docker docker-compose
+  ssh-agent gpg-agent gh
+  brew
+  golang gradle mvn npm nvm pip poetry pyenv virtualenv python sbt scala
+  asdf ag
+  direnv autoenv
+  terraform
+  helm
+)
+
+
 # User configuration
 export EDITOR='vim'
+export VISUAL='vim'
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
 export PATH="/usr/local/sbin:$PATH"
 
-HISTSIZE=100000000
-SAVEHIST=100000000
-
 source $ZSH/oh-my-zsh.sh
+
+# Search Configs (fzf/rg)
+export IGNORED_DIRS="{.git,.bzr,.svn,.hg,CVS,node_modules,dist,deps,_build,.backstop,.elixir_ls,.cache}"
+export RG_DEFAULT_FLAGS=(--no-ignore-vcs --hidden --follow --max-columns 150)
+export RG_DEFAULT_ARGS=($RG_DEFAULT_FLAGS --glob "!**/$IGNORED_DIRS/*")
+export FZF_DEFAULT_COMMAND="rg --files $RG_DEFAULT_FLAGS --glob '!**/$IGNORED_DIRS/*'"
+
 
 ## Custom Configuration
 # alias vi="/usr/local/bin/vi"
@@ -78,12 +98,14 @@ alias g="git"
 alias commit="git cz"
 alias commit-init="commitizen init cz-conventional-changelog --save-dev --save-exact"
 
+alias agf="ag --nobreak --nonumbers --noheading . | fzf"
+
 #### zsh-snippets
 alias me='whoami'
 alias today='date'
 alias dir='nautilus .'
 
-#### TRASH
+#### System
 alias tp='trash-put'
 alias tl='trash-list'
 alias pp="pwd | pbcopy"
@@ -97,6 +119,7 @@ alias pspk="ps -ef | peco | awk '{ print $2 }' | xargs kill"
 alias nsp="lsof -iTCP -sTCP:LISTEN -n -P | peco"
 alias nspk="lsof -iTCP -sTCP:LISTEN -n -P | peco | awk '{ print $2 }' | xargs kill"
 
+
 alias jpk="jps | peco | awk '{ print $0 }' | xargs kill -15"
 alias zp="z | peco"
 alias zc="history | peco"
@@ -104,13 +127,14 @@ alias untar='tar -zxvf'
 alias untarxz='tar -xJf'
 
 #### exa
-# alias ls='exa --long --header --git'
-# alias llt='exa -lbF --git --tree --level=2'
+alias ls='exa --long --header --git'
+alias llt='exa -lbF --git --tree --level=2'
 
 ### terminal
 alias b=bat
 
-#### kubernetes
+#### kubernetes and infra
+alias tf='terraform'
 export PATH="$HOME/.krew/bin:$PATH"
 alias helm=helm3
 alias krew=kubectl-krew
@@ -118,9 +142,6 @@ alias k=kubectl
 alias kx=kubectx
 alias kn=kubens
 alias k9=k9s
-
-alias kp="open 'http://localhost:8001/api/v1/namespaces/kube-dashboard/services/http:kuda-ui-kubernetes-dashboard:http/proxy'; kubectl proxy"
-alias kd="open 'http://localhost:8001/api/v1/namespaces/kube-dashboard/services/http:kuda-ui-kubernetes-dashboard:http/proxy'"
 
 ka() {
   local cmd=${1:-/bin/bash}
@@ -159,52 +180,16 @@ alias vup="osascript -e 'set volume output volume ((output volume of (get volume
 alias vdown="osascript -e 'set volume output volume ((output volume of (get volume settings)) - 10)'"
 alias vmute="osascript -e 'set Volume 0'"
 
-alias dk="docker"
-alias dkm="docker-machine"
-alias dkc="docker-compose"
-alias dks=" docker stop $(docker ps -a -q); docker rm -f $(docker ps -a -q); docker volume rm $(docker volume ls -f dangling=true -q);"
-
-alias ec="emacsclient -c &"
-alias ed="emacs --daemon"
-alias ek="emacsclient -e \"(kill-emacs)\""
-
-alias dg="digdag"
-
-function setjdk() {
-  if [ $# -ne 0 ]; then
-  removeFromPath '/System/Library/Frameworks/JavaVM.framework/Home/bin'
-  if [ -n "${JAVA_HOME+x}" ]; then
-    removeFromPath $JAVA_HOME
-  fi
-  export JAVA_HOME=`/usr/libexec/java_home -v $@`
-  export PATH=$JAVA_HOME/bin:$PATH
-  fi
-}
-function removeFromPath() {
-  export PATH=$(echo $PATH | sed -E -e "s;:$1;;" -e "s;$1:?;;")
-}
-
-
-if which peco &> /dev/null; then
-  function peco_select_history() {
-    BUFFER=$(fc -l -n -r 1 | \
-                peco --layout=bottom-up --query "$LBUFFER")
-    CURSOR=$#BUFFER # move cursor
-    zle -R -c       # refresh
-  }
- 
-  zle -N peco_select_history
-  bindkey '^R' peco_select_history
-fi
-
 # zplug
-if [ -f ${HOME}/.zplug/init.zsh ]; then
-    source ${HOME}/.zplug/init.zsh
-fi
+export ZPLUG_HOME=$(brew --prefix)/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 ENHANCD_FILTER=fzf:peco
 
 zplug "chrissicool/zsh-256color"
+zplug "hlissner/zsh-autopair", use:autopair.zsh
+# zplug "junegunn/fzf-git.sh", use:fzf-git.sh
+KEYTIMEOUT=2 # 10ms for key sequences for vi
 
 # zplug "plugins/brew-cask", from:oh-my-zsh
 # zplug "plugins/osx", from:oh-my-zsh
@@ -214,14 +199,10 @@ zplug "chrissicool/zsh-256color"
 # zplug "plugins/terraform", from:oh-my-zsh
 # zplug "plugins/virtualenv", from:oh-my-zsh
 
-# zplug "plugins/vi-mode", from:oh-my-zsh
 # zplug "b4b4r07/zsh-vimode-visual", defer:3
-# zplug "zsh-users/zsh-completions", defer:0
-# zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
-zplug "hlissner/zsh-autopair", use:autopair.zsh
-zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2, on:"zsh-users/zsh-autosuggestions"
-KEYTIMEOUT=1 # 10ms for key sequences for vi
+zplug "zsh-users/zsh-completions", defer:0
+# zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
+# zplug "zsh-users/zsh-syntax-highlighting", defer:2, on:"zsh-users/zsh-autosuggestions"
 
 # zplug 'b4b4r07/httpstat', as:command, use:'(*).sh', rename-to:'$1'
 # zplug "modules/tmux",       from:prezto
@@ -251,18 +232,17 @@ KEYTIMEOUT=1 # 10ms for key sequences for vi
 zplug load
 
 # fasd
-eval "$(fasd --init auto)"
+if command -v fasd >/dev/null ; then
+  eval "$(fasd --init auto)"
+fi
 
-# fzf related aliases
-
+# fzf
 export FZF_DEFAULT_OPTS="
 --color dark,hl:33,hl+:37,fg+:235,bg+:136,fg+:254
 --color info:254,prompt:37,spinner:108,pointer:235,marker:235
 "
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-alias agf="ag --nobreak --nonumbers --noheading . | fzf"
 
 # unalias v
 v() {
@@ -471,36 +451,21 @@ function _web_search() {
   open_command "$url"
 }
 
-alias tf='terraform'
-
-autoload -z edit-command-line
-zle -N edit-command-line
-bindkey "^X^E" edit-command-line
-
-# pet
-# function pet-select() {
-#   BUFFER=$(pet search --query "$LBUFFER")
-#   CURSOR=$#BUFFER
-#   zle redisplay
-# }
-# zle -N pet-select
-# stty -ixon
-# bindkey '^S' pet-select
 
 # direnv
-eval "$(direnv hook zsh)"
+if command -v direnv >/dev/null ; then
+  eval "$(direnv hook zsh)"
+fi
 
 # python env
+alias python=python3
 export PATH="$HOME/.pyenv:$PATH"
 eval "$(pyenv virtualenv-init -)"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
 # autoenv
-# source /usr/local/opt/autoenv/activate.sh
-
-# conda
-# export PATH="$HOME/miniconda2/bin:$PATH"
+source $(brew --prefix autoenv)/activate.sh
 
 # fzf color theme
 _gen_fzf_default_opts() {
@@ -528,45 +493,11 @@ _gen_fzf_default_opts() {
     --color fg:-1,bg:-1,hl:$blue,fg+:$base2,bg+:$base02,hl+:$blue
     --color info:$yellow,prompt:$yellow,pointer:$base3,marker:$base3,spinner:$yellow
   "
-  ## Solarized Light color scheme for fzf
-  #export FZF_DEFAULT_OPTS="
-  #  --color fg:-1,bg:-1,hl:$blue,fg+:$base02,bg+:$base2,hl+:$blue
-  #  --color info:$yellow,prompt:$yellow,pointer:$base03,marker:$base03,spinner:$yellow
-  #"
 }
 _gen_fzf_default_opts
 
-### ZSH History config ###
 
-setopt append_history
-setopt hist_expire_dups_first
-setopt hist_fcntl_lock
-setopt hist_ignore_all_dups
-setopt hist_lex_words
-setopt hist_reduce_blanks
-setopt hist_save_no_dups
-setopt share_history
-
-pb-yank () {
-  CUTBUFFER=$(pbpaste)
-  zle yank
-}
-zle -N pb-yank
-bindkey '^y'   pb-yank
-
-copy-to-xclip() {
-    zle kill-buffer
-    print -rn -- $CUTBUFFER | pbcopy
-}; 
-zle -N copy-to-xclip
-bindkey '^]'   copy-to-xclip
-
-pb-kill-whole-line () {
-  zle kill-whole-line
-  echo -n $CUTBUFFER | pbcopy
-}
-zle -N pb-kill-whole-line
-bindkey '^U'   pb-kill-whole-line
+# Language Framework
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -581,11 +512,80 @@ export GVM_DIR="$HOME/.gvm"
 export GPG_TTY=$(tty)
 
 export PATH="$HOME/Library/Python/2.7/bin:$PATH"
+export PATH="$HOME.local/bin:$PATH"
 
-# source /Users/kun/.gvm/pkgsets/go1.12.7/global/src/github.com/bonnefoa/kubectl-fzf/kubectl_fzf.sh
-
-if [ -f '/Users/kun/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/kun/google-cloud-sdk/path.zsh.inc'; fi
-if [ -f '/Users/kun/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/kun/google-cloud-sdk/completion.zsh.inc'; fi
+if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then . "$HOME/google-cloud-sdk/path.zsh.inc"; fi
+if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then . "$HOME/google-cloud-sdk/completion.zsh.inc"; fi
 
 source <(kubectl completion zsh)
 eval "$(scalaenv init -)"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Fzf Tab Configs
+# disable sort when completing `git checkout`
+zstyle ':completion:*:git-checkout:*' sort false
+# set descriptions format to enable group support
+zstyle ':completion:*:descriptions' format '[%d]'
+# set list-colors to enable filename colorizing
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# preview directory's content with exa when completing cd
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
+# switch group using `,` and `.`
+zstyle ':fzf-tab:*' switch-group ',' '.'
+
+# FZF Key Bindings
+source $(brew --prefix fzf)/shell/key-bindings.zsh 
+source $(brew --prefix fzf)/shell/completion.zsh
+bindkey '^Q' fzf-file-widget
+
+# ZSH Key Bindings
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "[D" backward-word
+bindkey "[C" forward-word
+bindkey "^K" kill-line
+# bindkey "^Y" accept-and-hold
+pb-yank () {
+  CUTBUFFER=$(pbpaste)
+  zle yank
+}
+zle -N pb-yank
+bindkey '^y'   pb-yank
+
+copy-to-xclip() {
+    zle kill-buffer
+    print -rn -- $CUTBUFFER | pbcopy
+};
+zle -N copy-to-xclip
+bindkey '^]'   copy-to-xclip
+
+pb-kill-whole-line () {
+  zle kill-whole-line
+  echo -n $CUTBUFFER | pbcopy
+}
+zle -N pb-kill-whole-line
+bindkey '^U'   pb-kill-whole-line
+
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+# ZSH History Config
+
+HISTFILE="$HOME/.zhistory"
+HISTSIZE=10000000
+SAVEHIST=10000000
+
+setopt EXTENDED_HISTORY          # Write the history file in the ":start:elapsed;command" format.
+setopt INC_APPEND_HISTORY        # Write to the history file immediately, not when the shell exits.
+setopt SHARE_HISTORY             # Share history between all sessions.
+setopt HIST_EXPIRE_DUPS_FIRST    # Expire duplicate entries first when trimming history.
+setopt HIST_IGNORE_DUPS          # Don't record an entry that was just recorded again.
+setopt HIST_IGNORE_ALL_DUPS      # Delete old recorded entry if new entry is a duplicate.
+setopt HIST_FIND_NO_DUPS         # Do not display a line previously found.
+setopt HIST_IGNORE_SPACE         # Don't record an entry starting with a space.
+setopt HIST_SAVE_NO_DUPS         # Don't write duplicate entries in the history file.
+setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording entry.
+setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
+setopt HIST_BEEP                 # Beep when accessing nonexistent history.
