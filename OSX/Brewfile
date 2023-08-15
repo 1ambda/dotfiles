@@ -1,0 +1,123 @@
+# Tap homebrew
+tap "homebrew/cask"
+tap "homebrew/cask-drivers"
+tap "homebrew/cask-fonts"
+tap "homebrew/cask-versions"
+tap "homebrew/core"
+tap "homebrew/boneyard"
+tap "homebrew/dev-tools"
+tap "homebrew/bundle"
+tap "homebrew/services"
+tap "isacikgoz/taps"
+
+# Shell
+brew "bash"
+brew "zsh"
+brew "zplug"
+
+# Build
+brew "coreutils"
+brew "make"
+brew "ctags"
+
+# Version Control
+brew "git"
+brew "git-lfs"
+brew "gh"
+brew "mercurial"
+brew "git-delta"
+brew "diff-so-fancy"
+brew "gnupg"
+
+# Terminal Productivity
+brew "fasd"
+brew "fd"
+brew "bat"
+brew "fzf"
+brew "tmux"
+brew "tmuxinator"
+brew "reattach-to-user-namespace"
+brew "trash-cli"
+brew "knqyf263/pet/pet"
+brew "the_silver_searcher"
+brew "peco"
+
+# Environment
+brew "direnv"
+brew "autoenv"
+brew "autoconf"
+
+# Terminal Editor
+brew "vim"
+
+# Terminal CLI
+brew "tldr"
+brew "tree"
+brew "jq"
+brew "yq"
+brew "curl"
+brew "grep"
+brew "wget"
+brew "telnet"
+brew "unzip"
+brew "gzip"
+brew "lsof"
+brew "gnu-sed"
+
+# Container
+brew "kubectl"
+brew "kubectx"
+brew "kubectl"
+brew "k9s"
+brew "krew"
+brew "htop"
+
+# Network and Security
+brew "wireshark"
+brew "openssl"
+brew "libressl"
+
+# Languages
+brew "awscli"
+brew "python"
+brew "pyenv"
+brew "pyenv-virtualenv"
+brew "ruby"
+brew "lua"
+brew "groovy"
+brew "gradle"
+brew "maven"
+brew "scalaenv"
+brew "sbt"
+brew "nvm"
+brew "jabba"
+
+# Fonts
+cask "font-lato"
+cask "font-open-sans"
+cask "font-roboto"
+cask "font-source-code-pro-for-powerline"
+cask "font-source-code-pro"
+cask "font-source-sans-pro"
+cask "font-source-serif-pro"
+
+# Apps
+cask 'iterm2'
+cask "alfred"
+cask "1password-cli"
+cask "docker"
+cask "karabiner-elements"
+cask "firefox"
+cask "google-chrome"
+cask "microsoft-edge"
+cask "visual-studio-code"
+cask 'postman'
+cask "github"
+cask 'sourcetree'
+
+# Mac App Store
+brew "mas"
+mas "1Password", id: 443987910
+mas "Keynote", id: 409183694
+mas "Slack", id: 803453959
+mas "Xcode", id: 497799835
