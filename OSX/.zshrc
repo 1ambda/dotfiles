@@ -75,7 +75,7 @@ source $ZSH/oh-my-zsh.sh
 
 # Search Configs (fzf/rg)
 export IGNORED_DIRS="{.git,.bzr,.svn,.hg,CVS,node_modules,dist,deps,_build,.backstop,.elixir_ls,.cache}"
-export RG_DEFAULT_FLAGS=(--no-ignore-vcs --hidden --follow --max-columns 150)
+export RG_DEFAULT_FLAGS=(--hidden --follow --max-columns 150)
 export RG_DEFAULT_ARGS=($RG_DEFAULT_FLAGS --glob "!**/$IGNORED_DIRS/*")
 export FZF_DEFAULT_COMMAND="rg --files $RG_DEFAULT_FLAGS --glob '!**/$IGNORED_DIRS/*'"
 
@@ -188,6 +188,7 @@ ENHANCD_FILTER=fzf:peco
 
 zplug "chrissicool/zsh-256color"
 zplug "hlissner/zsh-autopair", use:autopair.zsh
+# zplug "zsh-users/zsh-completions", defer:0
 # zplug "junegunn/fzf-git.sh", use:fzf-git.sh
 KEYTIMEOUT=2 # 10ms for key sequences for vi
 
@@ -200,7 +201,6 @@ KEYTIMEOUT=2 # 10ms for key sequences for vi
 # zplug "plugins/virtualenv", from:oh-my-zsh
 
 # zplug "b4b4r07/zsh-vimode-visual", defer:3
-zplug "zsh-users/zsh-completions", defer:0
 # zplug "zsh-users/zsh-autosuggestions", defer:1, on:"zsh-users/zsh-completions"
 # zplug "zsh-users/zsh-syntax-highlighting", defer:2, on:"zsh-users/zsh-autosuggestions"
 
@@ -250,8 +250,15 @@ v() {
   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
 }
 
+j() {
+  local dir
+  dir=$(find ${1:-.} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+
 # unalias o
-i() {
+o() {
   local out file key
   out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
   key=$(head -1 <<< "$out")
@@ -276,13 +283,6 @@ unalias z
 z() {
   local dir
   dir="$(fasd -Rdl "$1" | fzf -1 -0 --no-sort +m)" && cd "${dir}" || return 1
-}
-
-j() {
-  local dir
-  dir=$(find ${1:-.} -path '*/\.*' -prune \
-                  -o -type d -print 2> /dev/null | fzf +m) &&
-  cd "$dir"
 }
 
 # fh - repeat history
@@ -464,6 +464,19 @@ eval "$(pyenv virtualenv-init -)"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
+function virtualenv_prompt_info() {
+  [[ -n ${VIRTUAL_ENV} ]] || return
+  local NAME="${VIRTUAL_ENV:t}"
+  if [[ $NAME == "venv" || $NAME == "env" || $NAME == ".venv" ]]; then
+    local BASE="${VIRTUAL_ENV:h}"
+    NAME="${BASE:t}"
+  fi
+  echo "${ZSH_THEME_VIRTUALENV_PREFIX:=(}${NAME}${ZSH_THEME_VIRTUALENV_SUFFIX:=)}"
+}
+
+# disables prompt mangling in virtual_env/bin/activate
+export VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # autoenv
 source $(brew --prefix autoenv)/activate.sh
 
@@ -533,13 +546,21 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':fzf-tab:complete:cd:*' fzf-preview 'exa -1 --color=always $realpath'
 # switch group using `,` and `.`
 zstyle ':fzf-tab:*' switch-group ',' '.'
+zstyle ':fzf-tab:*' continuous-trigger 'tab'
+zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
+zstyle ':fzf-tab:*' accept-line enter
 
 # FZF Key Bindings
 source $(brew --prefix fzf)/shell/key-bindings.zsh 
 source $(brew --prefix fzf)/shell/completion.zsh
 bindkey '^Q' fzf-file-widget
+# bindkey '^I' fzf-cd-widget
 
 # ZSH Key Bindings
+# https://apple.stackexchange.com/questions/439702/optionleft-and-optionright-skip-special-characters
+autoload -U select-word-style
+select-word-style bash
+
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
 bindkey "[D" backward-word
