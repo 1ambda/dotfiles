@@ -79,6 +79,18 @@ export RG_DEFAULT_FLAGS=(--hidden --follow --max-columns 150)
 export RG_DEFAULT_ARGS=($RG_DEFAULT_FLAGS --glob "!**/$IGNORED_DIRS/*")
 export FZF_DEFAULT_COMMAND="rg --files $RG_DEFAULT_FLAGS --glob '!**/$IGNORED_DIRS/*'"
 
+export FZF_CTRL_R_OPTS="
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-c:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-C to copy command into clipboard'"
+export FZF_ALT_C_OPTS="${FZF_ALT_C_OPTS:+$FZF_ALT_C_OPTS} 
+  --preview 'echo {}' --preview-window up:3:hidden:wrap
+  --bind 'ctrl-/:toggle-preview'
+  --bind 'ctrl-c:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header 'Press CTRL-C to copy command into clipboard'"
 
 ## Custom Configuration
 # alias vi="/usr/local/bin/vi"
@@ -266,7 +278,7 @@ v() {
 q() {
   local result lines file position 
 
-	result=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --sync --bind 'ctrl-f:preview-page-down,ctrl-b:preview-page-up,enter:become(echo {+1} {+2})' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers") 
+	result=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --sync --bind 'pgdn:preview-half-page-down,pgup:preview-half-page-up,ctrl-f:preview-down,ctrl-b:preview-up,enter:become(echo {+1} {+2})' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers") 
 	lines=$(echo $result | tr ' ' $'\n' | rs -g1 -t 0 2)
 
 	if [ -n "$result" ]; then
@@ -288,7 +300,7 @@ q() {
 # unalias p
 p() {
   local out file dirpath
-  out=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --bind 'ctrl-f:preview-page-down,ctrl-b:preview-page-up' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers")
+  out=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --bind 'pgdn:preview-half-page-down,pgup:preview-half-page-up,ctrl-f:preview-down,ctrl-b:preview-up' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers")
   file=$(cut -d $'\u00a0' -f 1 <<< $out)
   if [ -n "$file" ]; then
     dirpath=$(dirname $file)
