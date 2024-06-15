@@ -245,9 +245,54 @@ export FZF_DEFAULT_OPTS="
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # unalias v
+# v() {
+#   local file
+#   file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
+# }
 v() {
-  local file
-  file="$(fasd -Rfl "$1" | fzf -1 -0 --no-sort +m)" && vi "${file}" || return 1
+  if (( # == 0 )); then
+    vim 
+  elif (( # == 1 )); then
+    vim $1 
+  elif (( # == 2 )); then
+	  vim +"$2|norm! zt" $1
+  else
+    vim "$@"
+  fi
+}
+
+
+# unalias q
+q() {
+  local result lines file position 
+	result=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --sync --bind 'enter:become(echo {+1} {+2})' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers") 
+	lines=$(echo $result | tr ' ' $'\n' | rs -g1 -t 0 2)
+
+	if [ -n "$result" ]; then
+
+    local IFS=$'\n'
+    if [ $ZSH_VERSION ]; then
+      setopt sh_word_split
+    fi
+    
+    for line in ${lines}; do 
+      file=$(echo $line | cut -d ' ' -f 1)
+      position=$(echo $line | cut -d ' ' -f 2)
+      echo "$file $position (LINE)"
+	 	done
+    echo ""
+	fi
+}
+
+# unalias p
+p() {
+  local out file dirpath
+  out=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers")
+  file=$(cut -d $'\u00a0' -f 1 <<< $out)
+  if [ -n "$file" ]; then
+    dirpath=$(dirname $file)
+    cd $dirpath
+  fi
 }
 
 j() {
@@ -460,6 +505,8 @@ fi
 # python env
 alias python=python3
 export PATH="$HOME/.pyenv:$PATH"
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv virtualenv-init -)"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
