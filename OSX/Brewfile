@@ -39,9 +39,10 @@ brew "tmuxinator"
 brew "reattach-to-user-namespace"
 brew "trash-cli"
 brew "knqyf263/pet/pet"
-brew "the_silver_searcher"
+brew "thexae_silver_searcher"
 brew "peco"
 brew "exa"
+brew "rg"
 
 # Environment
 brew "direnv"
@@ -113,6 +114,7 @@ cask "firefox"
 cask "google-chrome"
 cask "microsoft-edge"
 cask "visual-studio-code"
+cask "slack"
 cask 'postman'
 cask "github"
 cask 'sourcetree'
