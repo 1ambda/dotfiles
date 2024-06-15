@@ -381,12 +381,36 @@ gr() {
 
 # gco - checkout git branch/tag
 # unalias gco
-
-alias gm="git com; git pull origin master"
-
-gco() { 
+gco() {
   local tags branches target; 
-  tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v HEAD | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}') 
+  tags=$(git tag | awk '{print "\x1b[31;1mtag\x1b[m\t" $1}') || return; branches=$(git branch --all | grep -v head | sed "s/.* //" | sed "s#remotes/[^/]*/##" | sort -u | awk '{print "\x1b[34;1mbranch\x1b[m\t" $1}') || return; target=$( (echo "$tags"; echo "$branches") | fzf-tmux -l30 -- --no-hscroll --ansi +m -d "\t" -n 2) || return; git checkout $(echo "$target" | awk '{print $2}')
+}
+
+# gbd - branch delete
+# unalias gbd
+gbd() {
+  local branches branch
+  branches=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  branch=$(echo "$branches" | fzf --multi ) &&
+  git branch -D $(echo "$branch" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
+}
+
+# gpr - view git pr
+# unalias gpr
+gpr() {
+  GH_FORCE_TTY=100% gh pr list | fzf -m --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs -I {} gh pr view {} --web
+}
+
+# gpr - checkout git pl
+# unalias gpl
+gpl() {
+  GH_FORCE_TTY=100% gh pr list | fzf --ansi --preview 'GH_FORCE_TTY=100% gh pr view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs -I {} gh pr checkout {} -b pr{}
+}
+
+# gis - issues git
+# unalias gis
+gis() {
+  GH_FORCE_TTY=100% gh issue list | fzf -m --ansi --preview 'GH_FORCE_TTY=100% gh issue view {1}' --preview-window down --header-lines 3 | awk '{print $1}' | xargs -I {} gh issue view {} --web
 }
 
 # gl - git commit browser
