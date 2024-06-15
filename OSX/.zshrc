@@ -265,7 +265,8 @@ v() {
 # unalias q
 q() {
   local result lines file position 
-	result=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --sync --bind 'enter:become(echo {+1} {+2})' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers") 
+
+	result=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --sync --bind 'ctrl-f:preview-page-down,ctrl-b:preview-page-up,enter:become(echo {+1} {+2})' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers") 
 	lines=$(echo $result | tr ' ' $'\n' | rs -g1 -t 0 2)
 
 	if [ -n "$result" ]; then
@@ -279,7 +280,7 @@ q() {
       file=$(echo $line | cut -d ' ' -f 1)
       position=$(echo $line | cut -d ' ' -f 2)
       echo "$file $position (LINE)"
-	 	done
+    done
     echo ""
 	fi
 }
@@ -287,7 +288,7 @@ q() {
 # unalias p
 p() {
   local out file dirpath
-  out=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers")
+  out=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --bind 'ctrl-f:preview-page-down,ctrl-b:preview-page-up' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers")
   file=$(cut -d $'\u00a0' -f 1 <<< $out)
   if [ -n "$file" ]; then
     dirpath=$(dirname $file)
