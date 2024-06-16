@@ -165,30 +165,59 @@ nmap gu :action ShowUsages<CR>
 nmap gf :action FindUsages<CR>
 nmap gi :action GotoImplementation<CR>
 nmap gs :action GotoSuperMethod<CR>
-map ge :action ShowErrorDescription<CR>
+nmap gt :action GotoTest<cr>
 nmap gx :action GotoNextError<CR>
 nmap gX :action GotoPreviousError<CR>
-noremap ghc <ESC>:action CallHierarchy<CR>
-noremap ght <ESC>:action TypeHierarchy<CR>
-noremap ghm <ESC>:action MethodHierarchy<CR>
-noremap gj <ESC>:action SliceBackward<CR>
-noremap gk <ESC>:action SliceForward<CR>
+nmap ge :action ShowErrorDescription<CR>
+nnoremap ghc <ESC>:action CallHierarchy<CR>
+nnoremap ght <ESC>:action TypeHierarchy<CR>
+nnoremap ghm <ESC>:action MethodHierarchy<CR>
+nnoremap gj <ESC>:action SliceBackward<CR>
+nnoremap gk <ESC>:action SliceForward<CR>
 nnoremap gq :action QuickImplementations<CR>
 
 " Refactoring
-nnoremap rl :action Refactorings.QuickListPopupAction<CR>
-nnoremap rr :action RenameElement<CR>
+nmap rl :action Refactorings.QuickListPopupAction<CR>
+nmap rr :action RenameElement<CR>i
+nmap rd :action SafeDelete<CR>
+nmap ri :action Inline<CR>
 
 
 " VCS 
-nmap hl <ESC>:action Git.Menu<CR>
-nmap hg <ESC>:action VcsGroups<CR>
+nmap hm <ESC>:action Git.Menu<CR>
+nmap hg <ESC>:action Vcs.Operations.Popup<CR>
+nmap ha <ESC>:action Annotate<CR>
+nmap hh <ESC>:action Vcs.ShowTabbedFileHistory<CR>
+nmap hl <ESC>:action Git.ShowGitLog<CR>
+nmap hd <ESC>:action Vcs.ShowDiffWithLocal<CR>
+" Debug
+" nmap vc :action CompileDirty<CR>
+" nmap vr :action Run<CR>
+" nmap vR :action RunAnything<CR>
+" nmap vb :action Debug<CR>
+" nmap vc :action RunClass<CR>
+" nmap vd :action DebugClass<CR>
+" nmap vt :action RerunTests<CR>
+" nmap vT :action RerunFailedTests<CR>
+" nmap vp :action ToggleLineBreakpoint<CR>
+" nmap <C-q> :action EvaluateExpression<CR>
+" nmap <Delete> :action ToggleLineBreakpoint<CR
+" nmap <Left> :action StepOut<CR>
+" nmap <Right> :action StepOver<CR>
+" nmap <A-Right> :action Resume<CR>
+" nmap <F5> :action Resume<CR>
+" nmap <Up> :action Debugger.FramePanelPopup<CR>
+" nmap <Down> :action StepInto<CR>
+" nmap <A-Down> :action SmartStepInto<CR>
+" nmap <A-d> :action JavaDebuggerActions<CR>
 
 
 nmap <Leader>a :action FindInPath<CR>
 nmap <Leader>r :action RecentFiles<CR>
+nmap <Leader>R :action RecentChangedFiles<CR>
 nmap <Leader>w :action SearchEverywhere<CR>
 nmap <Leader>y :action GotoSymbol<CR>
+nmap <Leader>v :action Tool_External Tools_mvim<CR>
 
 
 nmap <A-K> :action MethodUp<CR>
