@@ -1,9 +1,44 @@
-set ignorecase
-set smartcase
-set scrolloff=3 " 3 lines above/below cursor when scrolling
+set number                        " line numbers
+
+set hlsearch                      " highlight search occurrences
+set ignorecase                    " ignore case in search patterns
+set smartcase                     " no ignore case when pattern is uppercase
+set incsearch                     " show search results while typing
+set wrapscan                      " searches wrap around the end of the file
 
 set keep-english-in-normal
-" set clipboard+=unnamedplus
+set gdefault                      " substitute all occurrences in line per default
+set history=10000                 " keep x lines of command line history
+set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor visible
+set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
+set multiple-cursors
+
+set commentary
+set surround
+set ideajoin
+set ideastatusicon=disabled
+
+" set <leader> to <space>
+let mapleader=" "
+set easymotion
+map , <Plug>(easymotion-prefix)
+
+
+" sneak, quickscope 
+set quickscope
+set sneak
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+
+" edit ideavim config
+nnoremap <Leader>vv :e ~/.ideavimrc<CR>
+nnoremap <Leader>vr <ESC>:source ~/.ideavimrc<CR>
+
+" multi cursors
+map mc <A-N>
+nnoremap mp :action PasteMultiple <CR>
+map <A-M> <A-N>
+
 
 " map paste, yank and delete to named register so the content
 " will not be overwritten
@@ -16,30 +51,73 @@ vnoremap p "xp
 nnoremap x "xx
 vnoremap x "xx
 
-set surround
-set ideajoin
-set commentary
-
-let mapleader=" "
-nmap <Leader>l <Plug>(easymotion-lineforward)
-nmap <Leader>j <Plug>(easymotion-j)
-nmap <Leader>k <Plug>(easymotion-k)
-nmap <Leader>h <Plug>(easymotion-linebackward)
-nmap <Leader>a <Plug>(easymotion-jumptoanywhere)
-set easymotion
+" " Custom Bindings
 
 " Naviate the current quickly 
-nmap <C-j> 15gj
-nmap <C-k> 15gk
+nmap <C-j> 15j
+nmap <C-k> 15k
+vmap <C-j> 15gj
+vmap <C-k> 15gk
+vmap <C-j> 15gj
+imap <C-j> <Esc>15ji
+imap <C-k> <Esc>15ki
 
-" These create newlines like o and O but stay in normal mode
-nmap zj o<Esc>k^
-nmap zk O<Esc>j^
+nnoremap L $
+nnoremap H ^
+vnoremap L $
+vnoremap H ^
 
-" Errors
-nmap <Leader>x :action GotoNextError<cr>
-nmap <Leader>X :action GotoPreviousError<cr>
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+cmap <C-b> <Left>
+cmap <C-f> <Right>
 
+" vmap <C-j> <C-e>
+" vmap <C-k> <C-y>
+" vmap <C-h> 10zh
+" vmap <C-l> 10zl
+
+nmap <C-l> :action NextTab<CR>
+nmap <C-h> :action PreviousTab<CR>
+imap <C-l> :action NextTab<CR>
+imap <C-h> :action PreviousTab<CR>
+
+" nmap <a-m> :action PreviousTab<CR>
+" nmap <a-.> :action NextTab<CR>
+" imap <a-m> :action PreviousTab<CR>
+" imap <a-.> :action NextTab<CR>
+
+" toggle chars at end of line
+nnoremap <leader>, mZA,<Esc>`Z
+nnoremap <leader>; mZA;<Esc>`Z
+nnoremap <leader>' mZA'<Esc>`Z
+nnoremap <leader>" mZA"<Esc>`Z
+
+
+" clear the highlighted search result
+nmap <space><cr> :nohlsearch<CR>
+
+
+" don't lose selection when indenting
+vnoremap < <gv
+vnoremap > >gv
+vnoremap = =gv
+
+vnoremap J :m '>+1<CR>gv
+vnoremap K :m '<-2<CR>gv
+
+" make Y behave like D and C, yanking till end of line
+nmap Y y$
+
+" Visual Mode
 nmap <S-Up> v<Up>
 nmap <S-Down> v<Down>
 nmap <S-Left> v<Left>
@@ -55,8 +133,60 @@ imap <S-Right> <Esc>v<Right>
 
 vmap <C-c> y<Esc>i
 vmap <C-x> d<Esc>i
-imap <C-v> <Esc>pi
+imap <c-v> <esc>pi
 imap <C-z> <Esc>ui
 
+
+" IDEA specific
+nmap <leader>? :action GotoAction<CR>
+nmap == :action ReformatCode<CR>
+vmap == :action ReformatCode<CR>
+nmap -- :action OptimizeImports<CR>
+vmap -- :action OptimizeImports<CR>
+
+" change font size
+nmap + :action EditorIncreaseFontSize<CR>
+nmap _ :action EditorDecreaseFontSize<CR>
+nmap <leader>= :action EditorResetFontSize<CR>
+
+
+" code navigation
+" https://youtrack.jetbrains.com/issue/VIM-44
+nmap <C-m> :action Back<cr>
+nmap <C-.> :action Forward<cr>
+imap <C-m> :action Back<cr>
+imap <C-.> :action Forward<cr>
+
+nmap gf <ESC>:action GotoFile<CR>
+nmap gp :action ParameterInfo<CR>
+nmap gd :action GotoDeclaration<CR>
+nmap gD :action GotoTypeDeclaration<CR>
+nmap gu :action ShowUsages<CR>
+nmap gf :action FindUsages<CR>
+nmap gi :action GotoImplementation<CR>
+nmap gs :action GotoSuperMethod<CR>
+map gh :action ShowErrorDescription<CR>
+nmap gx :action GotoNextError<CR>
+nmap gX :action GotoPreviousError<CR>
+nmap gk <Action>(MethodUp)
+nmap g, <Action>(MethodDown)
+noremap ghc <ESC>:action CallHierarchy<CR>
+noremap ght <ESC>:action TypeHierarchy<CR>
+noremap ghm <ESC>:action MethodHierarchy<CR>
+noremap gj <ESC>:action SliceBackward<CR>
+noremap gk <ESC>:action SliceForward<CR>
+nnoremap gq :action QuickImplementations<CR>
+nnoremap gr :action Refactorings.QuickListPopupAction<CR>
+
+
+" VCS 
+nmap <Leader>hk <ESC>:action Git.Menu<CR>
+nmap <Leader>hj <ESC>:action VcsGroups<CR>
+
+
+nmap <Leader>a :action FindInPath<CR>
+nmap <Leader>r :action RecentFiles<CR>
+nmap <Leader>w :action SearchEverywhere<CR>
+nmap <Leader>y :action GotoSymbol<CR>
 
 
