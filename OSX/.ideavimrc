@@ -165,23 +165,24 @@ nmap gu :action ShowUsages<CR>
 nmap gf :action FindUsages<CR>
 nmap gi :action GotoImplementation<CR>
 nmap gs :action GotoSuperMethod<CR>
-map gh :action ShowErrorDescription<CR>
+map ge :action ShowErrorDescription<CR>
 nmap gx :action GotoNextError<CR>
 nmap gX :action GotoPreviousError<CR>
-nmap gk <Action>(MethodUp)
-nmap g, <Action>(MethodDown)
 noremap ghc <ESC>:action CallHierarchy<CR>
 noremap ght <ESC>:action TypeHierarchy<CR>
 noremap ghm <ESC>:action MethodHierarchy<CR>
 noremap gj <ESC>:action SliceBackward<CR>
 noremap gk <ESC>:action SliceForward<CR>
 nnoremap gq :action QuickImplementations<CR>
-nnoremap gr :action Refactorings.QuickListPopupAction<CR>
+
+" Refactoring
+nnoremap rl :action Refactorings.QuickListPopupAction<CR>
+nnoremap rr :action RenameElement<CR>
 
 
 " VCS 
-nmap <Leader>hk <ESC>:action Git.Menu<CR>
-nmap <Leader>hj <ESC>:action VcsGroups<CR>
+nmap hl <ESC>:action Git.Menu<CR>
+nmap hg <ESC>:action VcsGroups<CR>
 
 
 nmap <Leader>a :action FindInPath<CR>
@@ -190,3 +191,7 @@ nmap <Leader>w :action SearchEverywhere<CR>
 nmap <Leader>y :action GotoSymbol<CR>
 
 
+nmap <A-K> :action MethodUp<CR>
+nmap <A-J> :action MethodDown<CR>
+imap <A-K> :action MethodUp<CR>
+imap <A-J> :action MethodDown<CR>
