@@ -138,7 +138,7 @@ imap <C-z> <Esc>ui
 
 
 " IDEA specific
-nmap <leader>? :action GotoAction<CR>
+nmap <leader>q :action GotoAction<CR>
 nmap == :action ReformatCode<CR>
 vmap == :action ReformatCode<CR>
 nmap -- :action OptimizeImports<CR>
@@ -152,10 +152,35 @@ nmap <leader>= :action EditorResetFontSize<CR>
 
 " code navigation
 " https://youtrack.jetbrains.com/issue/VIM-44
-nmap <C-m> :action Back<cr>
-nmap <C-.> :action Forward<cr>
-imap <C-m> :action Back<cr>
-imap <C-.> :action Forward<cr>
+nmap <C-m> :action Back<CR>
+nmap <C-.> :action Forward<CR>
+nmap <C-,> :action GotoDeclaration<CR>
+nmap <C-S-,> :action GotoImplementation<CR>
+nmap <C-S-m> :action ShowUsages<CR>
+nmap <C-S-.> :action GotoTest<CR>
+nmap <C-S-k> :action GotoSuperMethod<CR>
+
+imap <C-m> :action Back<CR>
+imap <C-.> :action Forward<CR>
+imap <C-,> :action GotoDeclaration<CR>
+imap <C-S-,> :action GotoImplementation<CR>
+imap <C-S-m> :action ShowUsages<CR>
+imap <C-S-.> :action GotoTest<CR>
+imap <C-S-k> :action GotoSuperMethod<CR>
+
+
+nmap <A-m> :action MethodUp<CR>
+nmap <A-,> :action GotoSuperMethod<CR>
+nmap <A-.> :action MethodDown<CR>
+nmap <A-k> :action ShowNavBar<CR>
+nmap <A-j-k> :action MethodHierarchy<CR>
+
+imap <A-m> :action MethodUp<CR>
+imap <A-,> :action GotoSuperMethod<CR>
+imap <A-.> :action MethodDown<CR>
+imap <A-k> :action ShowNavBar<CR>
+imap <A-S-k> :action MethodHierarchy<CR>
+
 
 nmap gf <ESC>:action GotoFile<CR>
 nmap gp :action ParameterInfo<CR>
@@ -187,9 +212,7 @@ nmap ri :action Inline<CR>
 nmap hm <ESC>:action Git.Menu<CR>
 nmap hg <ESC>:action Vcs.Operations.Popup<CR>
 nmap ha <ESC>:action Annotate<CR>
-nmap hh <ESC>:action Vcs.ShowTabbedFileHistory<CR>
-nmap hl <ESC>:action Git.ShowGitLog<CR>
-nmap hd <ESC>:action Vcs.ShowDiffWithLocal<CR>
+nmap hy <ESC>:action Vcs.ShowTabbedFileHistory<CR>
 " Debug
 " nmap vc :action CompileDirty<CR>
 " nmap vr :action Run<CR>
@@ -218,9 +241,3 @@ nmap <Leader>R :action RecentChangedFiles<CR>
 nmap <Leader>w :action SearchEverywhere<CR>
 nmap <Leader>y :action GotoSymbol<CR>
 nmap <Leader>v :action Tool_External Tools_mvim<CR>
-
-
-nmap <A-K> :action MethodUp<CR>
-nmap <A-J> :action MethodDown<CR>
-imap <A-K> :action MethodUp<CR>
-imap <A-J> :action MethodDown<CR>
