@@ -85,11 +85,6 @@ cmap <C-f> <Right>
 " vmap <C-h> 10zh
 " vmap <C-l> 10zl
 
-nmap <C-l> :action NextTab<CR>
-nmap <C-h> :action PreviousTab<CR>
-imap <C-l> :action NextTab<CR>
-imap <C-h> :action PreviousTab<CR>
-
 " nmap <a-m> :action PreviousTab<CR>
 " nmap <a-.> :action NextTab<CR>
 " imap <a-m> :action PreviousTab<CR>
@@ -168,6 +163,16 @@ imap <C-S-m> :action ShowUsages<CR>
 imap <C-S-.> :action GotoTest<CR>
 imap <C-S-k> :action GotoSuperMethod<CR>
 
+nmap <C-l> :action NextTab<CR>
+nmap <C-h> :action PreviousTab<CR>
+imap <C-l> :action NextTab<CR>
+imap <C-h> :action PreviousTab<CR>
+
+nmap <C-S-h> :action PreviousEditorTab<CR>
+nmap <C-S-l> :action NextEditorTab<CR>
+imap <C-S-h> :action PreviousEditorTab<CR>
+imap <C-S-l> :action NextEditorTab<CR>
+
 
 nmap <A-m> :action MethodUp<CR>
 nmap <A-,> :action GotoSuperMethod<CR>
@@ -180,6 +185,10 @@ imap <A-,> :action GotoSuperMethod<CR>
 imap <A-.> :action MethodDown<CR>
 imap <A-k> :action ShowNavBar<CR>
 imap <A-S-k> :action MethodHierarchy<CR>
+
+
+nmap <C-q> :action HideAllWindows<CR>
+imap <C-q> :action HideAllWindows<CR>
 
 
 nmap gf <ESC>:action GotoFile<CR>
@@ -209,10 +218,10 @@ nmap ri :action Inline<CR>
 
 
 " VCS 
-nmap hm <ESC>:action Git.Menu<CR>
-nmap hg <ESC>:action Vcs.Operations.Popup<CR>
-nmap ha <ESC>:action Annotate<CR>
-nmap hy <ESC>:action Vcs.ShowTabbedFileHistory<CR>
+nmap nG <ESC>:action Git.Menu<CR>
+nmap ng <ESC>:action Vcs.Operations.Popup<CR>
+nmap na <ESC>:action Annotate<CR>
+nmap nh <ESC>:action Vcs.ShowTabbedFileHistory<CR>
 " Debug
 " nmap vc :action CompileDirty<CR>
 " nmap vr :action Run<CR>
@@ -240,4 +249,3 @@ nmap <Leader>r :action RecentFiles<CR>
 nmap <Leader>R :action RecentChangedFiles<CR>
 nmap <Leader>w :action SearchEverywhere<CR>
 nmap <Leader>y :action GotoSymbol<CR>
-nmap <Leader>v :action Tool_External Tools_mvim<CR>
