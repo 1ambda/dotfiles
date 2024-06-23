@@ -218,28 +218,28 @@ nmap ri :action Inline<CR>
 
 
 " VCS 
-nmap nG <ESC>:action Git.Menu<CR>
-nmap ng <ESC>:action Vcs.Operations.Popup<CR>
-nmap na <ESC>:action Annotate<CR>
-nmap nh <ESC>:action Vcs.ShowTabbedFileHistory<CR>
+nmap mG <ESC>:action Git.Menu<CR>
+nmap mg <ESC>:action Vcs.Operations.Popup<CR>
+nmap mH <ESC>:action Annotate<CR>
+nmap mh <ESC>:action Vcs.ShowTabbedFileHistory<CR>
 " Debug
+nmap mr :action Run<CR>
+nmap md :action Debug<CR>
+nmap mt :action RerunTests<CR>
+nmap mb :action ToggleLineBreakpoint<CR>
+nmap mq :action StepOut<CR>
+nmap ms :action StepInto<CR>
+nmap ma :action StepOver<CR>
+nmap mw :action Resume<CR>
+"
 " nmap vc :action CompileDirty<CR>
-" nmap vr :action Run<CR>
 " nmap vR :action RunAnything<CR>
-" nmap vb :action Debug<CR>
 " nmap vc :action RunClass<CR>
 " nmap vd :action DebugClass<CR>
-" nmap vt :action RerunTests<CR>
 " nmap vT :action RerunFailedTests<CR>
-" nmap vp :action ToggleLineBreakpoint<CR>
 " nmap <C-q> :action EvaluateExpression<CR>
-" nmap <Delete> :action ToggleLineBreakpoint<CR
-" nmap <Left> :action StepOut<CR>
-" nmap <Right> :action StepOver<CR>
-" nmap <A-Right> :action Resume<CR>
 " nmap <F5> :action Resume<CR>
 " nmap <Up> :action Debugger.FramePanelPopup<CR>
-" nmap <Down> :action StepInto<CR>
 " nmap <A-Down> :action SmartStepInto<CR>
 " nmap <A-d> :action JavaDebuggerActions<CR>
 
