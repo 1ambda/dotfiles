@@ -1,0 +1,184 @@
+[user]
+  email = 1amb4a@gmail.com
+  name = Kun
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBh2H9zigz3azDCHTi1KWxq0ywrW5b7tf1xrg1mv7XO
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+	gpgsign = true
+  template = ~/.stCommitMsg
+  verbose = true
+
+[core]
+  warnAmbiguousRefs = false
+  editor = vim
+  excludesfile = ~/.gitignore
+  autocrlf = input
+  ignorecase = false
+  commentChar = ";"
+  pager = delta --side-by-side --width ${FZF_PREVIEW_COLUMNS-$COLUMNS}
+
+[interactive]
+  diffFilter = delta --side-by-side --width ${FZF_PREVIEW_COLUMNS-$COLUMNS}
+
+[merge]
+  conflictStyle = zdiff3
+
+[diff]
+  colorMoved = default
+
+[pull]
+  rebase = false
+
+[push]
+  default = simple
+
+[fetch]
+  # Use parallel jobs for fetching submodules
+  parallel = 0
+
+[branch]
+  # Make all new branches to automatically use rebase rather than merge, on pull
+  autosetuprebase = always
+
+[stash]
+  # Show diff when running 'git stash show <SHA>'.
+  showPatch = true
+
+[color]
+  diff = auto
+  status = auto
+  branch = auto
+  interactive = auto
+  ui = auto
+
+[alias]
+  root = rev-parse --show-toplevel
+  out = "log --pretty=oneline --abbrev-commit --graph @{u}.."
+  in = "!git fetch && git log --pretty=oneline --abbrev-commit --graph ..@{u}"
+
+  c = commit
+  ci = commit -v
+  cm = commit -m
+  cf = commit --fixup
+  ca = commit --amend
+  cane = commit --amend --no-edit
+
+  amend = commit --amend -C HEAD
+
+  wip = !"git add -A; git ls-files --deleted -z | xargs -0 git rm; git commit -m \"[WIP]\" && git commit --amend"
+  unwip = !"git log -n 1 | grep -q -c -e \"\\[WIP\\]\" && git reset HEAD~1"
+
+  merge-span = "!f() { echo $(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f1)$1$(git log -1 $2 --merges --pretty=format:%P | cut -d' ' -f2); }; f"
+  merge-log = "!git lg "git merge-span .. $1""
+  merge-diff = "!git diff "git merge-span ... $1""
+  merge-difftool = "!git difftool "git merge-span ... $1""
+
+  cp =  cherry-pick
+
+  # use `gco` instead
+  co =  checkout
+  cob = checkout -b
+  cot = checkout -t
+  com = checkout main
+  cod = checkout develop
+  cor = checkout release
+  cou = checkout upstream
+
+  find = log --pretty=\"format:%Cgreen%H %Cblue%s\" --name-status --grep
+
+  cl = clone
+
+  f = fetch --prune
+  fo = fetch origin
+  fo = fetch upstream
+  fs = fetch stash
+
+  pf = push --force-with-lease
+
+  psoh = push origin HEAD
+  psom = push origin main
+  psod = push origin develop
+
+  pl = "!git pull origin $(git-rev-parse --abbrev-ref HEAD)"
+
+  ploh = pull origin HEAD
+  plom = pull origin main
+  plod = pull origin develop
+
+  # use git-extras
+  # pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pull/$1 && git checkout pull/$1; }; f"
+  # pr-clean = "!git for-each-ref refs/heads/pull/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+  # pr = "!_() { git config fetch.prune no && git fetch ${1:-origin} +refs/pull/*/head:refs/remotes/${1:-origin}/pr/*; }; _"
+  g = "log --graph --pretty='format:%C(auto)%h%d %s%x1b[38;5;022m% GS %x1b[38;5;239m%cr%x1b[0m'"
+
+  st = status
+
+  dfs = "!git --no-pager diff --stat"
+  df = "!git diff \"$@\""
+  dfc = "!git diff --cached \"$@\""
+
+  insp = "!f() { git ll "$1"^.."$1"; }; f"
+  inspd = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\"  && git diff "$1"^.."$1"; --color \"$@\" | diff-so-fancy | less --tabs=4 -RFX; }; f"
+
+  sw = !git checkout $(git branch -a --format '%(refname:short)' | sed 's~origin/~~' | sort | uniq | fzf)
+
+  br = branch
+
+  lr = log --grep
+  lp = log -p
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+  lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+  ld = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=relative
+  lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+  lnc = log --pretty=format:"%h\\ %s\\ [%cn]"
+
+  today = "log --since=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+  yesterday = "log --since yesterday --until=midnight --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(blue)[%an]%Creset' --abbrev-commit"
+  ours = "!f() { git checkout --ours $@ && git add $@; }; f"
+  theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
+
+  undo = reset HEAD~1 --mixed
+
+
+[filter "lfs"]
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+
+
+[delta]
+  decorations = true
+  navigate = true
+  line-numbers = true
+	features = collared-trogon
+  line-numbers-left-style = black
+  line-numbers-minus-style = "#B10036"
+  line-numbers-plus-style = "#03a4ff"
+  line-numbers-right-style = black
+  line-numbers-zero-style = "#999999"
+
+
+[diff-so-fancy]
+  markEmptyLines = false
+  changeHunkIndicators = true
+  stripLeadingSymbols = false
+
+
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+
+
+[include]
+  # wget --output-document ~/delta-themes.gitconfig https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig
+	path = ~/delta-themes.gitconfig

@@ -1,0 +1,251 @@
+set number                        " line numbers
+
+set hlsearch                      " highlight search occurrences
+set ignorecase                    " ignore case in search patterns
+set smartcase                     " no ignore case when pattern is uppercase
+set incsearch                     " show search results while typing
+set wrapscan                      " searches wrap around the end of the file
+
+set keep-english-in-normal
+set gdefault                      " substitute all occurrences in line per default
+set history=10000                 " keep x lines of command line history
+set scrolloff=5 sidescrolloff=10  " keep some lines before and after the cursor visible
+set clipboard=unnamedplus,unnamed,ideaput " integrate with system clipboard
+set multiple-cursors
+
+set commentary
+set surround
+set ideajoin
+set ideastatusicon=disabled
+
+" set <leader> to <space>
+let mapleader=" "
+set easymotion
+map , <Plug>(easymotion-prefix)
+
+
+" sneak, quickscope
+set quickscope
+set sneak
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
+
+
+" edit ideavim config
+nnoremap <Leader>vv :e ~/.ideavimrc<CR>
+nnoremap <Leader>vr <ESC>:source ~/.ideavimrc<CR>
+
+" multi cursors
+map mc <A-N>
+nnoremap mp :action PasteMultiple <CR>
+map <A-M> <A-N>
+
+
+" map paste, yank and delete to named register so the content
+" will not be overwritten
+nnoremap d "xd
+vnoremap d "xd
+nnoremap y "xy
+vnoremap y "xy
+nnoremap p "xp
+vnoremap p "xp
+nnoremap x "xx
+vnoremap x "xx
+
+" " Custom Bindings
+
+" Naviate the current quickly
+nmap <C-j> 15j
+nmap <C-k> 15k
+vmap <C-j> 15gj
+vmap <C-k> 15gk
+vmap <C-j> 15gj
+imap <C-j> <Esc>15ji
+imap <C-k> <Esc>15ki
+
+nnoremap L $
+nnoremap H ^
+vnoremap L $
+vnoremap H ^
+
+inoremap <C-a> <Home>
+inoremap <C-e> <End>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+cmap <C-a> <Home>
+cmap <C-e> <End>
+cmap <C-p> <Up>
+cmap <C-n> <Down>
+cmap <C-b> <Left>
+cmap <C-f> <Right>
+
+" vmap <C-j> <C-e>
+" vmap <C-k> <C-y>
+" vmap <C-h> 10zh
+" vmap <C-l> 10zl
+
+" nmap <a-m> :action PreviousTab<CR>
+" nmap <a-.> :action NextTab<CR>
+" imap <a-m> :action PreviousTab<CR>
+" imap <a-.> :action NextTab<CR>
+
+" toggle chars at end of line
+nnoremap <leader>, mZA,<Esc>`Z
+nnoremap <leader>; mZA;<Esc>`Z
+nnoremap <leader>' mZA'<Esc>`Z
+nnoremap <leader>" mZA"<Esc>`Z
+
+
+" clear the highlighted search result
+nmap <space><cr> :nohlsearch<CR>
+
+
+" don't lose selection when indenting
+vnoremap < <gv
+vnoremap > >gv
+vnoremap = =gv
+
+vnoremap J :m '>+1<CR>gv
+vnoremap K :m '<-2<CR>gv
+
+" make Y behave like D and C, yanking till end of line
+nmap Y y$
+
+" Visual Mode
+nmap <S-Up> v<Up>
+nmap <S-Down> v<Down>
+nmap <S-Left> v<Left>
+nmap <S-Right> v<Right>
+vmap <S-Up> <Up>
+vmap <S-Down> <Down>
+vmap <S-Left> <Left>
+vmap <S-Right> <Right>
+imap <S-Up> <Esc>v<Up>
+imap <S-Down> <Esc>v<Down>
+imap <S-Left> <Esc>v<Left>
+imap <S-Right> <Esc>v<Right>
+
+vmap <C-c> y<Esc>i
+vmap <C-x> d<Esc>i
+imap <c-v> <esc>pi
+imap <C-z> <Esc>ui
+
+
+" IDEA specific
+nmap <leader>q :action GotoAction<CR>
+nmap == :action ReformatCode<CR>
+vmap == :action ReformatCode<CR>
+nmap -- :action OptimizeImports<CR>
+vmap -- :action OptimizeImports<CR>
+
+" change font size
+nmap + :action EditorIncreaseFontSize<CR>
+nmap _ :action EditorDecreaseFontSize<CR>
+nmap <leader>= :action EditorResetFontSize<CR>
+
+
+" code navigation
+" https://youtrack.jetbrains.com/issue/VIM-44
+nmap <C-m> :action Back<CR>
+nmap <C-.> :action Forward<CR>
+nmap <C-,> :action GotoDeclaration<CR>
+nmap <C-S-,> :action GotoImplementation<CR>
+nmap <C-S-m> :action ShowUsages<CR>
+nmap <C-S-.> :action GotoTest<CR>
+nmap <C-S-k> :action GotoSuperMethod<CR>
+
+imap <C-m> :action Back<CR>
+imap <C-.> :action Forward<CR>
+imap <C-,> :action GotoDeclaration<CR>
+imap <C-S-,> :action GotoImplementation<CR>
+imap <C-S-m> :action ShowUsages<CR>
+imap <C-S-.> :action GotoTest<CR>
+imap <C-S-k> :action GotoSuperMethod<CR>
+
+nmap <C-l> :action NextTab<CR>
+nmap <C-h> :action PreviousTab<CR>
+imap <C-l> :action NextTab<CR>
+imap <C-h> :action PreviousTab<CR>
+
+nmap <C-S-h> :action PreviousEditorTab<CR>
+nmap <C-S-l> :action NextEditorTab<CR>
+imap <C-S-h> :action PreviousEditorTab<CR>
+imap <C-S-l> :action NextEditorTab<CR>
+
+
+nmap <A-m> :action MethodUp<CR>
+nmap <A-,> :action GotoSuperMethod<CR>
+nmap <A-.> :action MethodDown<CR>
+nmap <A-k> :action ShowNavBar<CR>
+nmap <A-j-k> :action MethodHierarchy<CR>
+
+imap <A-m> :action MethodUp<CR>
+imap <A-,> :action GotoSuperMethod<CR>
+imap <A-.> :action MethodDown<CR>
+imap <A-k> :action ShowNavBar<CR>
+imap <A-S-k> :action MethodHierarchy<CR>
+
+
+nmap <C-q> :action HideAllWindows<CR>
+imap <C-q> :action HideAllWindows<CR>
+
+
+nmap gf <ESC>:action GotoFile<CR>
+nmap gp :action ParameterInfo<CR>
+nmap gd :action GotoDeclaration<CR>
+nmap gD :action GotoTypeDeclaration<CR>
+nmap gu :action ShowUsages<CR>
+nmap gf :action FindUsages<CR>
+nmap gi :action GotoImplementation<CR>
+nmap gs :action GotoSuperMethod<CR>
+nmap gt :action GotoTest<cr>
+nmap gx :action GotoNextError<CR>
+nmap gX :action GotoPreviousError<CR>
+nmap ge :action ShowErrorDescription<CR>
+nnoremap ghc <ESC>:action CallHierarchy<CR>
+nnoremap ght <ESC>:action TypeHierarchy<CR>
+nnoremap ghm <ESC>:action MethodHierarchy<CR>
+nnoremap gj <ESC>:action SliceBackward<CR>
+nnoremap gk <ESC>:action SliceForward<CR>
+nnoremap gq :action QuickImplementations<CR>
+
+" Refactoring
+nmap rl :action Refactorings.QuickListPopupAction<CR>
+nmap rr :action RenameElement<CR>i
+nmap rd :action SafeDelete<CR>
+nmap ri :action Inline<CR>
+
+
+" VCS
+nmap mG <ESC>:action Git.Menu<CR>
+nmap mg <ESC>:action Vcs.Operations.Popup<CR>
+nmap mH <ESC>:action Annotate<CR>
+nmap mh <ESC>:action Vcs.ShowTabbedFileHistory<CR>
+" Debug
+nmap mr :action Run<CR>
+nmap md :action Debug<CR>
+nmap mt :action RerunTests<CR>
+nmap mb :action ToggleLineBreakpoint<CR>
+nmap mq :action StepOut<CR>
+nmap ms :action StepInto<CR>
+nmap ma :action StepOver<CR>
+nmap mw :action Resume<CR>
+"
+" nmap vc :action CompileDirty<CR>
+" nmap vR :action RunAnything<CR>
+" nmap vc :action RunClass<CR>
+" nmap vd :action DebugClass<CR>
+" nmap vT :action RerunFailedTests<CR>
+" nmap <C-q> :action EvaluateExpression<CR>
+" nmap <F5> :action Resume<CR>
+" nmap <Up> :action Debugger.FramePanelPopup<CR>
+" nmap <A-Down> :action SmartStepInto<CR>
+" nmap <A-d> :action JavaDebuggerActions<CR>
+
+
+nmap <Leader>a :action FindInPath<CR>
+nmap <Leader>r :action RecentFiles<CR>
+nmap <Leader>R :action RecentChangedFiles<CR>
+nmap <Leader>w :action SearchEverywhere<CR>
+nmap <Leader>y :action GotoSymbol<CR>
