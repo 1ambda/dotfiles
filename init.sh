@@ -30,18 +30,28 @@ wget --output-document ~/delta-themes.gitconfig https://raw.githubusercontent.co
 mise use -g usage
 
 mise use --global node@18
+mise install node@16
+mise install pmpm@10
+
 mise use -g java@corretto-8
-mise use -g java@corretto-11
-mise use -g java@corretto-22
-mise use -g java@corretto-23
+mise install java@corretto-8;
+mise install java@corretto-11;
+mise install java@17;
+mise install java@23;
 
 mise use -g go@1.24
 
 mise use -g ruby@3.2
 
+mise plugin install maven
+mise install maven@3.5
+mise use -g maven@3
+
+mise use -g gradle@8
 
 mise plugins install scala
-mise use -g scala@2.13.16
+mise use -g scala@2.13
+mise install scala@2.12
 
 
 
@@ -51,6 +61,9 @@ ln -s $HOME/dotfiles/.tmux.conf $HOME/.tmux.conf;
 ln -s $HOME/dotfiles/.ideavimrc $HOME/.ideavimrc;
 ln -s $HOME/dotfiles/.zshrc $HOME/.zshrc;
 ln -s $HOME/dotfiles/.vimrc $HOME/.vimrc;
+
+mkdir -p $HOME/.config/mise;
+ln -s $HOME/dotfiles/mise.toml $HOME/.config/mise/config.toml;
 
 ln -s $HOME/dotfiles/hammerspoon.lua $HOME/.hammerspoon/init.lua;
 

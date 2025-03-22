@@ -19,7 +19,7 @@ set ideajoin
 set ideastatusicon=disabled
 
 " set <leader> to <space>
-let mapleader=" "
+let mapleader=","
 set easymotion
 map , <Plug>(easymotion-prefix)
 
@@ -211,10 +211,10 @@ nnoremap gk <ESC>:action SliceForward<CR>
 nnoremap gq :action QuickImplementations<CR>
 
 " Refactoring
-nmap rl :action Refactorings.QuickListPopupAction<CR>
-nmap rr :action RenameElement<CR>i
-nmap rd :action SafeDelete<CR>
-nmap ri :action Inline<CR>
+" nmap rl :action Refactorings.QuickListPopupAction<CR>
+" nmap rr :action RenameElement<CR>i
+" nmap rd :action SafeDelete<CR>
+" nmap ri :action Inline<CR>
 
 
 " VCS

@@ -1,3 +1,17 @@
+# Performance optimizations
+DISABLE_AUTO_UPDATE="true"
+DISABLE_MAGIC_FUNCTIONS="true"
+DISABLE_COMPFIX="true"
+DISABLE_UNTRACKED_FILES_DIRTY="true"
+
+# Cache completions aggressively
+autoload -Uz compinit
+if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
+    compinit
+else
+    compinit -C
+fi
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -89,6 +103,17 @@ export GPG_TTY="$(tty)"
 
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_NO_AUTO_UPDATE=1
+
+stty -ixoff # disable sending start/stop characters
+stty -ixon # disable start/stop output control
+stty start undef # unmap c-q
+stty stop undef # unmap c-s
+tabs -2 # use two space tabs
+
+unsetopt beep # never beep
+unsetopt correct # don't correct command spelling
+
 
 ## ZSH History Config
 [ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
@@ -121,50 +146,73 @@ export FZF_DEFAULT_OPTS=$FZF_DEFAULT_OPTS'
  --color=marker:#73d0ff,spinner:#73d0ff,header:#d4bfff'
 
 export FZF_CTRL_T_COMMAND='fd --type f --hidden --exclude .git --exclude .cache'
-export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
-# export FZF_CTRL_T_OPTS="--preview '(highlight -O ansi -l {} 2> /dev/null || cat {} || tree -C {}) 2> /dev/null | head -200'"
+export FZF_ALT_C_COMMAND="fd --type d --hidden --exclude .git"
 export FZF_CTRL_T_OPTS="
+  --ansi
   --walker-skip .git,node_modules,target
   --preview 'bat -n --color=always {}'
-  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
+  --preview-window=top:60%
+  --info=inline --layout=reverse
+  --bind 'ctrl-t:reload(fd -u -E .git -E node_modules -E bin -E obj -E .venv -E .python --color always .)'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'
+	--bind 'ctrl-f:preview-half-page-down'
+	--bind 'ctrl-b:preview-half-page-up'
+  --bind='enter:execute(vim {+1})'
+  --color header:italic
+  --header='enter=print, C-t=recurse, C-/=change-preview, C-b=preview-up, C-f=preview-down'
+"
+
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
-  --preview 'tree -C {}'"
-export FZF_CTRL_R_OPTS="
-  --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --info=inline --layout=reverse
+  --preview 'tree -C {}'
+  --preview-window=top:60%
   --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard'"
+  --header='enter=cd'
+"
+
+export FZF_CTRL_R_OPTS="
+	--bind 'ctrl-f:page-down'
+	--bind 'ctrl-b:page-up'
+  --bind 'ctrl-l:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --color header:italic
+  --header='enter=enter, C-l=copy, C-b=up, C-f=down'
+"
+
 export FZF_PREVIEW_ADVANCED=true
 export FZF_TMUX_HEIGHT=100%
 
-export _ZO_FZF_OPTS='
-    --no-sort --height 75% --reverse --margin=0,1 --exit-0 --select-1
-    --bind ctrl-f:page-down,ctrl-b:page-up
-    --bind pgdn:preview-page-down,pgup:preview-page-up
-    --prompt="❯ "
-    --color bg+:#262626,fg+:#dadada,hl:#f09479,hl+:#f09479
-    --color border:#303030,info:#cfcfb0,header:#80a0ff,spinner:#36c692
-    --color prompt:#87afff,pointer:#ff5189,marker:#f09479
-    --preview "([[ -e '{2..}/README.md' ]] && bat --color=always --style=numbers --line-range=:50 '{2..}/README.md') || eza --color=always --group-directories-first --oneline {2..}"
-'
+export _ZO_FZF_OPTS="
+  --walker-skip .git,node_modules,target
+  --no-sort --keep-right --info=inline --layout=reverse --margin=0,1 --exit-0 --select-1
+  --preview 'tree -L 3 -C {2..}' --exact --no-sort
+  --preview-window=bottom:80%
+  --color header:italic
+  --bind 'ctrl-l:execute-silent(echo -n {2..} | pbcopy)+abort'
+  --header='enter=cd, C-p=copy'
+"
 
 export FORGIT_FZF_DEFAULT_OPTS="
 --exact
 --cycle
 --reverse
---preview-window=bottom:70%
+--preview-window=bottom:80%
 --height '100%'
 "
 export FORGIT_STASH_FZF_OPTS='
 --bind="ctrl-d:reload(git stash drop $(cut -d: -f1 <<<{}) 1>/dev/null && git stash list)"
 '
+
 export FORGIT_LOG_FZF_OPTS='
---bind="ctrl-e:execute(echo {} |grep -Eo [a-f0-9]+ |head -1 |xargs git show |vim -)"
+--header="enter=view, C-o=nvim, C-y=yank"
+--bind="ctrl-l:execute-silent(echo {} | grep -Eo [a-f0-9]+ | head -1 | tr -d '"'\n'"' | $FORGIT_COPY_CMD)"
+--bind="ctrl-o:execute(echo {} | grep -Eo [a-f0-9]+ | head -1 | xargs git show | vim -)"
 '
 
 export FORGIT_PAGER='delta -w ${FZF_PREVIEW_COLUMNS:-$COLUMNS}'
 
 export BAT_THEME=TwoDark
+export BAT_PAGER="less -RS"
 export BAT_STYLE=header,numbers,grid
 
 
@@ -177,6 +225,10 @@ bindkey "^U"      pb-kill-whole-line
 bindkey "^A"      beginning-of-line
 bindkey "^E"      end-of-line
 bindkey "^K"      kill-line
+
+bindkey "^Q"      fzf-file-widget
+bindkey "^J"      fzf-cd-widget
+
 
 ## Zsh Plugins
 bindkey -M main '^[OA' history-substring-search-up
@@ -206,6 +258,10 @@ function zvm_after_init() {
   zvm_bindkey viins '^[[B' history-substring-search-down
   zvm_bindkey vicmd '^[[A' history-substring-search-up
   zvm_bindkey vicmd '^[[B' history-substring-search-down
+  bindkey -M vicmd 'k' history-substring-search-up
+  bindkey -M vicmd 'j' history-substring-search-down
+  bindkey '^P' history-substring-search-up
+  bindkey '^N' history-substring-search-down
 
   zvm_bindkey vicmd "^A" beginning-of-line
   zvm_bindkey vicmd "^E" end-of-line
@@ -219,19 +275,25 @@ function zvm_after_init() {
   zvm_bindkey vicmd '^B' backward-char
   zvm_bindkey vicmd '^F' forward-char
 
-  zvm_bindkey viins '^Y' redo
+  zvm_bindkey viins '^S' redo
   zvm_bindkey viins '^Z' undo
+  bindkey '^S' redo
+  bindkey '^Z' undo
 
   bindkey "^[b" backward-word
   bindkey "^[f" forward-word
-  bindkey '^[y' redo
-  bindkey '^[z' undo
   bindkey '^h' backward-delete-char
   bindkey '^w' backward-kill-word
-  # bindkey '^[[Z' undo
 
-  bindkey -M vicmd 'k' history-substring-search-up
-  bindkey -M vicmd 'j' history-substring-search-down
+  bindkey "^Q"      fzf-file-widget
+
+  bindkey '^[[Z'    autosuggest-accept # Shift + Tab, suggest accept
+  bindkey '^[^M'    autosuggest-execute # Option + Enter, suggest execute
+  bindkey -s '^ ' ' git status --short^M'
+  # bindkey -s '^ ' ' git status --short^M'
+
+  # Check if the keybinding is already set
+  # bindkey -M viins
 }
 
 zvm_after_init_commands=(autopair-init)
@@ -256,6 +318,8 @@ export fzfTabFindKeep=1000
 bindkey '^ ' 'fzf-tab-complete-find'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=247'
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE="20"
+ZSH_AUTOSUGGEST_USE_ASYNC=1
 
 export ZPLUG_HOME=$(brew --prefix)/opt/zplug
 source $ZPLUG_HOME/init.zsh
@@ -300,6 +364,9 @@ alias vz='vi ~/.zshrc'
 alias vv='vi ~/.vimrc'
 alias vg='vi ~/.gitconfig'
 
+alias du='du -csh'
+alias df='df -h'
+
 alias grep='grep --color=auto'
 
 alias g="git"
@@ -310,6 +377,13 @@ alias vi="vim"
 
 alias v="rgi"
 
+alias m="mise"
+
+alias f='open -a Finder ./'
+
+alias a="zi"
+
+alias god="cd $HOME/dotfiles"
 alias gog="cd $HOME/github"
 alias gow="cd $HOME/workspace"
 
@@ -321,6 +395,12 @@ alias kn="kubens"
 alias python="python3"
 alias pip="pip3"
 
+alias p="python"
+alias pe="pyenv"
+alias pv="pyenv virtualenv"
+alias pd="pyenv deactivate"
+alias pa="pyenv activate"
+
 alias tm="tmux"
 alias tma='tmux a -t'
 alias tmn="tmux new"
@@ -330,27 +410,32 @@ alias tmh="tmux list-keys | percol"
 alias tp='trash-put'
 alias tl='trash-list'
 
-# q - search something
+alias -s {md,markdown,rst,toml,json,yaml}=code
+
+# q - query against files
 q() {
-  local result lines file position
+  local result parsed file position
+  local margin=15
 
-	result=$(rg --line-number --with-filename . --field-match-separator $'\u00a0' | fzf -m --sync --bind 'pgdn:preview-half-page-down,pgup:preview-half-page-up,ctrl-f:preview-down,ctrl-b:preview-up,enter:become(echo {+1} {+2})' --delimiter $'\u00a0' --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers")
-	lines=$(echo $result | tr ' ' $'\n' | rs -g1 -t 0 2)
+	result=$(rg --hidden --follow --glob '!.git' --line-number --with-filename . --field-match-separator $'\u00a0' | \
+	  fzf --sync \
+	  --walker-skip .git,node_modules,target \
+	  --delimiter $'\u00a0' \
+    --header='enter=edit, C-l=copy, C-b=preview-up, C-f=preview-down' \
+	  --color header:italic \
+    --bind 'ctrl-l:execute-silent(echo -n {+1} | pbcopy)+abort' \
+	  --bind 'ctrl-f:preview-half-page-down' \
+	  --bind 'ctrl-b:preview-half-page-up' \
+	  --bind 'enter:become(echo {+1} {+2})' \
+	  --preview "bat --color=always {1} --highlight-line {2} --style=header,numbers --file-name {1}" \
+    --preview-window=top:60%
+	)
 
-	if [ -n "$result" ]; then
+	parsed=$(echo $result | rs -g1 -t 0 2)
+  file=$(echo $parsed | cut -d ' ' -f 1)
+  line=$(echo $parsed | cut -d ' ' -f 2)
 
-    local IFS=$'\n'
-    if [ $ZSH_VERSION ]; then
-      setopt sh_word_split
-    fi
-
-    for line in ${lines}; do
-      file=$(echo $line | cut -d ' ' -f 1)
-      position=$(echo $line | cut -d ' ' -f 2)
-      echo "$file $position (LINE)"
-    done
-    echo ""
-	fi
+  [ -n "$file" ] && vim "$file" +$line
 }
 
 # j - jump to directories
@@ -364,6 +449,8 @@ j() {
     return 0
   fi
   builtin cd -- ${(q)dir:a}
+
+  zle jump-fzf
 }
 
 # c - browse chrome history
@@ -403,7 +490,8 @@ zstyle ':fzf-tab:*' single-group full
 zstyle ':fzf-tab:*' prefix ''
 zstyle ':fzf-tab:*' fzf-bindings 'space:accept'
 zstyle ':fzf-tab:*' continuous-trigger 'tab'
-zstyle ':fzf-tab:*' accept-line enter
+# zstyle ':fzf-tab:*' accept-line enter
+
 
 ## Load libraries
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -422,4 +510,6 @@ fi
 if command -v direnv >/dev/null ; then
   eval "$(direnv hook zsh)"
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 

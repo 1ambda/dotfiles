@@ -21,10 +21,10 @@
   autocrlf = input
   ignorecase = false
   commentChar = ";"
-  pager = delta --side-by-side --width ${FZF_PREVIEW_COLUMNS-$COLUMNS}
+  pager = delta --width ${FZF_PREVIEW_COLUMNS-$COLUMNS}
 
 [interactive]
-  diffFilter = delta --side-by-side --width ${FZF_PREVIEW_COLUMNS-$COLUMNS}
+  diffFilter = delta --width ${FZF_PREVIEW_COLUMNS-$COLUMNS}
 
 [merge]
   conflictStyle = zdiff3

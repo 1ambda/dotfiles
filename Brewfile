@@ -20,6 +20,7 @@ brew 'grep'
 
 
 # cli
+brew 'zoxide'
 brew 'gh'
 brew 'jq'
 brew 'bash'
@@ -59,6 +60,8 @@ brew 'kubectl'
 brew 'kubectx'
 brew 'k9s'
 brew 'helm'
+brew 'mysql'
+brew 'pkg-config'
 
 
 # app
@@ -73,4 +76,14 @@ cask 'slack'
 cask 'visual-studio-code'
 cask 'intellij-idea'
 cask 'datagrip'
+cask 'webstorm'
+cask 'pycharm'
 cask 'font-droid-sans-mono-for-powerline'
+
+cask 'alt-tab'
+cask 'monitorcontrol'
+cask 'numi'
+
+# cask 'nikitabobko/tap/aerospace'
+# cask 'jordanbaird-ice'
+# cask 'obsidian'
