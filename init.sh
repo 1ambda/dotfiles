@@ -53,6 +53,9 @@ mise plugins install scala
 mise use -g scala@2.13
 mise install scala@2.12
 
+mise plugin add poetry
+mise use -g poetry@2
+
 
 
 # Initialize the dotfiles

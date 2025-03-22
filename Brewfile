@@ -62,6 +62,7 @@ brew 'k9s'
 brew 'helm'
 brew 'mysql'
 brew 'pkg-config'
+brew 'git-absorb'
 
 
 # app

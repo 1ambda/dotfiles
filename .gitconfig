@@ -1,6 +1,6 @@
 [user]
   email = 1amb4a@gmail.com
-  name = Kun
+  name = Kui
   signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKBh2H9zigz3azDCHTi1KWxq0ywrW5b7tf1xrg1mv7XO
 
 [gpg]
@@ -10,7 +10,7 @@
   program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
 
 [commit]
-	gpgsign = true
+  gpgsign = true
   template = ~/.stCommitMsg
   verbose = true
 
@@ -158,7 +158,7 @@
   decorations = true
   navigate = true
   line-numbers = true
-	features = collared-trogon
+  features = collared-trogon
   line-numbers-left-style = black
   line-numbers-minus-style = "#B10036"
   line-numbers-plus-style = "#03a4ff"
@@ -181,4 +181,7 @@
 
 [include]
   # wget --output-document ~/delta-themes.gitconfig https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig
-	path = ~/delta-themes.gitconfig
+  path = ~/delta-themes.gitconfig
+
+[init]
+  defaultBranch = main

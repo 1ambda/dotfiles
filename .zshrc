@@ -511,5 +511,3 @@ if command -v direnv >/dev/null ; then
   eval "$(direnv hook zsh)"
 fi
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
