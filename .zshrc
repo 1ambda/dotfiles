@@ -87,7 +87,7 @@ ZSH_THEME="robbyrussell"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git virtualenv)
+plugins=(virtualenv)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -338,10 +338,10 @@ zplug "zsh-users/zsh-autosuggestions", defer:1
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
-zplug "atusy/gh-fzf"
-zplug "plugins/git", from:oh-my-zsh
 zplug "plugins/mise", from:oh-my-zsh
-zplug "plugins/colorize", from:oh-my-zsh
+# zplug "atusy/gh-fzf"
+# zplug "plugins/git", from:oh-my-zsh
+# zplug "plugins/colorize", from:oh-my-zsh
 
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "

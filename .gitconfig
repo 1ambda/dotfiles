@@ -165,12 +165,10 @@
   line-numbers-right-style = black
   line-numbers-zero-style = "#999999"
 
-
 [diff-so-fancy]
   markEmptyLines = false
   changeHunkIndicators = true
   stripLeadingSymbols = false
-
 
 [color "diff-highlight"]
   oldNormal = red bold
@@ -178,9 +176,7 @@
   newNormal = green bold
   newHighlight = green bold 22
 
-
 [include]
-  # wget --output-document ~/delta-themes.gitconfig https://raw.githubusercontent.com/dandavison/delta/master/themes.gitconfig
   path = ~/delta-themes.gitconfig
 
 [init]
