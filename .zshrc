@@ -374,6 +374,11 @@ alias grep='grep --color=auto'
 
 alias g="git"
 alias gh=ghf
+alias gl="glo"
+alias gr="git absorb --and-rebase"
+alias gds="gd --cached"
+alias gdf="gd"
+alias gs="git status"
 
 alias cat="bat"
 alias vi="vim"
@@ -394,6 +399,7 @@ alias k="kubectl"
 alias kk="k9s"
 alias kx="kubectx"
 alias kn="kubens"
+alias kt="kubetail"
 
 alias python="python3"
 alias pip="pip3"

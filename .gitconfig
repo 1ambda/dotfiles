@@ -117,6 +117,7 @@
   # pr = "!_() { git config fetch.prune no && git fetch ${1:-origin} +refs/pull/*/head:refs/remotes/${1:-origin}/pr/*; }; _"
   g = "log --graph --pretty='format:%C(auto)%h%d %s%x1b[38;5;022m% GS %x1b[38;5;239m%cr%x1b[0m'"
 
+  s = status
   st = status
 
   dfs = "!git --no-pager diff --stat"
@@ -144,7 +145,8 @@
   ours = "!f() { git checkout --ours $@ && git add $@; }; f"
   theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"
 
-  undo = reset HEAD~1 --mixed
+  undo = reset HEAD~1 --soft
+  reword = "!git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | cut -c -7 | xargs -o -I{} git commit --fixup=reword:{}"
 
 
 [filter "lfs"]
